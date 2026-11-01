@@ -72,6 +72,24 @@ describe('review regressions', () => {
     expect(teams).not.toContain('Action.Submit');
     expect(p.actions[0].label).not.toContain('\n');
   });
+  it('escapes backslashes before Markdown metacharacters', () => {
+    const hostile = String.raw`\\*bold* \\_italic_ \\` + '`code`';
+    const p = createPresentation({
+      schemaVersion: 1,
+      eventId: 'ckevt_markup',
+      eventType: 'ccv2.build.completed',
+      status: 'failure',
+      occurredAt: '2026-11-01T20:20:00Z',
+      source: { product: 'commercekit', component: 'ccv2-build' },
+      data: { buildName: hostile },
+    } as never);
+    const slackPayload = renderSlack(p);
+    const teamsPayload = renderTeams(p);
+    const slackText = (slackPayload.attachments[0].blocks[1] as { fields: { text: string }[] }).fields[0].text;
+    const teamsFact = (teamsPayload.attachments[0].content.body[1] as { facts: { value: string }[] }).facts[0].value;
+    expect(slackText).toContain(String.raw`\\\*bold\*`);
+    expect(teamsFact).toContain(String.raw`\\\*bold\*`);
+  });
   it('does not render unknown optional fields or redacted secrets', () => {
     const e = {
       ...event('success', { filesChecked: 1, errors: 0, warnings: 0, unknownVisible: 'must-not-render' }),

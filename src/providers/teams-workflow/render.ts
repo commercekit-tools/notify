@@ -49,6 +49,7 @@ export function renderTeams(p: Presentation) {
 
 function safeText(value: string): string {
   return sanitize(value)
+    .replace(/\\/g, '\\\\')
     .replace(/([*_`~\x5B\x5D<>])/g, '\\$1')
     .replace(/\r?\n/g, ' ');
 }

@@ -17,7 +17,7 @@ export function renderSlack(p: Presentation) {
       type: 'section',
       fields: p.facts.slice(0, 10).map((f) => ({
         type: 'mrkdwn',
-        text: `*${esc(f.label)}*\n${esc(f.value).replace(/[*_`~]/g, '\\$&')}`,
+        text: `*${esc(f.label)}*\n${escapeMrkdwn(esc(f.value))}`,
         verbatim: true,
       })),
     });
@@ -44,4 +44,8 @@ export function renderSlack(p: Presentation) {
     .slice(0, 3900);
   if (blocks.length > 50) throw new Error('Slack message exceeds the Block Kit block limit.');
   return { text: fallback, attachments: [{ color: p.accent, blocks }], unfurl_links: false, unfurl_media: false };
+}
+
+function escapeMrkdwn(value: string): string {
+  return value.replace(/\\/g, '\\\\').replace(/([*_`~])/g, '\\$1');
 }
