@@ -1,0 +1,90 @@
+name: Manual provider smoke
+on:
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: Provider test destination
+        required: true
+        type: choice
+        options:
+          - slack
+          - teams-workflow
+      event:
+        description: Synthetic notification fixture
+        required: true
+        type: choice
+        options:
+          - check-success
+          - check-failure
+          - build-success
+          - build-failure
+          - deployment-action-required
+          - deployment-success
+          - deployment-failure
+      confirmation:
+        description: Type SEND-COMMERCEKIT-TEST-NOTIFICATION to authorize one test send
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: notify-provider-smoke
+  cancel-in-progress: false
+jobs:
+  send:
+    runs-on: ubuntu-24.04
+    environment: provider-smoke
+    timeout-minutes: 5
+    steps:
+      - name: Confirm deliberate test send
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: test "$CONFIRMATION" = 'SEND-COMMERCEKIT-TEST-NOTIFICATION'
+      # actions/checkout v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Send to Slack test destination
+        id: slack
+        if: inputs.provider == 'slack'
+        uses: ./
+        with:
+          provider: slack
+          event-file: tests/fixtures/events/${{ inputs.event }}.json
+          webhook-url: ${{ secrets.COMMERCEKIT_SLACK_TEST_WEBHOOK_URL }}
+          fail-on-notification-error: 'true'
+      - name: Send to Teams test destination
+        id: teams
+        if: inputs.provider == 'teams-workflow'
+        uses: ./
+        with:
+          provider: teams-workflow
+          event-file: tests/fixtures/events/${{ inputs.event }}.json
+          webhook-url: ${{ secrets.COMMERCEKIT_TEAMS_TEST_WORKFLOW_URL }}
+          fail-on-notification-error: 'true'
+      - name: Summarize test delivery
+        if: always()
+        env:
+          PROVIDER: ${{ inputs.provider }}
+          FIXTURE: ${{ inputs.event }}
+          SLACK_DELIVERED: ${{ steps.slack.outputs.delivered }}
+          SLACK_STATUS: ${{ steps.slack.outputs.status }}
+          SLACK_ATTEMPTS: ${{ steps.slack.outputs.attempts }}
+          TEAMS_DELIVERED: ${{ steps.teams.outputs.delivered }}
+          TEAMS_STATUS: ${{ steps.teams.outputs.status }}
+          TEAMS_ATTEMPTS: ${{ steps.teams.outputs.attempts }}
+          COMMIT: ${{ github.sha }}
+        run: |
+          if [ "$PROVIDER" = 'slack' ]; then
+            delivered="$SLACK_DELIVERED"; status="$SLACK_STATUS"; attempts="$SLACK_ATTEMPTS"
+          else
+            delivered="$TEAMS_DELIVERED"; status="$TEAMS_STATUS"; attempts="$TEAMS_ATTEMPTS"
+          fi
+          {
+            printf '### Manual provider smoke\n'
+            printf '| Field | Value |\n|---|---|\n'
+            printf '| Provider | %s |\n' "$PROVIDER"
+            printf '| Fixture | %s |\n' "$FIXTURE"
+            printf '| Delivered | %s |\n' "$delivered"
+            printf '| Status | %s |\n' "$status"
+            printf '| Attempts | %s |\n' "$attempts"
+            printf '| Commit | %s |\n' "$COMMIT"
+          } >> "$GITHUB_STEP_SUMMARY"
