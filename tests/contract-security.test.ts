@@ -8,6 +8,7 @@ import { validateEvent } from '../src/event/validate.js';
 import { validateWebhook } from '../src/delivery/url-validation.js';
 import { deliver } from '../src/delivery/webhook.js';
 import { retryAfterMs } from '../src/delivery/retry-after.js';
+import { renderTeams } from '../src/providers/teams-workflow/render.js';
 const valid = {
   schemaVersion: 1,
   eventId: 'ckevt_test',
@@ -102,5 +103,41 @@ describe('input and delivery safety', () => {
       /HTTP 400/,
     );
     expect(count).toBe(1);
+  });
+  it('does not retry a rejected redirect', async () => {
+    let calls = 0;
+    const redirected = (async () => {
+      calls++;
+      throw new TypeError('fetch failed', { cause: new Error('unexpected redirect') });
+    }) as typeof fetch;
+    await expect(
+      deliver('slack', new URL('https://hooks.slack.com/x'), {}, redirected, async () => {}),
+    ).rejects.toThrow(/redirects are not allowed/);
+    expect(calls).toBe(1);
+  });
+  it('retries a timeout once and counts both attempts', async () => {
+    let calls = 0;
+    const timedOut = (async () => {
+      calls++;
+      if (calls === 1) throw new DOMException('aborted', 'AbortError');
+      return new Response('', { status: 200 });
+    }) as typeof fetch;
+    expect(await deliver('teams-workflow', new URL('https://example.test/hook'), {}, timedOut, async () => {})).toEqual(
+      { attempts: 2 },
+    );
+  });
+  it('rejects a Teams card above the 27 KiB safety cap', () => {
+    expect(() =>
+      renderTeams({
+        title: 'Synthetic',
+        status: 'success',
+        statusLabel: 'Succeeded',
+        icon: '✅',
+        tone: 'success',
+        accent: '#168A45',
+        facts: Array.from({ length: 10 }, (_, index) => ({ label: `Fact ${index}`, value: '界'.repeat(1000) })),
+        actions: [],
+      }),
+    ).toThrow(/27 KiB/);
   });
 });

@@ -39,13 +39,15 @@ export function validateEvent(value: unknown): asserts value is NotificationEven
 }
 
 export function validateSafeUrl(value: string, field: string): URL {
+  if (/[\u0000-\u001F\u007F]/.test(value) || value.length > 2048)
+    throw new Error(`${field} must be a bounded HTTPS URL without control characters.`);
   let url: URL;
   try {
     url = new URL(value);
   } catch {
     throw new Error(`${field} must be a valid HTTPS URL.`);
   }
-  if (url.protocol !== 'https:' || !url.hostname || url.username || url.password || url.hash || value.length > 2048)
+  if (url.protocol !== 'https:' || !url.hostname || url.username || url.password || url.hash)
     throw new Error(`${field} must be a bounded HTTPS URL without credentials or fragments.`);
   return url;
 }

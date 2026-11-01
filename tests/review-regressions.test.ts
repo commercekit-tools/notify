@@ -32,6 +32,7 @@ describe('review regressions', () => {
     'file:///tmp/run',
     'https://user:pass@github.com/run',
     'https://github.com/run#frag',
+    'https://github.com/run\n/path',
   ])('rejects unsafe runUrl %s', (url) =>
     expect(() =>
       validateEvent({ ...event('success', { filesChecked: 1, errors: 0, warnings: 0 }), context: { runUrl: url } }),

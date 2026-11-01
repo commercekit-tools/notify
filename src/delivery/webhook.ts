@@ -30,6 +30,11 @@ export async function deliver(
         clearTimeout(timer);
       }
     } catch (error) {
+      const cause = error instanceof Error ? error.cause : undefined;
+      if (cause instanceof Error && /unexpected redirect/i.test(cause.message))
+        throw Object.assign(new Error('Notification webhook redirected; redirects are not allowed.'), {
+          attempts: attempt,
+        });
       const timeout = error instanceof Error && error.name === 'AbortError';
       last = timeout ? 'Notification request timed out.' : 'Notification request failed due to a network error.';
       if (attempt === 3) throw Object.assign(new Error(last), { attempts: attempt });
