@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "occurredAt": "2026-11-01T20:20:00.000Z",
+  "source": {
+    "product": "commercekit",
+    "component": "ccv2-build"
+  },
+  "context": {
+    "repository": "example-org/project",
+    "workflow": "CommerceKit CI",
+    "runId": "123456",
+    "runUrl": "https://github.com/example-org/project/actions/runs/123456"
+  },
+  "links": [
+    {
+      "label": "View workflow",
+      "url": "https://github.com/example-org/project/actions/runs/123456"
+    }
+  ],
+  "eventId": "ckevt_example_build_failure",
+  "eventType": "ccv2.build.completed",
+  "status": "failure",
+  "data": {
+    "buildCode": "build-example",
+    "error": {
+      "message": "Build failed safely."
+    }
+  }
+}
