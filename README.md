@@ -111,3 +111,5 @@ See [SECURITY.md](SECURITY.md). Common issues: ensure exactly one event input is
 ## Versioning and release status
 
 Event schema version 1 and Action release versions are independent. No Action tag, GitHub Release, or Marketplace listing exists yet. See [RELEASING.md](RELEASING.md).
+
+Context may be enriched from the standard safe GitHub Actions variables when event values are missing. Provided values are preserved. A supplied or generated `context.runUrl` must be a bounded HTTPS URL with no credentials or fragment. For successful, warning, and failed checks, `filesChecked`, `errors`, and `warnings` are required so summaries never invent zero counts. Dynamic provider text is sanitized and rendered as inert text; only validated links become actions.
