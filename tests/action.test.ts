@@ -77,3 +77,11 @@ it('reports configuration failures and safely sets outputs', async () => {
   expect(core.setOutput).toHaveBeenCalledWith('delivered', 'false');
   expect(core.setFailed).toHaveBeenCalled();
 });
+it('converts an input-read exception into failure and safe outputs', async () => {
+  core.getInput.mockImplementationOnce(() => {
+    throw new Error('private input exception');
+  });
+  await runAction();
+  expect(core.setFailed).toHaveBeenCalledWith('private input exception');
+  expect(core.setOutput).toHaveBeenCalledWith('delivered', 'false');
+});

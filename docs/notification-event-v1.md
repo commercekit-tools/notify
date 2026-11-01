@@ -11,3 +11,5 @@ Check data may contain mode, changedFrom, filesChecked, errors, warnings, durati
 All input is limited to 64 KiB. Strings and arrays have schema bounds. Additive unknown fields are ignored and never rendered; unknown event types and schema versions fail. Additive optional fields preserve v1; changed meaning or removed required fields require a new schema version. Event schema, Action, and producer versions evolve independently.
 
 See [`../schema/notification-event-v1.schema.json`](../schema/notification-event-v1.schema.json) for machine-readable validation.
+
+For `check.completed` with `success`, `warning`, or `failure`, `data.filesChecked`, `data.errors`, and `data.warnings` are required non-negative integers. They may be omitted for `cancelled` and `internal-error`. `context.runUrl`, like every event link, must be a bounded HTTPS URL without credentials or fragment. The Action may fill missing context fields from the documented GitHub Actions environment variables; it does not read the full GitHub event payload or copy arbitrary environment values.

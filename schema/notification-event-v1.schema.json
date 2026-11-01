@@ -69,7 +69,13 @@
         "properties": {
           "status": { "enum": ["success", "warning", "failure", "cancelled", "internal-error"] },
           "data": { "$ref": "#/$defs/check" }
-        }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "status": { "enum": ["success", "warning", "failure"] } } },
+            "then": { "properties": { "data": { "required": ["filesChecked", "errors", "warnings"] } } }
+          }
+        ]
       }
     },
     {
