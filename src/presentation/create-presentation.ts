@@ -1,5 +1,5 @@
 import type { NotificationEvent } from '../event/types.js';
-import { sanitize } from '../event/sanitize.js';
+import { sanitize, sanitizeLabel, safePlainText } from '../event/sanitize.js';
 import { theme } from './theme.js';
 import type { Presentation } from './types.js';
 const str = (v: unknown): string => (typeof v === 'string' ? sanitize(v) : '');
@@ -26,17 +26,19 @@ export function createPresentation(event: NotificationEvent): Presentation {
             : event.status === 'cancelled'
               ? 'CommerceKit check cancelled'
               : 'CommerceKit check encountered an internal error';
-    const errors = Number(d.errors ?? 0),
-      warnings = Number(d.warnings ?? 0),
-      files = Number(d.filesChecked ?? 0);
-    summary =
-      event.status === 'success'
+    const hasCounts = ['filesChecked', 'errors', 'warnings'].every((key) => typeof d[key] === 'number');
+    const errors = d.errors as number | undefined;
+    const warnings = d.warnings as number | undefined;
+    const files = d.filesChecked as number | undefined;
+    summary = hasCounts
+      ? event.status === 'success'
         ? `${files} files checked with no errors.`
         : event.status === 'warning'
           ? `${warnings} warnings across ${files} files.`
           : event.status === 'failure'
             ? `${errors} errors and ${warnings} warnings across ${files} files.`
-            : str((d.error as Record<string, unknown> | undefined)?.message) || t.label;
+            : str((d.error as Record<string, unknown> | undefined)?.message) || t.label
+      : str((d.error as Record<string, unknown> | undefined)?.message) || t.label;
     add('Mode', d.mode);
     add('Changed from', d.changedFrom);
     add('Files checked', d.filesChecked);
@@ -84,7 +86,13 @@ export function createPresentation(event: NotificationEvent): Presentation {
     add('Decision', d.decisionType);
   }
   add('Repository', c.repository);
-  const links = event.links ?? (typeof c.runUrl === 'string' ? [{ label: 'View workflow', url: c.runUrl }] : []);
+  const eventLinks = event.links ?? [];
+  const links =
+    eventLinks.length > 0
+      ? eventLinks.map((link) => ({ label: safePlainText(sanitizeLabel(link.label)), url: link.url }))
+      : typeof c.runUrl === 'string'
+        ? [{ label: 'View workflow', url: c.runUrl }]
+        : [];
   const footer = [
     str(c.workflow),
     str(c.runId) ? `Run ${str(c.runId)}` : '',

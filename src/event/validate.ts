@@ -33,9 +33,19 @@ export function validateEvent(value: unknown): asserts value is NotificationEven
   };
   if (!allowed[event.eventType]?.includes(event.status))
     throw new Error('Invalid NotificationEvent eventType/status combination.');
-  for (const link of event.links ?? []) {
-    const url = new URL(link.url);
-    if (url.protocol !== 'https:' || url.username || url.password || url.hash)
-      throw new Error('NotificationEvent links must be safe HTTPS URLs without credentials or fragments.');
+  for (const link of event.links ?? []) validateSafeUrl(link.url, 'NotificationEvent links');
+  const context = event.context as Record<string, unknown> | undefined;
+  if (typeof context?.runUrl === 'string') validateSafeUrl(context.runUrl, 'context.runUrl');
+}
+
+export function validateSafeUrl(value: string, field: string): URL {
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error(`${field} must be a valid HTTPS URL.`);
   }
+  if (url.protocol !== 'https:' || !url.hostname || url.username || url.password || url.hash || value.length > 2048)
+    throw new Error(`${field} must be a bounded HTTPS URL without credentials or fragments.`);
+  return url;
 }
