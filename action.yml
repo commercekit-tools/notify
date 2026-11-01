@@ -1,0 +1,37 @@
+name: CommerceKit Notifications
+description: 'Send rich CommerceKit workflow notifications to Slack and Microsoft Teams Workflows.'
+author: CommerceKit
+branding:
+  icon: bell
+  color: green
+inputs:
+  provider:
+    description: 'Notification provider: slack or teams-workflow.'
+    required: true
+  event-json:
+    description: NotificationEvent v1 JSON string.
+    required: false
+  event-file:
+    description: Path to a UTF-8 NotificationEvent v1 JSON file.
+    required: false
+  webhook-url:
+    description: Provider webhook URL stored as a secret.
+    required: true
+  fail-on-notification-error:
+    description: Fail the step when a valid event cannot be delivered.
+    required: false
+    default: 'false'
+outputs:
+  delivered:
+    description: Whether the notification was delivered.
+  provider:
+    description: Selected provider.
+  event-type:
+    description: NotificationEvent type.
+  status:
+    description: NotificationEvent status.
+  attempts:
+    description: Number of network attempts.
+runs:
+  using: node24
+  main: dist/index.js
