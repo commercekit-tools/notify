@@ -113,3 +113,14 @@ See [SECURITY.md](SECURITY.md). Common issues: ensure exactly one event input is
 Event schema version 1 and Action release versions are independent. No Action tag, GitHub Release, or Marketplace listing exists yet. See [RELEASING.md](RELEASING.md).
 
 Context may be enriched from the standard safe GitHub Actions variables when event values are missing. Provided values are preserved. A supplied or generated `context.runUrl` must be a bounded HTTPS URL with no credentials or fragment. For successful, warning, and failed checks, `filesChecked`, `errors`, and `warnings` are required so summaries never invent zero counts. Dynamic provider text is sanitized and rendered as inert text; only validated links become actions.
+
+## Offline payload preview
+
+Review the synthetic provider-native designs without a webhook or network call:
+
+```sh
+pnpm payload:preview --provider slack --event check-success
+pnpm payload:preview --provider teams-workflow --event deployment-action-required
+```
+
+The command accepts only committed fixture names, validates the event through production code, and prints formatted payload JSON. It does not send the payload. The current Slack Block Kit and Teams Workflows Adaptive Card designs are the acceptance baseline; legacy embedded notifier layouts are not a visual requirement. Live provider acceptance happens after merge using the manual smoke workflow described in [RELEASING.md](RELEASING.md).

@@ -13,3 +13,5 @@ All input is limited to 64 KiB. Strings and arrays have schema bounds. Additive 
 See [`../schema/notification-event-v1.schema.json`](../schema/notification-event-v1.schema.json) for machine-readable validation.
 
 For `check.completed` with `success`, `warning`, or `failure`, `data.filesChecked`, `data.errors`, and `data.warnings` are required non-negative integers. They may be omitted for `cancelled` and `internal-error`. `context.runUrl`, like every event link, must be a bounded HTTPS URL without credentials or fragment. The Action may fill missing context fields from the documented GitHub Actions environment variables; it does not read the full GitHub event payload or copy arbitrary environment values.
+
+The schema `$id` is a logical canonical identifier. The website endpoint is not currently a downloadable schema; retrieve the source from this public repository's [`schema/notification-event-v1.schema.json`](../schema/notification-event-v1.schema.json) until a separate website publication is completed. Runtime validation always uses the bundled local schema.
