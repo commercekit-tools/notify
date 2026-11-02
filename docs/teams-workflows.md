@@ -1,0 +1,7 @@
+# Microsoft Teams Workflows
+
+In Teams, create a Workflow using a webhook request trigger and configure it to post the received Adaptive Card to the intended channel or chat. Copy the generated URL into a GitHub Actions secret and set `provider: teams-workflow`. Assign at least one co-owner so the workflow remains operable if its creator leaves.
+
+The renderer sends the message/attachments Adaptive Card envelope and an Adaptive Card version 1.2. A semantic status container holds the category, textual outcome, title, and short summary. A priority FactSet shows the main identifier and UTC event time; a separate emphasis container groups the remaining details. Native `Action.OpenUrl` buttons follow the card body. The action never submits deployment decisions. Payloads are capped at 27 KiB. Teams webhook hostnames vary; URLs must use HTTPS, contain no credentials or fragment, and may not target local/private IP literals or `.local`. Retired Office 365 Incoming Webhooks are not the supported new integration.
+
+See [Microsoft's Adaptive Card webhook envelope and supported actions](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-using). The post-merge smoke workflow validates the exact Teams Workflows trigger in a temporary test destination.

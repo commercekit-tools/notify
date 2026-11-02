@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "occurredAt": "2026-11-01T20:20:00.000Z",
+  "source": {
+    "product": "commercekit",
+    "component": "ccv2-deploy"
+  },
+  "context": {
+    "repository": "example-org/project",
+    "workflow": "CommerceKit CI",
+    "runId": "123456",
+    "runUrl": "https://github.com/example-org/project/actions/runs/123456"
+  },
+  "links": [
+    {
+      "label": "View workflow",
+      "url": "https://github.com/example-org/project/actions/runs/123456"
+    }
+  ],
+  "eventId": "ckevt_example_deployment_internal_error",
+  "eventType": "ccv2.deployment.completed",
+  "status": "internal-error",
+  "data": {
+    "error": {
+      "message": "Workflow could not complete deployment."
+    }
+  }
+}

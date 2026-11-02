@@ -1,0 +1,103 @@
+import { describe, it, expect } from 'vitest';
+import { readdir, readFile } from 'node:fs/promises';
+import { validateEvent } from '../src/event/validate.js';
+import { createPresentation } from '../src/presentation/create-presentation.js';
+import { renderSlack } from '../src/providers/slack/render.js';
+import { renderTeams } from '../src/providers/teams-workflow/render.js';
+import { theme } from '../src/presentation/theme.js';
+
+const titles: Record<string, string> = {
+  'check-success': 'CommerceKit check succeeded',
+  'check-warning': 'CommerceKit check completed with warnings',
+  'check-failure': 'CommerceKit check failed',
+  'check-internal-error': 'CommerceKit check encountered an internal error',
+  'build-started': 'CCv2 build started',
+  'build-success': 'CCv2 build succeeded',
+  'build-failure': 'CCv2 build failed',
+  'build-cancelled': 'CCv2 build cancelled',
+  'deployment-started': 'CCv2 deployment started',
+  'deployment-action-required': 'CCv2 deployment requires a decision',
+  'deployment-success': 'CCv2 deployment succeeded',
+  'deployment-failure': 'CCv2 deployment failed',
+  'deployment-cancelled': 'CCv2 deployment cancelled',
+  'deployment-internal-error': 'CommerceKit could not complete the CCv2 deployment workflow',
+};
+describe('golden synthetic events', () => {
+  it('validates and renders each supported event fixture deterministically', async () => {
+    const names = (await readdir(new URL('./fixtures/events/', import.meta.url)))
+      .filter((n) => n.endsWith('.json'))
+      .sort();
+    expect(names).toHaveLength(14);
+    for (const name of names) {
+      const event = JSON.parse(await readFile(new URL(`./fixtures/events/${name}`, import.meta.url), 'utf8'));
+      validateEvent(event);
+      const presentation = createPresentation(event);
+      expect(presentation.title).toBe(titles[name.replace('.json', '')]);
+      expect(presentation.category).toContain('CommerceKit');
+      expect(presentation.summary).toBeTruthy();
+      expect(presentation.highlights.at(-1)).toEqual({ label: 'Occurred', value: '2026-11-01 20:20:00 UTC' });
+      const slack = renderSlack(presentation);
+      const teams = renderTeams(presentation);
+      expect(slack).toEqual(renderSlack(createPresentation(event)));
+      expect(teams).toEqual(renderTeams(createPresentation(event)));
+      expect(slack.text).toContain(presentation.title);
+      expect(slack.text).toContain(presentation.summary);
+      expect(slack.attachments).toHaveLength(1);
+      expect(slack.attachments[0].color).toBe(theme[event.status as keyof typeof theme].accent);
+      expect(slack.blocks).toMatchObject([{ type: 'context' }]);
+      expect(slack.attachments[0].blocks[0]).toMatchObject({ type: 'header' });
+      expect(teams.attachments[0].content).toMatchObject({ type: 'AdaptiveCard', version: '1.2' });
+      expect(teams.attachments[0].content.body[0]).toMatchObject({
+        type: 'Container',
+        style: theme[event.status as keyof typeof theme].teams,
+      });
+      expect(JSON.stringify(teams)).toContain('Action.OpenUrl');
+      expect(JSON.stringify(teams)).not.toContain('Action.Submit');
+      expect(presentation.actions[0]?.label).toBe('View workflow');
+      expect(slack).toMatchSnapshot(`${name}: Slack`);
+      expect(teams).toMatchSnapshot(`${name}: Teams Workflows`);
+    }
+  });
+
+  it('gives key identifiers, time, outcome, and details distinct places', async () => {
+    const event = JSON.parse(await readFile(new URL('./fixtures/events/build-success.json', import.meta.url), 'utf8'));
+    validateEvent(event);
+    const presentation = createPresentation(event);
+    expect(presentation.summary).toBe('Build build-example is ready for deployment.');
+    expect(presentation.highlights).toEqual([
+      { label: 'Build code', value: 'build-example' },
+      { label: 'Occurred', value: '2026-11-01 20:20:00 UTC' },
+    ]);
+    expect(presentation.facts.map((fact) => fact.label)).toEqual(['Application', 'Status', 'Repository']);
+    expect(renderSlack(presentation).attachments[0].blocks.map((block) => block.type)).toEqual([
+      'header',
+      'section',
+      'divider',
+      'section',
+      'section',
+      'actions',
+      'context',
+    ]);
+    const card = renderTeams(presentation).attachments[0].content;
+    expect(card.body.map((element) => element.type)).toEqual(['Container', 'FactSet', 'Container', 'TextBlock']);
+    expect(card.body[0]).toMatchObject({ style: 'good' });
+    expect(card.body[2]).toMatchObject({ style: 'emphasis' });
+    expect(card.actions).toMatchObject([{ type: 'Action.OpenUrl', title: 'View workflow' }]);
+  });
+
+  it('keeps check metrics numeric and gives action-required a clear next step', async () => {
+    const check = JSON.parse(await readFile(new URL('./fixtures/events/check-success.json', import.meta.url), 'utf8'));
+    const deployment = JSON.parse(
+      await readFile(new URL('./fixtures/events/deployment-action-required.json', import.meta.url), 'utf8'),
+    );
+    const checkPresentation = createPresentation(check);
+    const deploymentPresentation = createPresentation(deployment);
+    expect(checkPresentation.facts).toContainEqual({ label: 'Files checked', value: '18' });
+    expect(checkPresentation.facts).toContainEqual({ label: 'Errors', value: '0' });
+    expect(checkPresentation.facts).toContainEqual({ label: 'Warnings', value: '0' });
+    expect(deploymentPresentation.summary).toBe(
+      'Deployment deploy-example is waiting for a decision. Review the workflow run to continue.',
+    );
+    expect(deploymentPresentation.highlights[0]).toEqual({ label: 'Deployment code', value: 'deploy-example' });
+  });
+});
