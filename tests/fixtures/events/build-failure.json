@@ -23,7 +23,7 @@
   "data": {
     "buildCode": "build-example",
     "error": {
-      "message": "Build failed safely."
+      "message": "The example build did not pass validation."
     }
   }
 }

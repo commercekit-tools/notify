@@ -23,7 +23,7 @@
   "data": {
     "deploymentCode": "deploy-example",
     "error": {
-      "message": "Deployment failed safely."
+      "message": "The example deployment did not pass its health check."
     }
   }
 }

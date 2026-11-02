@@ -86,8 +86,13 @@ describe('review regressions', () => {
     } as never);
     const slackPayload = renderSlack(p);
     const teamsPayload = renderTeams(p);
-    const slackText = (slackPayload.attachments[0].blocks[1] as { fields: { text: string }[] }).fields[0].text;
-    const teamsFact = (teamsPayload.attachments[0].content.body[1] as { facts: { value: string }[] }).facts[0].value;
+    const slackText = slackPayload.attachments[0].blocks
+      .flatMap((block) => ('fields' in block ? (block.fields as { text: string }[]) : []))
+      .find((field) => field.text.startsWith('*Build name*'))?.text;
+    const highlights = teamsPayload.attachments[0].content.body.find((element) => element.type === 'FactSet') as {
+      facts: { title: string; value: string }[];
+    };
+    const teamsFact = highlights.facts.find((fact) => fact.title === 'Build name')?.value;
     expect(slackText).toContain(String.raw`\\\*bold\*`);
     expect(teamsFact).toContain(String.raw`\\\*bold\*`);
   });
@@ -98,5 +103,20 @@ describe('review regressions', () => {
     };
     const p = createPresentation(e as never);
     expect(JSON.stringify([renderSlack(p), renderTeams(p)])).not.toContain('must-not-render');
+  });
+  it('keeps summary markup and mention syntax inert in Slack fallback text', () => {
+    const p = createPresentation({
+      schemaVersion: 1,
+      eventId: 'ckevt_summary_markup',
+      eventType: 'ccv2.build.completed',
+      status: 'failure',
+      occurredAt: '2026-11-01T20:20:00Z',
+      source: { product: 'commercekit', component: 'ccv2-build' },
+      data: { error: { message: '*bad* <@U123> @everyone' } },
+    } as never);
+    const fallback = renderSlack(p).text;
+    expect(fallback).toContain('\\*bad\\*');
+    expect(fallback).not.toContain('<@U123>');
+    expect(fallback).not.toContain('@everyone');
   });
 });

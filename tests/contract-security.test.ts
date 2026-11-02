@@ -129,12 +129,14 @@ describe('input and delivery safety', () => {
   it('rejects a Teams card above the 27 KiB safety cap', () => {
     expect(() =>
       renderTeams({
+        category: 'CommerceKit · Test',
         title: 'Synthetic',
         status: 'success',
         statusLabel: 'Succeeded',
         icon: '✅',
         tone: 'success',
         accent: '#168A45',
+        highlights: [],
         facts: Array.from({ length: 10 }, (_, index) => ({ label: `Fact ${index}`, value: '界'.repeat(1000) })),
         actions: [],
       }),

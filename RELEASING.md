@@ -33,7 +33,7 @@ For Slack, create a temporary channel and Incoming Webhook. Store the URL in the
 
 For Teams, create a temporary Workflows webhook with a co-owner and post to a temporary channel. Store its URL in the protected environment secret, then run `deployment-action-required`, `deployment-success`, and `deployment-failure`. Confirm the Workflows trigger accepts the card, the styled status container, title, summary, facts, `Action.OpenUrl` button, and subtle footer render on desktop and mobile Teams. Confirm the button opens the safe workflow URL and that no retired connector flow is used. Disable or delete the temporary workflow afterward as appropriate.
 
-Do not require similarity to the old embedded notifier messages. The new provider-native designs are the visual acceptance basis.
+Use the older public notification screenshots as a structural reference for the event heading, outcome sentence, grouped facts, and actions. Accept the new design against current Slack Block Kit and Teams Workflows behavior, accessibility, and the live smoke checklist. Exact legacy content, payloads, and extra SAP fields are not required.
 
 ## Tag consistency
 

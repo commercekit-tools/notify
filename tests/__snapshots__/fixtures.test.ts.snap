@@ -1,0 +1,2804 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > build-cancelled.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "⏹️ CCv2 build cancelled",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Build code*
+build-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "Build build-example was cancelled.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#6B7280",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 build · Cancelled",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Cancelled · CCv2 build cancelled · build-example · https://github.com/example-org/project/actions/runs/123456 · Build build-example was cancelled.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > build-cancelled.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 build · ⏹️ Cancelled",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CCv2 build cancelled",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "Build build-example was cancelled.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "default",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Build code",
+                "value": "build-example",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > build-failure.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "❌ CCv2 build failed",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Build code*
+build-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "The example build did not pass validation.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#C62828",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 build · Failed",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Failed · CCv2 build failed · build-example · https://github.com/example-org/project/actions/runs/123456 · The example build did not pass validation.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > build-failure.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 build · ❌ Failed",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CCv2 build failed",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "The example build did not pass validation.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "attention",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Build code",
+                "value": "build-example",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > build-started.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "ℹ️ CCv2 build started",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Build name*
+Main build",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "The build has started from main.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Application*
+commerce-cloud",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Branch*
+main",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#1877C9",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 build · Started",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Started · CCv2 build started · Main build · https://github.com/example-org/project/actions/runs/123456 · The build has started from main.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > build-started.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 build · ℹ️ Started",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CCv2 build started",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "The build has started from main.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "accent",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Build name",
+                "value": "Main build",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Application",
+                    "value": "commerce-cloud",
+                  },
+                  {
+                    "title": "Branch",
+                    "value": "main",
+                  },
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > build-success.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "✅ CCv2 build succeeded",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Build code*
+build-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "Build build-example is ready for deployment.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Application*
+commerce-cloud",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Status*
+SUCCESS",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#168A45",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 build · Succeeded",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Succeeded · CCv2 build succeeded · build-example · https://github.com/example-org/project/actions/runs/123456 · Build build-example is ready for deployment.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > build-success.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 build · ✅ Succeeded",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CCv2 build succeeded",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "Build build-example is ready for deployment.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "good",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Build code",
+                "value": "build-example",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Application",
+                    "value": "commerce-cloud",
+                  },
+                  {
+                    "title": "Status",
+                    "value": "SUCCESS",
+                  },
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > check-failure.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "❌ CommerceKit check failed",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "2 errors and 3 warnings across 18 files.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Mode*
+changed",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Files checked*
+18",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Errors*
+2",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Warnings*
+3",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#C62828",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · Check · Failed",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Failed · CommerceKit check failed · example-org/project · https://github.com/example-org/project/actions/runs/123456 · 2 errors and 3 warnings across 18 files.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > check-failure.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · Check · ❌ Failed",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CommerceKit check failed",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "2 errors and 3 warnings across 18 files.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "attention",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Repository",
+                "value": "example-org/project",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Mode",
+                    "value": "changed",
+                  },
+                  {
+                    "title": "Files checked",
+                    "value": "18",
+                  },
+                  {
+                    "title": "Errors",
+                    "value": "2",
+                  },
+                  {
+                    "title": "Warnings",
+                    "value": "3",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > check-internal-error.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "❌ CommerceKit check encountered an internal error",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "The check could not be completed.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#C62828",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · Check · CommerceKit error",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "CommerceKit error · CommerceKit check encountered an internal error · example-org/project · https://github.com/example-org/project/actions/runs/123456 · The check could not be completed.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > check-internal-error.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · Check · ❌ CommerceKit error",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CommerceKit check encountered an internal error",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "The check could not be completed.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "attention",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Repository",
+                "value": "example-org/project",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > check-success.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "✅ CommerceKit check succeeded",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "18 files checked with no errors.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Mode*
+full",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Files checked*
+18",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Errors*
+0",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Warnings*
+0",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Duration*
+4s",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#168A45",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · Check · Succeeded",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Succeeded · CommerceKit check succeeded · example-org/project · https://github.com/example-org/project/actions/runs/123456 · 18 files checked with no errors.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > check-success.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · Check · ✅ Succeeded",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CommerceKit check succeeded",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "18 files checked with no errors.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "good",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Repository",
+                "value": "example-org/project",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Mode",
+                    "value": "full",
+                  },
+                  {
+                    "title": "Files checked",
+                    "value": "18",
+                  },
+                  {
+                    "title": "Errors",
+                    "value": "0",
+                  },
+                  {
+                    "title": "Warnings",
+                    "value": "0",
+                  },
+                  {
+                    "title": "Duration",
+                    "value": "4s",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > check-warning.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "⚠️ CommerceKit check completed with warnings",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "3 warnings across 18 files.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Mode*
+changed",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Files checked*
+18",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Errors*
+0",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Warnings*
+3",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#B7791F",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · Check · Completed with warnings",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Completed with warnings · CommerceKit check completed with warnings · example-org/project · https://github.com/example-org/project/actions/runs/123456 · 3 warnings across 18 files.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > check-warning.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · Check · ⚠️ Completed with warnings",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CommerceKit check completed with warnings",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "3 warnings across 18 files.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "warning",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Repository",
+                "value": "example-org/project",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Mode",
+                    "value": "changed",
+                  },
+                  {
+                    "title": "Files checked",
+                    "value": "18",
+                  },
+                  {
+                    "title": "Errors",
+                    "value": "0",
+                  },
+                  {
+                    "title": "Warnings",
+                    "value": "3",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-action-required.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "⚠️ CCv2 deployment requires a decision",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Deployment code*
+deploy-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "Deployment deploy-example is waiting for a decision. Review the workflow run to continue.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Decision*
+approval",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#B7791F",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 deployment · Action required",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Action required · CCv2 deployment requires a decision · deploy-example · https://github.com/example-org/project/actions/runs/123456 · Deployment deploy-example is waiting for a decision. Review the workflow run to continue.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-action-required.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 deployment · ⚠️ Action required",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CCv2 deployment requires a decision",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "Deployment deploy-example is waiting for a decision. Review the workflow run to continue.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "warning",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Deployment code",
+                "value": "deploy-example",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Decision",
+                    "value": "approval",
+                  },
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-cancelled.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "⏹️ CCv2 deployment cancelled",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Deployment code*
+deploy-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "Deployment deploy-example was cancelled.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#6B7280",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 deployment · Cancelled",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Cancelled · CCv2 deployment cancelled · deploy-example · https://github.com/example-org/project/actions/runs/123456 · Deployment deploy-example was cancelled.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-cancelled.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 deployment · ⏹️ Cancelled",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CCv2 deployment cancelled",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "Deployment deploy-example was cancelled.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "default",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Deployment code",
+                "value": "deploy-example",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-failure.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "❌ CCv2 deployment failed",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Deployment code*
+deploy-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "The example deployment did not pass its health check.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#C62828",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 deployment · Failed",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Failed · CCv2 deployment failed · deploy-example · https://github.com/example-org/project/actions/runs/123456 · The example deployment did not pass its health check.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-failure.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 deployment · ❌ Failed",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CCv2 deployment failed",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "The example deployment did not pass its health check.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "attention",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Deployment code",
+                "value": "deploy-example",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-internal-error.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "❌ CommerceKit could not complete the CCv2 deployment workflow",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "Workflow could not complete deployment.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#C62828",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 deployment · CommerceKit error",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "CommerceKit error · CommerceKit could not complete the CCv2 deployment workflow · https://github.com/example-org/project/actions/runs/123456 · Workflow could not complete deployment.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-internal-error.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 deployment · ❌ CommerceKit error",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CommerceKit could not complete the CCv2 deployment workflow",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "Workflow could not complete deployment.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "attention",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-started.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "ℹ️ CCv2 deployment started",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Deployment code*
+deploy-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "Deployment deploy-example has started in staging.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Environment*
+staging",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#1877C9",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 deployment · Started",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Started · CCv2 deployment started · deploy-example · https://github.com/example-org/project/actions/runs/123456 · Deployment deploy-example has started in staging.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-started.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 deployment · ℹ️ Started",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CCv2 deployment started",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "Deployment deploy-example has started in staging.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "accent",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Deployment code",
+                "value": "deploy-example",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Environment",
+                    "value": "staging",
+                  },
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-success.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "✅ CCv2 deployment succeeded",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Deployment code*
+deploy-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "Deployment deploy-example completed in staging.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Environment*
+staging",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Build code*
+build-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#168A45",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 deployment · Succeeded",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Succeeded · CCv2 deployment succeeded · deploy-example · https://github.com/example-org/project/actions/runs/123456 · Deployment deploy-example completed in staging.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-success.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 deployment · ✅ Succeeded",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CCv2 deployment succeeded",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "Deployment deploy-example completed in staging.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "good",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Deployment code",
+                "value": "deploy-example",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Environment",
+                    "value": "staging",
+                  },
+                  {
+                    "title": "Build code",
+                    "value": "build-example",
+                  },
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;

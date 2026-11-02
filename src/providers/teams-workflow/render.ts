@@ -10,22 +10,44 @@ export function renderTeams(p: Presentation) {
         { info: 'accent', success: 'good', warning: 'warning', danger: 'attention', neutral: 'default' } as const
       )[p.tone],
       items: [
-        { type: 'TextBlock', text: `${p.icon} ${p.statusLabel}`, weight: 'Bolder', wrap: true },
-        { type: 'TextBlock', text: p.title, weight: 'Bolder', size: 'Medium', wrap: true },
+        {
+          type: 'TextBlock',
+          text: `${safeText(p.category)} · ${p.icon} ${safeText(p.statusLabel)}`,
+          size: 'Small',
+          weight: 'Bolder',
+          wrap: true,
+        },
+        { type: 'TextBlock', text: safeText(p.title), weight: 'Bolder', size: 'Large', wrap: true, spacing: 'Medium' },
+        ...(p.summary ? [{ type: 'TextBlock', text: safeText(p.summary), wrap: true, spacing: 'Medium' }] : []),
       ],
     },
   ];
-  if (p.summary) body.push({ type: 'TextBlock', text: safeText(p.summary), wrap: true });
-  if (p.facts.length)
+  if (p.highlights.length)
     body.push({
       type: 'FactSet',
-      facts: p.facts.slice(0, 10).map((f) => ({ title: safeText(f.label), value: safeText(f.value) })),
+      facts: p.highlights.slice(0, 2).map((f) => ({ title: safeText(f.label), value: safeText(f.value) })),
+      spacing: 'Medium',
     });
-  if (p.footer) body.push({ type: 'TextBlock', text: safeText(p.footer), isSubtle: true, size: 'Small', wrap: true });
-  if (p.actions.length)
+  if (p.facts.length)
     body.push({
-      type: 'ActionSet',
-      actions: p.actions.slice(0, 3).map((a) => ({ type: 'Action.OpenUrl', title: safeText(a.label), url: a.url })),
+      type: 'Container',
+      style: 'emphasis',
+      spacing: 'Medium',
+      items: [
+        {
+          type: 'FactSet',
+          facts: p.facts.slice(0, 10).map((f) => ({ title: safeText(f.label), value: safeText(f.value) })),
+        },
+      ],
+    });
+  if (p.footer)
+    body.push({
+      type: 'TextBlock',
+      text: safeText(p.footer),
+      isSubtle: true,
+      size: 'Small',
+      wrap: true,
+      spacing: 'Medium',
     });
   const payload = {
     type: 'message',
@@ -38,6 +60,13 @@ export function renderTeams(p: Presentation) {
           type: 'AdaptiveCard',
           version: '1.2',
           body,
+          ...(p.actions.length
+            ? {
+                actions: p.actions
+                  .slice(0, 3)
+                  .map((a) => ({ type: 'Action.OpenUrl', title: safeText(a.label), url: a.url })),
+              }
+            : {}),
         },
       },
     ],
