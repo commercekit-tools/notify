@@ -1,0 +1,114 @@
+name: Prepare Marketplace release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Initial Action release version
+        required: true
+        type: choice
+        options:
+          - v1.0.0
+      smoke-confirmation:
+        description: Type SLACK-AND-TEAMS-SMOKE-PASSED after live provider validation
+        required: true
+        type: string
+      marketplace-confirmation:
+        description: Type MARKETPLACE-NAME-VALIDATED after checking the release UI
+        required: true
+        type: string
+      confirmation:
+        description: Type PREPARE-COMMERCEKIT-V1.0.0 to create the tag and draft release
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: notify-marketplace-release
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Confirm release prerequisites
+        env:
+          VERSION: ${{ inputs.version }}
+          SMOKE_CONFIRMATION: ${{ inputs['smoke-confirmation'] }}
+          MARKETPLACE_CONFIRMATION: ${{ inputs['marketplace-confirmation'] }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          test "$VERSION" = 'v1.0.0'
+          test "$SMOKE_CONFIRMATION" = 'SLACK-AND-TEAMS-SMOKE-PASSED'
+          test "$MARKETPLACE_CONFIRMATION" = 'MARKETPLACE-NAME-VALIDATED'
+          test "$CONFIRMATION" = 'PREPARE-COMMERCEKIT-V1.0.0'
+      # actions/checkout v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+      - name: Verify release commit and absence of an existing release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$GITHUB_SHA"
+          if git ls-remote --exit-code --tags origin "refs/tags/$VERSION" >/dev/null; then
+            echo 'The immutable version tag already exists.' >&2
+            exit 1
+          fi
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo 'The version already has a GitHub Release.' >&2
+            exit 1
+          fi
+          grep -Fq 'Available as: commercekit-tools/notify@v1' README.md
+          test -f docs/releases/v1.0.0.md
+          if grep -Eiq 'publication.*pending|marketplace listing.*pending' docs/releases/v1.0.0.md; then
+            echo 'Update the draft release notes for publication before preparing the release.' >&2
+            exit 1
+          fi
+      # actions/setup-node v7.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version-file: .node-version
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm quality
+
+  prepare-draft:
+    needs: preflight
+    runs-on: ubuntu-24.04
+    environment: marketplace-release
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      # actions/checkout v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - name: Tag reviewed commit and create draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$GITHUB_SHA"
+          if git ls-remote --exit-code --tags origin "refs/tags/$VERSION" >/dev/null; then
+            echo 'The immutable version tag already exists.' >&2
+            exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git tag -a "$VERSION" "$GITHUB_SHA" -m "CommerceKit Notifications $VERSION"
+          git push origin "refs/tags/$VERSION"
+          gh release create "$VERSION" --draft --verify-tag --title "CommerceKit Notifications $VERSION" --notes-file docs/releases/v1.0.0.md
+          {
+            printf '### Draft Marketplace release prepared\n'
+            printf 'Version: %s  \n' "$VERSION"
+            printf 'Commit: %s  \n' "$GITHUB_SHA"
+            printf 'An organization owner must publish the draft in the GitHub release UI with the Marketplace checkbox, categories, and two-factor authentication.\n'
+          } >> "$GITHUB_STEP_SUMMARY"

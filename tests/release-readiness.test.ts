@@ -53,4 +53,30 @@ describe('release readiness contracts', () => {
     expect(workflow).toContain("fail-on-notification-error: 'true'");
     expect(workflow).not.toMatch(/upload-artifact|pull_request_target|webhook-url:\s*\$\{\{\s*inputs\./);
   });
+
+  it('prepares only a gated, immutable draft release from main', async () => {
+    const workflow = await read('.github/workflows/marketplace-release.yml');
+    const trigger = workflow.split('permissions:')[0];
+    expect(trigger).toMatch(/on:\s+workflow_dispatch:/);
+    expect(trigger).not.toMatch(/^\s+(pull_request|pull_request_target|push|schedule|release):/m);
+    expect(workflow).toMatch(/permissions:\s+contents: read/);
+    expect(workflow).toMatch(
+      /prepare-draft:[\s\S]*environment: marketplace-release[\s\S]*permissions:\s+contents: write/,
+    );
+    expect(workflow).toMatch(/if: github\.ref == 'refs\/heads\/main'/);
+    expect(workflow).toContain('SLACK-AND-TEAMS-SMOKE-PASSED');
+    expect(workflow).toContain('MARKETPLACE-NAME-VALIDATED');
+    expect(workflow).toContain('PREPARE-COMMERCEKIT-V1.0.0');
+    expect(workflow).toMatch(/version:[\s\S]*type: choice\s+options:\s+- v1\.0\.0/);
+    expect(workflow).toContain('pnpm quality');
+    expect(workflow).toContain('git tag -a "$VERSION" "$GITHUB_SHA"');
+    expect(workflow).toContain('gh release create "$VERSION" --draft --verify-tag');
+    expect(workflow).toMatch(/git ls-remote origin refs\/heads\/main/);
+    expect(workflow).toMatch(/git ls-remote --exit-code --tags origin/);
+    expect(workflow).toMatch(/concurrency:\s+group: notify-marketplace-release\s+cancel-in-progress: false/);
+    expect(workflow).not.toMatch(/upload-artifact|secrets\.|uses: \.\/|--force|gh release create[^\n]*--latest/);
+    const actionPins = [...workflow.matchAll(/uses: [^\s@]+@([a-f0-9]{40})/g)];
+    expect(actionPins).toHaveLength(3);
+    expect(workflow.match(/^\s+- uses: [^\n]+@/gm)).toHaveLength(actionPins.length);
+  });
 });

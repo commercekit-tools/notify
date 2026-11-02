@@ -14,16 +14,31 @@ The Action release version (`v1.0.0`) and NotificationEvent schema version (`1`)
 8. Confirm that **CommerceKit Notifications** passes the exact-name validation in the Marketplace release UI. If it conflicts, select a suitable available fallback name through a reviewed metadata change.
 9. Have an organization owner accept the current GitHub Marketplace Developer Agreement if required. Confirm the release page validates metadata and that the publishing owner has two-factor authentication available.
 10. Prepare a small reviewed release-status README and release-notes commit/PR after successful provider smoke. Replace pre-release wording with `Available as: commercekit-tools/notify@v1`, and ensure the release-note draft is accurate. Merge this preparation before tagging.
-11. Run final quality, audit, public scan, and bundle reproducibility checks on the exact reviewed release commit.
-12. Create immutable `v1.0.0` at that commit.
-13. Publish GitHub Release `v1.0.0` and its Marketplace listing using the reviewed [release-note draft](docs/releases/v1.0.0.md).
-14. Create or move the compatible major tag `v1` to the same exact commit.
-15. Independently verify `commercekit-tools/notify@v1.0.0` from another repository.
-16. Independently verify `commercekit-tools/notify@v1` from another repository.
-17. Update commercekit.tools Automation documentation.
-18. Begin the modernized `ccv2-build` event producer.
+11. Configure the protected `marketplace-release` environment as described below. On `main`, run the **Prepare Marketplace release** workflow with its exact confirmations. It re-runs `pnpm quality` and checks the release commit before creating immutable `v1.0.0` and a **draft** GitHub Release from the reviewed [release notes](docs/releases/v1.0.0.md).
+12. Have an organization owner review and publish that draft GitHub Release in the GitHub release UI with **Publish this Action to the GitHub Marketplace** selected. Complete name, metadata, category, agreement, and two-factor-authentication validation there.
+13. Create or move the compatible major tag `v1` to the same exact commit after publication.
+14. Independently verify `commercekit-tools/notify@v1.0.0` from another repository.
+15. Independently verify `commercekit-tools/notify@v1` from another repository.
+16. Update commercekit.tools Automation documentation.
+17. Begin the modernized `ccv2-build` event producer.
 
 For Marketplace categories, choose **Utilities** as primary and **Continuous integration** as secondary if offered; otherwise use the closest accurate categories. The exact Action name can only be confirmed in the Marketplace release validation UI.
+
+## Guarded release preparation workflow
+
+`.github/workflows/marketplace-release.yml` runs **only** through `workflow_dispatch` on `main`. Before using it, protect a `marketplace-release` environment with required reviewers and deployment branch restricted to `main` where repository settings permit. The workflow uses read-only permissions for preflight and grants `contents: write` only to its environment-gated draft-release job. It does not need provider secrets or send notifications.
+
+After completing the live provider smoke tests and merging the reviewed README/release-note update, dispatch **Prepare Marketplace release** with version `v1.0.0` and these exact strings:
+
+| Input                      | Exact value                    |
+| -------------------------- | ------------------------------ |
+| `smoke-confirmation`       | `SLACK-AND-TEAMS-SMOKE-PASSED` |
+| `marketplace-confirmation` | `MARKETPLACE-NAME-VALIDATED`   |
+| `confirmation`             | `PREPARE-COMMERCEKIT-V1.0.0`   |
+
+The preflight requires an unchanged `main` commit, an unpublished version tag, release-ready README text, publication-ready release notes, and a passing `pnpm quality` run. The environment-gated job checks `main` again, pushes an annotated `v1.0.0` tag, and creates a **draft** release with `gh release create --draft --verify-tag`. The workflow does not publish the draft or the Marketplace listing. GitHub's Marketplace publication checkbox, agreement, categories, and owner authentication are completed in the release UI; there is no documented `gh release create` switch for that checkbox.
+
+If the tag push succeeds but draft creation fails, do not rerun the workflow or delete/move the immutable tag automatically. Inspect the tag and commit, resolve the failure, and have an owner create the draft release against the existing tag with the reviewed notes. Likewise, do not publish a draft before its metadata and content are verified.
 
 ## Manual provider smoke
 
