@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "eventId": "ckevt_example_build_internal_error",
+  "eventType": "ccv2.build.completed",
+  "status": "internal-error",
+  "occurredAt": "2026-11-01T20:20:00.000Z",
+  "source": {
+    "product": "commercekit",
+    "component": "ccv2-build"
+  },
+  "context": {
+    "repository": "example-org/project",
+    "workflow": "CommerceKit CI",
+    "runId": "123456",
+    "runUrl": "https://github.com/example-org/project/actions/runs/123456"
+  },
+  "data": {
+    "applicationCode": "commerce-cloud",
+    "branch": "main",
+    "buildName": "Main build",
+    "error": {
+      "message": "CommerceKit could not create the example build."
+    }
+  },
+  "links": [
+    {
+      "label": "View workflow",
+      "url": "https://github.com/example-org/project/actions/runs/123456"
+    }
+  ]
+}

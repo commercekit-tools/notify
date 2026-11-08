@@ -10,30 +10,34 @@ const titles: Record<string, string> = {
   'check-success': 'CommerceKit check succeeded',
   'check-warning': 'CommerceKit check completed with warnings',
   'check-failure': 'CommerceKit check failed',
+  'check-cancelled': 'CommerceKit check cancelled',
   'check-internal-error': 'CommerceKit check encountered an internal error',
   'build-started': 'CCv2 build started',
   'build-success': 'CCv2 build succeeded',
   'build-failure': 'CCv2 build failed',
   'build-cancelled': 'CCv2 build cancelled',
+  'build-internal-error': 'CCv2 build encountered an internal error',
   'deployment-started': 'CCv2 deployment started',
   'deployment-action-required': 'CCv2 deployment requires a decision',
   'deployment-success': 'CCv2 deployment succeeded',
   'deployment-failure': 'CCv2 deployment failed',
   'deployment-cancelled': 'CCv2 deployment cancelled',
-  'deployment-internal-error': 'CommerceKit could not complete the CCv2 deployment workflow',
+  'deployment-internal-error': 'CCv2 deployment encountered an internal error',
 };
 describe('golden synthetic events', () => {
   it('validates and renders each supported event fixture deterministically', async () => {
     const names = (await readdir(new URL('./fixtures/events/', import.meta.url)))
       .filter((n) => n.endsWith('.json'))
       .sort();
-    expect(names).toHaveLength(14);
+    expect(names).toHaveLength(16);
     for (const name of names) {
       const event = JSON.parse(await readFile(new URL(`./fixtures/events/${name}`, import.meta.url), 'utf8'));
       validateEvent(event);
       const presentation = createPresentation(event);
       expect(presentation.title).toBe(titles[name.replace('.json', '')]);
       expect(presentation.category).toContain('CommerceKit');
+      expect(presentation.statusLabel).toBe(theme[event.status as keyof typeof theme].label);
+      expect(presentation.icon).toBe(theme[event.status as keyof typeof theme].icon);
       expect(presentation.summary).toBeTruthy();
       expect(presentation.highlights.at(-1)).toEqual({ label: 'Occurred', value: '2026-11-01 20:20:00 UTC' });
       const slack = renderSlack(presentation);
@@ -56,6 +60,24 @@ describe('golden synthetic events', () => {
       expect(presentation.actions[0]?.label).toBe('View workflow');
       expect(slack).toMatchSnapshot(`${name}: Slack`);
       expect(teams).toMatchSnapshot(`${name}: Teams Workflows`);
+    }
+  });
+
+  it('uses the same outcome language for check, build, and deployment', async () => {
+    for (const [status, ending] of [
+      ['success', 'succeeded'],
+      ['failure', 'failed'],
+      ['cancelled', 'cancelled'],
+      ['internal-error', 'encountered an internal error'],
+    ]) {
+      for (const operation of ['check', 'build', 'deployment']) {
+        const event = JSON.parse(
+          await readFile(new URL(`./fixtures/events/${operation}-${status}.json`, import.meta.url), 'utf8'),
+        );
+        const presentation = createPresentation(event);
+        expect(presentation.title).toMatch(new RegExp(`${ending}$`));
+        expect(presentation.statusLabel).toBe(theme[status as keyof typeof theme].label);
+      }
     }
   });
 
