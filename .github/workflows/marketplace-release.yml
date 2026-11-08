@@ -13,6 +13,10 @@ on:
         description: Type SLACK-AND-TEAMS-SMOKE-PASSED after live provider validation
         required: true
         type: string
+      producer-confirmation:
+        description: Type CCV2-BUILD-AND-DEPLOY-READY after both producer Actions are built and validated
+        required: true
+        type: string
       marketplace-confirmation:
         description: Type MARKETPLACE-NAME-VALIDATED after checking the release UI
         required: true
@@ -39,11 +43,13 @@ jobs:
         env:
           VERSION: ${{ inputs.version }}
           SMOKE_CONFIRMATION: ${{ inputs['smoke-confirmation'] }}
+          PRODUCER_CONFIRMATION: ${{ inputs['producer-confirmation'] }}
           MARKETPLACE_CONFIRMATION: ${{ inputs['marketplace-confirmation'] }}
           CONFIRMATION: ${{ inputs.confirmation }}
         run: |
           test "$VERSION" = 'v1.0.0'
           test "$SMOKE_CONFIRMATION" = 'SLACK-AND-TEAMS-SMOKE-PASSED'
+          test "$PRODUCER_CONFIRMATION" = 'CCV2-BUILD-AND-DEPLOY-READY'
           test "$MARKETPLACE_CONFIRMATION" = 'MARKETPLACE-NAME-VALIDATED'
           test "$CONFIRMATION" = 'PREPARE-COMMERCEKIT-V1.0.0'
       # actions/checkout v7.0.1
