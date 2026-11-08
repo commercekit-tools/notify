@@ -65,6 +65,9 @@ describe('release readiness contracts', () => {
     );
     expect(workflow).toMatch(/if: github\.ref == 'refs\/heads\/main'/);
     expect(workflow).toContain('SLACK-AND-TEAMS-SMOKE-PASSED');
+    expect(workflow).toMatch(/producer-confirmation:\s+description:[^\n]+\s+required: true\s+type: string/);
+    expect(workflow).toContain("PRODUCER_CONFIRMATION: ${{ inputs['producer-confirmation'] }}");
+    expect(workflow).toContain('test "$PRODUCER_CONFIRMATION" = \'CCV2-BUILD-AND-DEPLOY-READY\'');
     expect(workflow).toContain('MARKETPLACE-NAME-VALIDATED');
     expect(workflow).toContain('PREPARE-COMMERCEKIT-V1.0.0');
     expect(workflow).toMatch(/version:[\s\S]*type: choice\s+options:\s+- v1\.0\.0/);

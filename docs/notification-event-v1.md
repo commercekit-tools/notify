@@ -14,4 +14,10 @@ See [`../schema/notification-event-v1.schema.json`](../schema/notification-event
 
 For `check.completed` with `success`, `warning`, or `failure`, `data.filesChecked`, `data.errors`, and `data.warnings` are required non-negative integers. They may be omitted for `cancelled` and `internal-error`. `context.runUrl`, like every event link, must be a bounded HTTPS URL without credentials or fragment. The Action may fill missing context fields from the documented GitHub Actions environment variables; it does not read the full GitHub event payload or copy arbitrary environment values.
 
+The optional `links` array carries operational destinations supplied by the producer. Prefer the GitHub Actions run first and a specific Cloud Portal build or deployment progress page second when that URL is known. The notifier does not infer a Cloud Portal URL from a build or deployment code. If no links are supplied, a valid `context.runUrl` becomes a **View workflow** action. A build-started event may omit `buildCode` until CCv2 returns it; its workflow link still provides a useful next step.
+
+## Shared notification language
+
+The presentation calls the three operations **CommerceKit check**, **CCv2 build**, and **CCv2 deployment**. Across operations, common outcomes use the same title endings: **succeeded**, **failed**, **cancelled**, and **encountered an internal error**. The shared status theme supplies the same textual status and icon to Slack and Teams Workflows. **Completed with warnings** applies to checks; **action required** applies to deployments. A failed operation and an internal CommerceKit error remain distinct statuses. Operation-specific summaries and facts explain what happened without changing that outcome vocabulary.
+
 The schema `$id` is a logical canonical identifier. The website endpoint is not currently a downloadable schema; retrieve the source from this public repository's [`schema/notification-event-v1.schema.json`](../schema/notification-event-v1.schema.json) until a separate website publication is completed. Runtime validation always uses the bundled local schema.

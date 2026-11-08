@@ -1,6 +1,6 @@
 # CommerceKit Notifications
 
-**Status: Initial implementation under development.** This Action is not yet released. The future `commercekit-tools/notify@v1` reference is unavailable until an approved release.
+**Status: Initial implementation under development.** This Action is not yet released. The future `commercekit-tools/notify@v1` reference is unavailable until the separate CCv2 build and deploy Actions are built, their NotificationEvent v1 integration is validated, and an approved release is published.
 
 Send a normalized CommerceKit workflow event to Slack Incoming Webhooks or Microsoft Teams Workflows. One root Action accepts `provider: slack` or `provider: teams-workflow`.
 
@@ -67,6 +67,8 @@ Or pass JSON directly:
 
 The same event can go to independent destinations using separate steps and secrets. Add separate conditions as appropriate. Each step has independent delivery behavior.
 
+Notification buttons should lead to the operation: the GitHub Actions run and, when the producer knows it, the specific Cloud Portal build or deployment progress page. Supply those destinations as up to three validated HTTPS `links` in the event, with the workflow run first. If `links` is absent or empty, `context.runUrl` supplies **View workflow**. The notifier does not create Cloud Portal URLs from identifiers or add a CommerceKit documentation button. For a build-started event before CCv2 provides a build code, omit the code and any code-dependent portal link; a later event can include both. See [producer integration](docs/producer-integration.md).
+
 A synthetic check event can be stored in a file:
 
 ```json
@@ -110,7 +112,7 @@ See [SECURITY.md](SECURITY.md). Common issues: ensure exactly one event input is
 
 ## Versioning and release status
 
-Event schema version 1 and Action release versions are independent. No Action tag, GitHub Release, or Marketplace listing exists yet. After reviewed provider smoke, the guarded [release preparation workflow](.github/workflows/marketplace-release.yml) can create the immutable version tag and a draft GitHub Release. An organization owner must publish the draft and Marketplace listing through GitHub's release UI. See [RELEASING.md](RELEASING.md).
+Event schema version 1 and Action release versions are independent. No Action tag, GitHub Release, or Marketplace listing exists yet. Publication is on hold until both CCv2 build and deploy producer Actions are built and their event outputs work with this Action. After that gate and reviewed provider smoke, the guarded [release preparation workflow](.github/workflows/marketplace-release.yml) can create the immutable version tag and a draft GitHub Release. An organization owner must publish the draft and Marketplace listing through GitHub's release UI. See [RELEASING.md](RELEASING.md).
 
 Context may be enriched from the standard safe GitHub Actions variables when event values are missing. Provided values are preserved. A supplied or generated `context.runUrl` must be a bounded HTTPS URL with no credentials or fragment. For successful, warning, and failed checks, `filesChecked`, `errors`, and `warnings` are required so summaries never invent zero counts. Dynamic provider text is sanitized and rendered as inert text; only validated links become actions.
 

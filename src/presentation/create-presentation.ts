@@ -72,7 +72,7 @@ export function createPresentation(event: NotificationEvent): Presentation {
             ? 'CCv2 build failed'
             : event.status === 'cancelled'
               ? 'CCv2 build cancelled'
-              : 'CommerceKit could not complete the CCv2 build workflow';
+              : 'CCv2 build encountered an internal error';
     const code = str(d.buildCode),
       name = str(d.buildName),
       application = str(d.applicationCode),
@@ -109,7 +109,7 @@ export function createPresentation(event: NotificationEvent): Presentation {
               ? 'CCv2 deployment failed'
               : event.status === 'cancelled'
                 ? 'CCv2 deployment cancelled'
-                : 'CommerceKit could not complete the CCv2 deployment workflow';
+                : 'CCv2 deployment encountered an internal error';
     const code = str(d.deploymentCode),
       environment = str(d.environmentCode) || str(c.environment),
       subject = code ? `Deployment ${code}` : 'The deployment',

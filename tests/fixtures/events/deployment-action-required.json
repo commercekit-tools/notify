@@ -15,6 +15,10 @@
     {
       "label": "View workflow",
       "url": "https://github.com/example-org/project/actions/runs/123456"
+    },
+    {
+      "label": "View deployment progress",
+      "url": "https://portal.example.org/deployments/deploy-example"
     }
   ],
   "eventId": "ckevt_example_deployment_action_required",
