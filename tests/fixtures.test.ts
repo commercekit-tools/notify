@@ -82,7 +82,10 @@ describe('golden synthetic events', () => {
     expect(card.body.map((element) => element.type)).toEqual(['Container', 'FactSet', 'Container', 'TextBlock']);
     expect(card.body[0]).toMatchObject({ style: 'good' });
     expect(card.body[2]).toMatchObject({ style: 'emphasis' });
-    expect(card.actions).toMatchObject([{ type: 'Action.OpenUrl', title: 'View workflow' }]);
+    expect(card.actions).toMatchObject([
+      { type: 'Action.OpenUrl', title: 'View workflow' },
+      { type: 'Action.OpenUrl', title: 'View build progress' },
+    ]);
   });
 
   it('keeps check metrics numeric and gives action-required a clear next step', async () => {
@@ -99,5 +102,42 @@ describe('golden synthetic events', () => {
       'Deployment deploy-example is waiting for a decision. Review the workflow run to continue.',
     );
     expect(deploymentPresentation.highlights[0]).toEqual({ label: 'Deployment code', value: 'deploy-example' });
+  });
+
+  it('uses workflow and known progress links without inventing a started build code', async () => {
+    const load = async (name: string) =>
+      JSON.parse(await readFile(new URL(`./fixtures/events/${name}.json`, import.meta.url), 'utf8'));
+    const started = createPresentation(await load('build-started'));
+    expect(started.highlights[0]).toEqual({ label: 'Build name', value: 'Main build' });
+    expect(started.actions).toEqual([
+      { label: 'View workflow', url: 'https://github.com/example-org/project/actions/runs/123456' },
+    ]);
+    expect(JSON.stringify(renderSlack(started))).not.toContain('build-example');
+
+    for (const [fixture, label, url] of [
+      ['build-success', 'View build progress', 'https://portal.example.org/builds/build-example'],
+      [
+        'deployment-action-required',
+        'View deployment progress',
+        'https://portal.example.org/deployments/deploy-example',
+      ],
+    ]) {
+      const presentation = createPresentation(await load(fixture));
+      expect(presentation.actions.map((action) => action.label)).toEqual(['View workflow', label]);
+      expect(presentation.actions[1]?.url).toBe(url);
+      const slack = renderSlack(presentation);
+      const teams = renderTeams(presentation);
+      const slackActions = slack.attachments[0].blocks.find((block) => block.type === 'actions') as {
+        elements: { url: string }[];
+      };
+      expect(slackActions.elements.map((action) => action.url)).toEqual(
+        presentation.actions.map((action) => action.url),
+      );
+      expect(teams.attachments[0].content.actions?.map((action) => action.url)).toEqual(
+        presentation.actions.map((action) => action.url),
+      );
+      expect(JSON.stringify(slack)).not.toContain('commercekit.tools/docs');
+      expect(JSON.stringify(teams)).not.toContain('commercekit.tools/docs');
+    }
   });
 });

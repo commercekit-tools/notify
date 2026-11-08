@@ -67,6 +67,8 @@ Or pass JSON directly:
 
 The same event can go to independent destinations using separate steps and secrets. Add separate conditions as appropriate. Each step has independent delivery behavior.
 
+Notification buttons should lead to the operation: the GitHub Actions run and, when the producer knows it, the specific Cloud Portal build or deployment progress page. Supply those destinations as up to three validated HTTPS `links` in the event, with the workflow run first. If `links` is absent or empty, `context.runUrl` supplies **View workflow**. The notifier does not create Cloud Portal URLs from identifiers or add a CommerceKit documentation button. For a build-started event before CCv2 provides a build code, omit the code and any code-dependent portal link; a later event can include both. See [producer integration](docs/producer-integration.md).
+
 A synthetic check event can be stored in a file:
 
 ```json

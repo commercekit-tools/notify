@@ -15,6 +15,10 @@
     {
       "label": "View workflow",
       "url": "https://github.com/example-org/project/actions/runs/123456"
+    },
+    {
+      "label": "View build progress",
+      "url": "https://portal.example.org/builds/build-example"
     }
   ],
   "eventId": "ckevt_example_build_success",
