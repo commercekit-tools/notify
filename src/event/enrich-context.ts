@@ -1,6 +1,15 @@
 import type { NotificationEvent } from './types.js';
 import { validateSafeUrl } from './validate.js';
 
+const limits: Record<string, number> = {
+  repository: 200,
+  ref: 300,
+  commit: 128,
+  actor: 128,
+  workflow: 200,
+  job: 200,
+  runId: 64,
+};
 const fields = {
   repository: 'GITHUB_REPOSITORY',
   ref: 'GITHUB_REF',
@@ -17,14 +26,15 @@ export function enrichContext(event: NotificationEvent, env: NodeJS.ProcessEnv =
   for (const [key, variable] of Object.entries(fields)) {
     if (context[key] !== undefined && context[key] !== '') continue;
     const value = env[variable]?.trim();
-    if (!value) continue;
+    if (!value || /[\u0000-\u001F\u007F]/.test(value)) continue;
     if (key === 'runAttempt') {
       const attempt = Number(value);
-      if (Number.isInteger(attempt) && attempt >= 1) context.runAttempt = attempt;
+      if (Number.isSafeInteger(attempt) && attempt >= 1) context.runAttempt = attempt;
     } else {
+      if (value.length > limits[key]) continue;
       if (key === 'repository' && !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(value)) continue;
       if (key === 'runId' && !/^\d+$/.test(value)) continue;
-      context[key] = value.slice(0, 300);
+      context[key] = value;
     }
   }
 

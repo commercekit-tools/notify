@@ -143,3 +143,16 @@ describe('input and delivery safety', () => {
     ).toThrow(/27 KiB/);
   });
 });
+
+it.each([
+  'https://[::ffff:127.0.0.1]/hook',
+  'https://[::ffff:192.168.1.5]/hook',
+  'https://[fe90::1]/hook',
+  'https://[febf::1]/hook',
+  'https://[::]/hook',
+  'https://0.0.0.0/hook',
+  'https://localhost./hook',
+  'https://host.local./hook',
+])('rejects local Teams address %s', (url) => {
+  expect(() => validateWebhook(url, 'teams-workflow')).toThrow();
+});
