@@ -51,3 +51,19 @@ describe('safe GitHub context enrichment', () => {
     expect(event.context).toEqual({});
   });
 });
+
+it('keeps enriched context within schema bounds and omits unsafe metadata', () => {
+  const event = enrichContext(base, {
+    GITHUB_REPOSITORY: 'owner/' + 'r'.repeat(250),
+    GITHUB_RUN_ID: '1'.repeat(100),
+    GITHUB_ACTOR: 'a'.repeat(200),
+    GITHUB_WORKFLOW: 'w'.repeat(250),
+    GITHUB_JOB: 'unsafe\njob',
+    GITHUB_SERVER_URL: 'https://github.com',
+  });
+  expect(() => validateEvent(event)).not.toThrow();
+  expect(event.context).not.toHaveProperty('repository');
+  expect(event.context).not.toHaveProperty('runId');
+  expect(event.context).not.toHaveProperty('job');
+  expect(event.context).not.toHaveProperty('runUrl');
+});
