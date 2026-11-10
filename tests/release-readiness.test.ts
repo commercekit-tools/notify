@@ -77,9 +77,23 @@ describe('release readiness contracts', () => {
     expect(workflow).toMatch(/git ls-remote origin refs\/heads\/main/);
     expect(workflow).toMatch(/git ls-remote --exit-code --tags origin/);
     expect(workflow).toMatch(/concurrency:\s+group: notify-marketplace-release\s+cancel-in-progress: false/);
-    expect(workflow).not.toMatch(/upload-artifact|secrets\.|uses: \.\/|--force|gh release create[^\n]*--latest/);
+    expect(workflow).not.toMatch(
+      /upload-artifact|secrets\.(?!GITHUB_TOKEN)|uses: \.\/|--force|gh release create[^\n]*--latest/,
+    );
     const actionPins = [...workflow.matchAll(/uses: [^\s@]+@([a-f0-9]{40})/g)];
     expect(actionPins).toHaveLength(3);
     expect(workflow.match(/^\s+- uses: [^\n]+@/gm)).toHaveLength(actionPins.length);
   });
+});
+
+it.each(['ci.yml', 'marketplace-release.yml'])('limits package authentication to installation in %s', async (name) => {
+  const workflow = await read(`.github/workflows/${name}`);
+  expect(workflow).toContain('packages: read');
+  expect(workflow).toContain('registry-url: https://npm.pkg.github.com');
+  expect(workflow).toContain("scope: '@commercekit-tools'");
+  expect(workflow.match(/NODE_AUTH_TOKEN:/g)).toHaveLength(1);
+  expect(workflow).toMatch(
+    /- run: pnpm install --frozen-lockfile\n {8}env:\n {10}NODE_AUTH_TOKEN: \$\{\{ secrets.GITHUB_TOKEN \}\}/,
+  );
+  expect(workflow).not.toMatch(/packages: write|actions: write|pull-requests: write|id-token: write/);
 });

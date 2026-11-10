@@ -1,4 +1,4 @@
-import type { Provider } from '../event/types.js';
+import type { Provider } from './types.js';
 import { retryAfterMs } from './retry-after.js';
 export interface DeliveryResult {
   attempts: number;

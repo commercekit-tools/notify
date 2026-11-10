@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { sanitize, sanitizeLabel } from '../src/event/sanitize.js';
+import { sanitize, sanitizeLabel } from '../src/presentation/sanitize.js';
 
 describe('sanitization rules', () => {
   it.each([

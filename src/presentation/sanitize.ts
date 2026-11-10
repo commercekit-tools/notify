@@ -1,3 +1,5 @@
+// Notify preserves its established redaction labels, webhook/query URL filtering,
+// and provider text behavior; the package sanitizers are not equivalent.
 interface Rule {
   pattern: RegExp;
   replace: (..._args: string[]) => string;

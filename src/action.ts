@@ -24,11 +24,11 @@ export async function runAction(): Promise<void> {
       json: core.getInput('event-json') || undefined,
       file: core.getInput('event-file') || undefined,
     });
-    const event = enrichContext(parsedEvent as never) as typeof parsedEvent;
+    const event = enrichContext(parsedEvent);
     eventType = String(event.eventType);
     status = String(event.status);
     const url = validateWebhook(webhook, provider);
-    const presentation = createPresentation(event as never);
+    const presentation = createPresentation(event);
     const payload = provider === 'slack' ? renderSlack(presentation) : renderTeams(presentation);
     try {
       const result = await deliver(provider, url, payload);

@@ -3,7 +3,7 @@ import { mkdtemp, writeFile, mkdir, symlink, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parseEvent } from '../src/event/parse.js';
-import { sanitize } from '../src/event/sanitize.js';
+import { sanitize } from '../src/presentation/sanitize.js';
 import { validateEvent } from '../src/event/validate.js';
 import { validateWebhook } from '../src/delivery/url-validation.js';
 import { deliver } from '../src/delivery/webhook.js';
@@ -42,7 +42,7 @@ describe('input and delivery safety', () => {
     }
   });
   it('rejects unsupported schema, unsafe link and invalid data shape', () => {
-    expect(() => validateEvent({ ...valid, schemaVersion: 2 })).toThrow(/version 2/);
+    expect(() => validateEvent({ ...valid, schemaVersion: 2 })).toThrow(/schema version/);
     expect(() => validateEvent({ ...valid, links: [{ label: 'Go', url: 'javascript:alert(1)' }] })).toThrow();
     expect(() => validateEvent({ ...valid, data: { errors: -1 } })).toThrow();
     expect(() => validateEvent({ ...valid, eventType: 'unknown' })).toThrow();

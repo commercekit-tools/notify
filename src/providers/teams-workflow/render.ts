@@ -1,6 +1,6 @@
 import { Buffer } from 'node:buffer';
 import type { Presentation } from '../../presentation/types.js';
-import { sanitize } from '../../event/sanitize.js';
+import { sanitize } from '../../presentation/sanitize.js';
 export const TEAMS_MAX_BYTES = 27 * 1024;
 export function renderTeams(p: Presentation) {
   const body: Record<string, unknown>[] = [
