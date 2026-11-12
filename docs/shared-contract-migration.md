@@ -1,6 +1,6 @@
 # Shared contract migration
 
-This branch migrates the pre-extraction baseline `015479e4340f61598d2125532acf6474381ca976` to `@commercekit-tools/notification-contract@0.0.2`. Notify remains unreleased.
+This migration moves the pre-extraction baseline `015479e4340f61598d2125532acf6474381ca976` to `@commercekit-tools/notification-contract@0.0.2`. Notify remains unreleased.
 
 ## Ownership inventory
 
@@ -18,12 +18,12 @@ This branch migrates the pre-extraction baseline `015479e4340f61598d2125532acf64
 
 There were no schema updater/provenance scripts to remove. All imports use public package exports. Direct Ajv dependencies are removed; the package supplies its runtime dependencies transitively.
 
-## Compatibility gate
+## Compatibility behavior
 
 All 16 committed fixtures are covered by the existing 32 provider snapshots. They must remain unchanged. The original sanitizer is deliberately retained because package primitives use different redaction labels and do not replace Notify's signed-URL and webhook filtering. Provider text safety is not delegated to generic package sanitizers.
 
-A confirmed acceptance difference requires review before this source-only migration is considered compatible: Notify's baseline accepts an HTTPS link ending in an empty `#`; package 0.0.2 rejects it. The package validator remains the single source of truth; the adapter does not bypass it. Resolving this requires explicit approval of the stricter rule or a compatible package revision. The shared package is not modified here.
+This migration adopts package 0.0.2's stricter validation: HTTPS links ending in an empty `#` are rejected, although the baseline accepted them. The package validator remains the single source of truth; the adapter does not bypass it. The shared package is not modified here.
 
 Package errors do not expose Ajv diagnostic paths. The local adapter retains the invalid-JSON and byte-limit messages and uses bounded, input-free messages for schema/type/status/data and link errors. No invalid JSON is echoed. Validation failures remain fatal and occur before delivery.
 
-The context adapter preserves producer values, fills safe missing metadata, requires an explicit runner server URL, and supports producer repository/run metadata when runner values are missing. The package also rejects C1 control characters in extracted metadata and requires an origin-only server URL; the baseline extractor accepted those metadata characters and HTTPS server path prefixes. These stricter context policies also need review under the unchanged-behavior requirement.
+The context adapter preserves producer values, fills safe missing metadata, requires an explicit runner server URL, and supports producer repository/run metadata when runner values are missing. The package also rejects C1 control characters in extracted metadata and requires an origin-only server URL; the baseline extractor accepted those metadata characters and HTTPS server path prefixes. This migration adopts those stricter context policies. Invalid runner metadata is omitted without overriding valid producer context.

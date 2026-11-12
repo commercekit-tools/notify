@@ -84,3 +84,22 @@ it('never echoes invalid event content in parser or validator errors', async () 
     expect(String(error)).toContain('Invalid NotificationEvent');
   }
 });
+
+it.each(['links', 'runUrl'])('rejects an empty URL fragment in %s under the shared contract policy', async (field) => {
+  const event = JSON.parse(text);
+  if (field === 'links') event.links = [{ label: 'View build', url: 'https://example.test/build#' }];
+  else event.context.runUrl = 'https://github.com/example/project/actions/runs/123#';
+  await expect(parseEvent({ json: JSON.stringify(event) })).rejects.toThrow(/HTTPS URLs/);
+});
+
+it('omits C1 runner metadata and run URLs from server path prefixes', async () => {
+  const event = await parseEvent({ json: text });
+  event.context = { repository: 'producer/project' };
+  const enriched = enrichContext(event, {
+    GITHUB_ACTOR: 'unsafe\u0085actor',
+    GITHUB_RUN_ID: '123',
+    GITHUB_SERVER_URL: 'https://github.example.org/prefix',
+  });
+  expect(enriched.context).toEqual({ repository: 'producer/project', runId: '123' });
+  validateEvent(enriched);
+});
