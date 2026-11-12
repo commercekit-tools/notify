@@ -1,4 +1,4 @@
-import type { Status } from '../event/types.js';
+import type { NotificationStatus as Status } from '@commercekit-tools/notification-contract';
 export const theme: Record<
   Status,
   {

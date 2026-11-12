@@ -10,6 +10,12 @@ Send a normalized CommerceKit workflow event to Slack Incoming Webhooks or Micro
 
 The Action performs no CCv2 API calls, build/deployment work, CLI checks, project-file inspection, or source diagnostics. See [the event contract](docs/notification-event-v1.md).
 
+## Shared event contract
+
+NotificationEvent v1 is supplied by `@commercekit-tools/notification-contract`, pinned to **0.0.2** from GitHub Packages and bundled into `dist/index.js`. Workflow users do not install the package or authenticate to GitHub Packages. Maintainers need package read access to install development dependencies; see [Contributing](CONTRIBUTING.md).
+
+Notify owns presentation templates, Slack/Teams rendering and escaping, webhook policies, delivery, retries, and Action inputs/outputs. Package SemVer, event `schemaVersion`, and Action releases evolve independently. Notify remains unreleased. See the [migration compatibility notes](docs/shared-contract-migration.md).
+
 ## Supported providers
 
 - Slack Incoming Webhooks (`slack`)

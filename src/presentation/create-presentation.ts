@@ -1,5 +1,5 @@
-import type { NotificationEvent } from '../event/types.js';
-import { sanitize, sanitizeLabel, safePlainText } from '../event/sanitize.js';
+import type { NotificationEvent } from '@commercekit-tools/notification-contract';
+import { sanitize, sanitizeLabel, safePlainText } from './sanitize.js';
 import { theme } from './theme.js';
 import type { Presentation } from './types.js';
 const str = (v: unknown): string =>

@@ -4,11 +4,13 @@ The Action release version (`v1.0.0`) and NotificationEvent schema version (`1`)
 
 **Release hold:** Do not tag, create a GitHub Release, or publish this Action to Marketplace until the separate `commercekit-tools/ccv2-build` and `commercekit-tools/ccv2-deploy` Actions are built and their NotificationEvent v1 outputs have been validated with this notifier. This is a product release gate; the two producer Actions remain separate repositories and releases.
 
+The Action bundles `@commercekit-tools/notification-contract@0.0.2` and its runtime dependencies. Package SemVer is independent of NotificationEvent `schemaVersion`. Maintainers and preflight CI need GitHub Packages read access as described in [Contributing](CONTRIBUTING.md); workflow users and manual provider smoke use the committed bundle without registry access. Package publication does not release this Action.
+
 ## Release order
 
 1. Merge reviewed notification PRs and verify main CI and CodeQL are green.
 2. Build and review the separate `ccv2-build` and `ccv2-deploy` Actions. Each must emit compact NotificationEvent v1 JSON as `notification-event` on success and failure before `core.setFailed(...)` where possible, without provider-specific rendering or webhook handling.
-3. Validate both producer outputs against this repository's schema and confirm the resulting build and deployment events render and deliver through this Action in controlled integration tests with a mocked transport. Do not claim the producers are ready solely because their repositories exist.
+3. Validate both producer outputs against the installed contract package's complete validator and confirm the resulting build and deployment events render and deliver through this Action in controlled integration tests with a mocked transport. Do not claim the producers are ready solely because their repositories exist.
 4. Verify `.github/workflows/provider-smoke.yml` is present on the default branch.
 5. Create a dedicated `provider-smoke` environment with protection/approval where available. Add only temporary `COMMERCEKIT_SLACK_TEST_WEBHOOK_URL` and `COMMERCEKIT_TEAMS_TEST_WORKFLOW_URL` secrets to that environment.
 6. Run the Slack smoke fixtures described below.
