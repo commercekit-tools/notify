@@ -7,6 +7,7 @@ import { renderTeams } from '../src/providers/teams-workflow/render.js';
 import { theme } from '../src/presentation/theme.js';
 
 const titles: Record<string, string> = {
+  'cleanup-success': 'CCv2 build cleanup completed',
   'check-success': 'CommerceKit check succeeded',
   'check-warning': 'CommerceKit check completed with warnings',
   'check-failure': 'CommerceKit check failed',
@@ -29,7 +30,7 @@ describe('golden synthetic events', () => {
     const names = (await readdir(new URL('./fixtures/events/', import.meta.url)))
       .filter((n) => n.endsWith('.json'))
       .sort();
-    expect(names).toHaveLength(16);
+    expect(names).toHaveLength(17);
     for (const name of names) {
       const event = JSON.parse(await readFile(new URL(`./fixtures/events/${name}`, import.meta.url), 'utf8'));
       validateEvent(event);

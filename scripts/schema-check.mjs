@@ -7,8 +7,8 @@ import { parseNotificationEventJson } from '@commercekit-tools/notification-cont
 
 const root = new URL('../', import.meta.url);
 const manifest = JSON.parse(await readFile(new URL('package.json', root), 'utf8'));
-assert.equal(metadata.version, '0.0.3');
-assert.equal(manifest.dependencies['@commercekit-tools/notification-contract'], '0.0.3');
+assert.equal(metadata.version, '0.0.4');
+assert.equal(manifest.dependencies['@commercekit-tools/notification-contract'], '0.0.4');
 assert.equal(schema.$schema, 'https://json-schema.org/draft/2020-12/schema');
 assert.equal(schema.properties.schemaVersion.const, 1);
 assert(!existsSync(new URL('schema/notification-event-v1.schema.json', root)), 'Local schema must not be vendored.');
@@ -21,6 +21,7 @@ for (const name of (await readdir(fixtures)).filter((name) => name.endsWith('.js
 assert.deepEqual(
   [...types].sort(),
   [
+    'ccv2.build-cleanup.completed',
     'check.completed',
     'ccv2.build.started',
     'ccv2.build.completed',
@@ -30,4 +31,4 @@ assert.deepEqual(
   ].sort(),
 );
 assert.deepEqual([...schema.properties.eventType.enum].sort(), [...types].sort());
-console.log('Notification contract 0.0.3: public schema export, all fixtures and supported event types verified.');
+console.log('Published notification contract: public schema export, all fixtures and supported event types verified.');

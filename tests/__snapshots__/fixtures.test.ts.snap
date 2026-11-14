@@ -2020,6 +2020,276 @@ exports[`golden synthetic events > validates and renders each supported event fi
 }
 `;
 
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > cleanup-success.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "✅ CCv2 build cleanup completed",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Mode*
+DRY RUN",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "DRY RUN: 2 planned targets; 0 deletion requests accepted. Outcome: dry-run.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Subscription*
+subscription-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Application*
+application-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Retention days*
+30",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Keep latest*
+10",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Planned*
+2",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Requests accepted*
+0",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Failed / unknown*
+0 / 0",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Deferred*
+2",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Duration*
+1s",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#168A45",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 build cleanup · Succeeded",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Succeeded · CCv2 build cleanup completed · DRY RUN · https://github.com/example-org/project/actions/runs/123456 · DRY RUN: 2 planned targets; 0 deletion requests accepted. Outcome: dry-run.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > cleanup-success.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 build cleanup · ✅ Succeeded",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CCv2 build cleanup completed",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "DRY RUN: 2 planned targets; 0 deletion requests accepted. Outcome: dry-run.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "good",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Mode",
+                "value": "DRY RUN",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Subscription",
+                    "value": "subscription-example",
+                  },
+                  {
+                    "title": "Application",
+                    "value": "application-example",
+                  },
+                  {
+                    "title": "Retention days",
+                    "value": "30",
+                  },
+                  {
+                    "title": "Keep latest",
+                    "value": "10",
+                  },
+                  {
+                    "title": "Planned",
+                    "value": "2",
+                  },
+                  {
+                    "title": "Requests accepted",
+                    "value": "0",
+                  },
+                  {
+                    "title": "Failed / unknown",
+                    "value": "0 / 0",
+                  },
+                  {
+                    "title": "Deferred",
+                    "value": "2",
+                  },
+                  {
+                    "title": "Duration",
+                    "value": "1s",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
 exports[`golden synthetic events > validates and renders each supported event fixture deterministically > deployment-action-required.json: Slack 1`] = `
 {
   "attachments": [

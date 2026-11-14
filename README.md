@@ -12,7 +12,7 @@ The Action performs no CCv2 API calls, build/deployment work, CLI checks, projec
 
 ## Shared event contract
 
-NotificationEvent v1 is supplied by `@commercekit-tools/notification-contract`, pinned to **0.0.3** from GitHub Packages and bundled into `dist/index.js`. Workflow users do not install the package or authenticate to GitHub Packages. Maintainers need package read access to install development dependencies; see [Contributing](CONTRIBUTING.md).
+NotificationEvent v1 is supplied by `@commercekit-tools/notification-contract`, pinned to **0.0.4** from GitHub Packages and bundled into `dist/index.js`. Workflow users do not install the package or authenticate to GitHub Packages. Maintainers need package read access to install development dependencies; see [Contributing](CONTRIBUTING.md).
 
 Notify owns presentation templates, Slack/Teams rendering and escaping, webhook policies, delivery, retries, and Action inputs/outputs. Package SemVer, event `schemaVersion`, and Action releases evolve independently. Notify remains unreleased. See the [migration compatibility notes](docs/shared-contract-migration.md).
 
@@ -134,3 +134,17 @@ pnpm payload:preview --provider teams-workflow --event deployment-action-require
 The command accepts only committed fixture names, validates the event through production code, and prints formatted payload JSON. It does not send the payload. The public [older notification screenshots](https://sap-cx-actions.github.io/docs/commerce-cloud/notifications/) informed the heading, outcome, details, and action hierarchy. This Action uses provider-native Block Kit and Adaptive Cards with the smaller NotificationEvent v1 contract; it does not reproduce the old payloads or extra SAP fields.
 
 For a visual preview, paste the complete Slack payload into [Block Kit Builder](https://app.slack.com/block-kit-builder/) in message preview mode. The top-level context block and colored attachment should appear together. If its attachment editor requests only an attachment object, extract it with `pnpm --silent payload:preview --provider slack --event build-success | jq '.attachments[0]'`; that narrower view omits the top-level context. Paste only the Adaptive Card into the [Microsoft Adaptive Card Designer](https://adaptivecards.microsoft.com/designer): `pnpm --silent payload:preview --provider teams-workflow --event build-success | jq '.attachments[0].content'`. The designers show the layout, while live provider acceptance after merge uses the manual smoke workflow in [RELEASING.md](RELEASING.md).
+
+### Cleanup compatibility
+
+This unreleased Action accepts `ccv2.build-cleanup.completed` through the published
+`@commercekit-tools/notification-contract@0.0.4` package. The exact registry
+dependency and integrity are recorded in `package.json` and `pnpm-lock.yaml`;
+all runtime dependencies are bundled into `dist/index.js`.
+
+Slack and Teams reuse the existing rendering and delivery implementation. Accepted
+deletion requests indicate initiation, not physical removal. Earlier Notify
+builds using notification-contract 0.0.3 reject cleanup events; consumers must
+pin an immutable Notify commit containing this compatible bundle. Package
+publication does not create an Action release or tag and does not authorize
+real cleanup or provider delivery.
