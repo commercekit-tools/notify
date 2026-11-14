@@ -1,6 +1,6 @@
 # Shared contract migration
 
-The original migration moved the pre-extraction baseline `015479e4340f61598d2125532acf6474381ca976` to `@commercekit-tools/notification-contract@0.0.2`. Notify now pins `0.0.3`; this additive package upgrade preserves the schema, rendering and delivery policies described below. Notify remains unreleased.
+The original migration moved the pre-extraction baseline `015479e4340f61598d2125532acf6474381ca976` to `@commercekit-tools/notification-contract@0.0.2`. Notify now pins `0.0.4`; this additive package upgrade preserves the schema, rendering and delivery policies described below. Notify remains unreleased.
 
 ## Ownership inventory
 
@@ -31,3 +31,19 @@ The context adapter preserves producer values, fills safe missing metadata, requ
 ## Action Kit 0.0.3 adoption
 
 Version 0.0.3 adds opt-in text primitives used by Build and Deploy. Notify retains its provider-specific sanitizer, redaction labels and webhook retry policy; the new primitives do not replace those policies. Upgrade the exact package dependency, installed-version assertions and reviewed release-age exception together, then regenerate the registry lockfile and committed bundle after publication. Preserve the existing golden snapshots and original migration provenance. Run the complete quality gate before pushing.
+
+## Action Kit 0.0.4 cleanup adoption
+
+Version 0.0.4 adds `ccv2.build-cleanup.completed` with the shared cleanup
+factory, type and schema validation. Notify consumes the exact published registry
+package, checks all supported event fixtures against its public schema export,
+and builds the standalone bundle from that frozen installation. No candidate
+source mount, local dependency link or vendored schema is used. The cleanup
+presentation reuses both existing provider renderers and delivery paths.
+
+Publication provenance: contract 0.0.4 was published by
+[action-kit workflow run 43622416072](https://github.com/commercekit-tools/action-kit/actions/runs/43622416072)
+from source commit
+[`a03da9366e6483040d504a742c1a95413c1202cb`](https://github.com/commercekit-tools/action-kit/commit/a03da9366e6483040d504a742c1a95413c1202cb).
+The actual registry integrity is recorded in the committed lockfile. This package
+publication did not create an Action release or Git release tag.

@@ -3,7 +3,7 @@ import { createBuildCleanupEvent, validateNotificationEvent } from '@commercekit
 import { createPresentation } from '../src/presentation/create-presentation.js';
 import { renderSlack } from '../src/providers/slack/render.js';
 import { renderTeams } from '../src/providers/teams-workflow/render.js';
-describe('packed cleanup contract and existing notify providers', () => {
+describe('published cleanup contract and existing notify providers', () => {
   for (const mode of ['dry-run', 'apply'] as const)
     for (const status of ['success', 'failure', 'cancelled', 'internal-error'] as const)
       it(`${mode} ${status}`, () => {

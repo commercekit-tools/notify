@@ -4,7 +4,7 @@ The Action release version (`v1.0.0`) and NotificationEvent schema version (`1`)
 
 **Release hold:** Do not tag, create a GitHub Release, or publish this Action to Marketplace until the separate `commercekit-tools/ccv2-build` and `commercekit-tools/ccv2-deploy` Actions are built and their NotificationEvent v1 outputs have been validated with this notifier. This is a product release gate; the two producer Actions remain separate repositories and releases.
 
-The Action bundles `@commercekit-tools/notification-contract@0.0.3` and its runtime dependencies. Package SemVer is independent of NotificationEvent `schemaVersion`. Maintainers and preflight CI need GitHub Packages read access as described in [Contributing](CONTRIBUTING.md); workflow users and manual provider smoke use the committed bundle without registry access. Package publication does not release this Action.
+The Action bundles `@commercekit-tools/notification-contract@0.0.4` and its runtime dependencies. Package SemVer is independent of NotificationEvent `schemaVersion`. Maintainers and preflight CI need GitHub Packages read access as described in [Contributing](CONTRIBUTING.md); workflow users and manual provider smoke use the committed bundle without registry access. Package publication does not release this Action.
 
 ## Release order
 
