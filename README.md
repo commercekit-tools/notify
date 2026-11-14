@@ -134,3 +134,24 @@ pnpm payload:preview --provider teams-workflow --event deployment-action-require
 The command accepts only committed fixture names, validates the event through production code, and prints formatted payload JSON. It does not send the payload. The public [older notification screenshots](https://sap-cx-actions.github.io/docs/commerce-cloud/notifications/) informed the heading, outcome, details, and action hierarchy. This Action uses provider-native Block Kit and Adaptive Cards with the smaller NotificationEvent v1 contract; it does not reproduce the old payloads or extra SAP fields.
 
 For a visual preview, paste the complete Slack payload into [Block Kit Builder](https://app.slack.com/block-kit-builder/) in message preview mode. The top-level context block and colored attachment should appear together. If its attachment editor requests only an attachment object, extract it with `pnpm --silent payload:preview --provider slack --event build-success | jq '.attachments[0]'`; that narrower view omits the top-level context. Paste only the Adaptive Card into the [Microsoft Adaptive Card Designer](https://adaptivecards.microsoft.com/designer): `pnpm --silent payload:preview --provider teams-workflow --event build-success | jq '.attachments[0].content'`. The designers show the layout, while live provider acceptance after merge uses the manual smoke workflow in [RELEASING.md](RELEASING.md).
+
+### Candidate cleanup compatibility
+
+The candidate renderer accepts `ccv2.build-cleanup.completed` from the matching
+unpublished notification-contract cleanup extension. Slack and Teams reuse the
+existing provider and delivery code. Accepted requests indicate deletion
+initiation, not physical removal. Existing notify releases using contract 0.0.3
+reject cleanup events; do not configure consumers until compatible dependencies
+and a tested immutable notify commit are available.
+
+Candidate build provenance: action-kit source commit
+[`05eb3240a036dd4afaf191921aa7bbb2ba4bf168`](https://github.com/commercekit-tools/action-kit/commit/05eb3240a036dd4afaf191921aa7bbb2ba4bf168),
+with exact packed package integrity
+`sha512-T+wt6X75QSHDpxHJDxqH797K1jO+YFKAbMLymqJ1rs78R0mWR8RT1bn53mwXviqAu7eO51YWMxm6CH6eW8iPtw==`.
+The dependent action-kit draft change must be reviewed and separately published
+before choosing and pinning a compatible registry version. The manifest and
+lockfile still pin published **0.0.3**, which does **not** support cleanup. The
+committed candidate bundle was generated from the exact unpublished package,
+so a normal registry-only rebuild and release remain **BLOCKED** until that pin
+is updated. No package version, registry lockfile, local dependency link, release,
+or provider delivery behavior was changed to hide this dependency gate.

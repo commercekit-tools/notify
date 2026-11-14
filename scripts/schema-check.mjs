@@ -21,6 +21,7 @@ for (const name of (await readdir(fixtures)).filter((name) => name.endsWith('.js
 assert.deepEqual(
   [...types].sort(),
   [
+    'ccv2.build-cleanup.completed',
     'check.completed',
     'ccv2.build.started',
     'ccv2.build.completed',
@@ -30,4 +31,6 @@ assert.deepEqual(
   ].sort(),
 );
 assert.deepEqual([...schema.properties.eventType.enum].sort(), [...types].sort());
-console.log('Notification contract 0.0.3: public schema export, all fixtures and supported event types verified.');
+console.log(
+  'Notification contract cleanup candidate: public schema export, all fixtures and supported event types verified.',
+);

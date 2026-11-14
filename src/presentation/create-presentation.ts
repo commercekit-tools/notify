@@ -61,6 +61,26 @@ export function createPresentation(event: NotificationEvent): Presentation {
     add('Errors', d.errors);
     add('Warnings', d.warnings);
     add('Duration', duration(d.durationMs));
+  } else if (event.eventType === 'ccv2.build-cleanup.completed') {
+    category = 'CommerceKit · CCv2 build cleanup';
+    title =
+      event.status === 'success'
+        ? 'CCv2 build cleanup completed'
+        : event.status === 'cancelled'
+          ? 'CCv2 build cleanup cancelled'
+          : 'CCv2 build cleanup requires attention';
+    const mode = d.mode === 'dry-run' ? 'DRY RUN' : 'APPLY';
+    summary = `${mode}: ${str(d.plannedCount)} planned targets; ${str(d.deletionRequestedCount)} deletion requests accepted. Outcome: ${str(d.cleanupStatus)}.`;
+    highlight('Mode', mode);
+    add('Subscription', d.subscriptionCode);
+    add('Application', d.applicationCode);
+    add('Retention days', d.retentionDays);
+    add('Keep latest', d.keepLatest);
+    add('Planned', d.plannedCount);
+    add('Requests accepted', d.deletionRequestedCount);
+    add('Failed / unknown', `${str(d.failedCount)} / ${str(d.unknownCount)}`);
+    add('Deferred', d.deferredCount);
+    add('Duration', duration(d.durationMs));
   } else if (event.eventType.startsWith('ccv2.build.')) {
     category = 'CommerceKit · CCv2 build';
     title =

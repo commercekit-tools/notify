@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "eventId": "ckevt_example_cleanup_success",
+  "occurredAt": "2026-11-01T20:20:00.000Z",
+  "eventType": "ccv2.build-cleanup.completed",
+  "status": "success",
+  "source": {
+    "product": "commercekit",
+    "component": "ccv2-build-cleanup"
+  },
+  "context": {
+    "repository": "example-org/project",
+    "workflow": "CommerceKit CI",
+    "runId": "123456",
+    "runUrl": "https://github.com/example-org/project/actions/runs/123456"
+  },
+  "links": [
+    {
+      "label": "View workflow",
+      "url": "https://github.com/example-org/project/actions/runs/123456"
+    }
+  ],
+  "data": {
+    "mode": "dry-run",
+    "subscriptionCode": "subscription-example",
+    "applicationCode": "application-example",
+    "retentionDays": 30,
+    "keepLatest": 10,
+    "cleanupStatus": "dry-run",
+    "scannedCount": 20,
+    "eligibleCount": 4,
+    "plannedCount": 2,
+    "deletionRequestedCount": 0,
+    "skippedCount": 20,
+    "failedCount": 0,
+    "unknownCount": 0,
+    "deferredCount": 2,
+    "durationMs": 1000
+  }
+}
