@@ -6,11 +6,11 @@ Run `pnpm format`, `pnpm lint`, `pnpm typecheck`, `pnpm schema:check`, `pnpm tes
 
 ## GitHub Packages access
 
-`@commercekit-tools/notification-contract` is pinned to `0.0.2`. The committed `.npmrc` contains only the scoped registry. Configure a classic GitHub PAT with `read:packages` in your user-level npm configuration, or supply `NODE_AUTH_TOKEN` through an external npm auth configuration. Never commit credentials or add a long-lived PAT repository secret.
+`@commercekit-tools/notification-contract` is pinned to `0.0.3`. The committed `.npmrc` contains only the scoped registry. Configure a classic GitHub PAT with `read:packages` in your user-level npm configuration, or supply `NODE_AUTH_TOKEN` through an external npm auth configuration. Never commit credentials or add a long-lived PAT repository secret.
 
 ```sh
 npm login --scope=@commercekit-tools --registry=https://npm.pkg.github.com --auth-type=legacy
-pnpm view @commercekit-tools/notification-contract@0.0.2 version --registry=https://npm.pkg.github.com
+pnpm view @commercekit-tools/notification-contract@0.0.3 version --registry=https://npm.pkg.github.com
 pnpm install --frozen-lockfile
 ```
 

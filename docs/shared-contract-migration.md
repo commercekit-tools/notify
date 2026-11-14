@@ -1,6 +1,6 @@
 # Shared contract migration
 
-This migration moves the pre-extraction baseline `015479e4340f61598d2125532acf6474381ca976` to `@commercekit-tools/notification-contract@0.0.2`. Notify remains unreleased.
+The original migration moved the pre-extraction baseline `015479e4340f61598d2125532acf6474381ca976` to `@commercekit-tools/notification-contract@0.0.2`. Notify now pins `0.0.3`; this additive package upgrade preserves the schema, rendering and delivery policies described below. Notify remains unreleased.
 
 ## Ownership inventory
 
@@ -27,3 +27,7 @@ This migration adopts package 0.0.2's stricter validation: HTTPS links ending in
 Package errors do not expose Ajv diagnostic paths. The local adapter retains the invalid-JSON and byte-limit messages and uses bounded, input-free messages for schema/type/status/data and link errors. No invalid JSON is echoed. Validation failures remain fatal and occur before delivery.
 
 The context adapter preserves producer values, fills safe missing metadata, requires an explicit runner server URL, and supports producer repository/run metadata when runner values are missing. The package also rejects C1 control characters in extracted metadata and requires an origin-only server URL; the baseline extractor accepted those metadata characters and HTTPS server path prefixes. This migration adopts those stricter context policies. Invalid runner metadata is omitted without overriding valid producer context.
+
+## Action Kit 0.0.3 adoption
+
+Version 0.0.3 adds opt-in text primitives used by Build and Deploy. Notify retains its provider-specific sanitizer, redaction labels and webhook retry policy; the new primitives do not replace those policies. Upgrade the exact package dependency, installed-version assertions and reviewed release-age exception together, then regenerate the registry lockfile and committed bundle after publication. Preserve the existing golden snapshots and original migration provenance. Run the complete quality gate before pushing.

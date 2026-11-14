@@ -10,7 +10,7 @@ Check data may contain mode, changedFrom, filesChecked, errors, warnings, durati
 
 All input is limited to 64 KiB. Strings and arrays have schema bounds. Additive unknown fields are ignored and never rendered; unknown event types and schema versions fail. Additive optional fields preserve v1; changed meaning or removed required fields require a new schema version. Event schema, Action, and producer versions evolve independently.
 
-The machine-readable schema is available through the public `@commercekit-tools/notification-contract/schema` export (JSON import attribute required). Notify pins package version `0.0.2`; package SemVer and event schemaVersion are independent.
+The machine-readable schema is available through the public `@commercekit-tools/notification-contract/schema` export (JSON import attribute required). Notify pins package version `0.0.3`; package SemVer and event schemaVersion are independent.
 
 For `check.completed` with `success`, `warning`, or `failure`, `data.filesChecked`, `data.errors`, and `data.warnings` are required non-negative integers. They may be omitted for `cancelled` and `internal-error`. `context.runUrl`, like every event link, must be a bounded HTTPS URL without credentials or fragment. The Action may fill missing context fields from the documented GitHub Actions environment variables; it does not read the full GitHub event payload or copy arbitrary environment values.
 
