@@ -12,7 +12,7 @@ The Action performs no CCv2 API calls, build/deployment work, CLI checks, projec
 
 ## Shared event contract
 
-NotificationEvent v1 is supplied by `@commercekit-tools/notification-contract`, pinned to **0.0.4** from GitHub Packages and bundled into `dist/index.js`. Workflow users do not install the package or authenticate to GitHub Packages. Maintainers need package read access to install development dependencies; see [Contributing](CONTRIBUTING.md).
+NotificationEvent v1 is supplied by `@commercekit-tools/notification-contract`, pinned to **0.0.5** from GitHub Packages and bundled into `dist/index.js`. Workflow users do not install the package or authenticate to GitHub Packages. Maintainers need package read access to install development dependencies; see [Contributing](CONTRIBUTING.md).
 
 Notify owns presentation templates, Slack/Teams rendering and escaping, webhook policies, delivery, retries, and Action inputs/outputs. Package SemVer, event `schemaVersion`, and Action releases evolve independently. Notify remains unreleased. See the [migration compatibility notes](docs/shared-contract-migration.md).
 
@@ -138,7 +138,7 @@ For a visual preview, paste the complete Slack payload into [Block Kit Builder](
 ### Cleanup compatibility
 
 This unreleased Action accepts `ccv2.build-cleanup.completed` through the published
-`@commercekit-tools/notification-contract@0.0.4` package. The exact registry
+`@commercekit-tools/notification-contract@0.0.5` package. The exact registry
 dependency and integrity are recorded in `package.json` and `pnpm-lock.yaml`;
 all runtime dependencies are bundled into `dist/index.js`.
 
@@ -149,25 +149,21 @@ pin an immutable Notify commit containing this compatible bundle. Package
 publication does not create an Action release or tag and does not authorize
 real cleanup or provider delivery.
 
-### Cleanup notification context candidate
+### Cleanup notification context
 
-The notification-context source change adds complete redacted cleanup inputs,
-all aggregate counts, safe errors and warning issues in both providers. Accepted
-build-deletion requests are reported as initiation; dry-runs report zero actual
-cleanup requests. Long input/issue previews are bounded and visibly marked when
-truncated. Legacy cleanup events still show their available policy/counts.
+Cleanup notifications include all fourteen input names with all four authentication
+values always `[REDACTED]`, all aggregate counts, safe errors and warning issues
+in both providers. Accepted build-deletion requests are reported as initiation;
+dry-runs report zero actual cleanup requests. Long input/issue previews are bounded
+and visibly marked when truncated. Legacy cleanup events still show their available
+policy/counts and identify unreported context.
 
-This extension requires the unpublished notification-contract **0.0.5 candidate**,
-including cleanup-specific warning support. The normal manifest, registry lockfile
-and committed bundle remain on published **0.0.4** until separate publication and
-consumer-pin authorization. Normal registry release readiness is therefore
-**BLOCKED**; no unsupported warning event is claimed to work in the old bundle.
-
-Candidate integration is tested from an exact-source packed tarball in an isolated
-private workspace. Set `COMMERCEKIT_CANDIDATE_CONTRACT_VERSION=0.0.5` only there;
-`pnpm schema:check` verifies the installed candidate version and requires a
-`file:...tgz` dependency in that temporary manifest. This is not a permanent local
-link, a registry-installed release, or an instruction to publish. The existing
-shared schema/context/text APIs and webhook delivery remain in use. After an
-authorized package publication, the normal dependency, lockfile, assertions and
-bundle must be upgraded together and the complete quality gate rerun.
+The published notification-contract **0.0.5** package supports the additive cleanup
+context and cleanup-specific warning status. The exact registry dependency,
+lockfile, installed-version assertions and committed bundle are upgraded together;
+there is no local tarball dependency or candidate override. Existing shared
+schema/context/text APIs and webhook delivery remain in use. See the
+[validation evidence](docs/cleanup-notification-validation.md) for registry provenance,
+provider coverage and remaining release gates. Earlier Notify bundles may accept
+basic cleanup events while rejecting cleanup warnings or omitting this context;
+pin an immutable Notify commit containing this compatible bundle.

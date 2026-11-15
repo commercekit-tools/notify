@@ -41,7 +41,7 @@ it('runs the standalone bundle without node_modules or registry authentication u
 
 for (const provider of ['slack', 'teams-workflow'])
   for (const status of ['success', 'failure', 'warning'])
-    it(`runs the candidate ${provider} cleanup ${status} bundle with complete redacted context`, async () => {
+    it(`runs the published ${provider} cleanup ${status} bundle with complete redacted context`, async () => {
       const dir = await mkdtemp(join(tmpdir(), 'notify-cleanup-bundle-'));
       try {
         await copyFile(new URL('../dist/index.js', import.meta.url), join(dir, 'index.mjs'));

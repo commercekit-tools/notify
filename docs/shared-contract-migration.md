@@ -1,6 +1,6 @@
 # Shared contract migration
 
-The original migration moved the pre-extraction baseline `015479e4340f61598d2125532acf6474381ca976` to `@commercekit-tools/notification-contract@0.0.2`. Notify now pins `0.0.4`; this additive package upgrade preserves the schema, rendering and delivery policies described below. Notify remains unreleased.
+The original migration moved the pre-extraction baseline `015479e4340f61598d2125532acf6474381ca976` to `@commercekit-tools/notification-contract@0.0.2`. Notify now pins `0.0.5`; this additive package upgrade preserves the schema, rendering and delivery policies described below. Notify remains unreleased.
 
 ## Ownership inventory
 
@@ -47,3 +47,22 @@ from source commit
 [`a03da9366e6483040d504a742c1a95413c1202cb`](https://github.com/commercekit-tools/action-kit/commit/a03da9366e6483040d504a742c1a95413c1202cb).
 The actual registry integrity is recorded in the committed lockfile. This package
 publication did not create an Action release or Git release tag.
+
+## Action Kit 0.0.5 cleanup context adoption
+
+Version 0.0.5 adds optional redacted input context, protected/blocked counts,
+bounded safe issues and cleanup-specific warning compatibility. Existing event
+semantics and the two-package structure remain unchanged. Notify pins the exact
+published registry version, validates all event fixtures through the public schema
+and builds its standalone bundle from the frozen registry installation. Candidate
+schema overrides and temporary file dependencies are no longer needed.
+
+Publication provenance: contract 0.0.5 was published by
+[action-kit workflow run 43667757934](https://github.com/commercekit-tools/action-kit/actions/runs/43667757934).
+Source commit:
+[`7cc2e8e6af46e7438064cc6205b22f4f7154eb94`](https://github.com/commercekit-tools/action-kit/commit/7cc2e8e6af46e7438064cc6205b22f4f7154eb94).
+Its registry integrity matches the previously tested exact-source tarball; the
+normal registry validation and archived candidate provenance are recorded in
+[cleanup validation](cleanup-notification-validation.md). This dependency update
+creates no Action release or Git release tag and does not authorize deployment,
+provider delivery or real SAP operations.

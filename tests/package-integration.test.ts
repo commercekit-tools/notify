@@ -19,7 +19,7 @@ import { renderTeams } from '../src/providers/teams-workflow/render.js';
 const text = await readFile(new URL('./fixtures/events/build-success.json', import.meta.url), 'utf8');
 
 it('uses the pinned package and its public schema export', () => {
-  expect(metadata.version).toBe(process.env.COMMERCEKIT_CANDIDATE_CONTRACT_VERSION ?? '0.0.4');
+  expect(metadata.version).toBe('0.0.5');
   expect(schema.properties.schemaVersion.const).toBe(1);
 });
 
