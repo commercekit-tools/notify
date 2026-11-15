@@ -10,6 +10,7 @@ export interface Presentation {
   summary?: string;
   highlights: { label: string; value: string }[];
   facts: { label: string; value: string }[];
+  sections?: { title: string; facts: { label: string; value: string }[] }[];
   actions: { label: string; url: string }[];
   footer?: string;
 }

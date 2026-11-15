@@ -2020,6 +2020,575 @@ exports[`golden synthetic events > validates and renders each supported event fi
 }
 `;
 
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > cleanup-failure.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "❌ CCv2 build cleanup failed",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Mode*
+DRY RUN",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "DRY RUN: CCv2 authorization failed (HTTP 403). Check technical-user permissions. 0 deletion requests accepted. Outcome: failed.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Subscription*
+subscription-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Application*
+application-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Duration*
+1s",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Cleanup counts",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Scanned*
+20",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Eligible*
+4",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Planned*
+2",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Requests accepted*
+0",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Protected*
+12",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Blocked*
+6",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Skipped*
+20",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Deferred*
+2",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Failed*
+1",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Unknown*
+0",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Cleanup inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*token-endpoint*
+[REDACTED]",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*client-id*
+[REDACTED]",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*client-secret*
+[REDACTED]",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*resource*
+[REDACTED]",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*subscription-code*
+subscription-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*api-base-url*
+https://sandbox.example.test",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*application-code*
+application-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*retention-days*
+30",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*keep-latest*
+10",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*dry-run*
+true",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*max-deletions*
+20",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*exclude-build-codes*
+protected-build",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*timeout-minutes*
+15",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*continue-on-delete-error*
+false",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "What went wrong",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Error code*
+authorization-failure",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Error*
+CCv2 authorization failed (HTTP 403). Check technical-user permissions.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#C62828",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 build cleanup · Failed",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Failed · CCv2 build cleanup failed · DRY RUN · https://github.com/example-org/project/actions/runs/123456 · DRY RUN: CCv2 authorization failed (HTTP 403). Check technical-user permissions. 0 deletion requests accepted. Outcome: failed.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > cleanup-failure.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 build cleanup · ❌ Failed",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CCv2 build cleanup failed",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "DRY RUN: CCv2 authorization failed (HTTP 403). Check technical-user permissions. 0 deletion requests accepted. Outcome: failed.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "attention",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Mode",
+                "value": "DRY RUN",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Subscription",
+                    "value": "subscription-example",
+                  },
+                  {
+                    "title": "Application",
+                    "value": "application-example",
+                  },
+                  {
+                    "title": "Duration",
+                    "value": "1s",
+                  },
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Cleanup counts",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Scanned",
+                "value": "20",
+              },
+              {
+                "title": "Eligible",
+                "value": "4",
+              },
+              {
+                "title": "Planned",
+                "value": "2",
+              },
+              {
+                "title": "Requests accepted",
+                "value": "0",
+              },
+              {
+                "title": "Protected",
+                "value": "12",
+              },
+              {
+                "title": "Blocked",
+                "value": "6",
+              },
+              {
+                "title": "Skipped",
+                "value": "20",
+              },
+              {
+                "title": "Deferred",
+                "value": "2",
+              },
+              {
+                "title": "Failed",
+                "value": "1",
+              },
+              {
+                "title": "Unknown",
+                "value": "0",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Cleanup inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "token-endpoint",
+                "value": "\\[REDACTED\\]",
+              },
+              {
+                "title": "client-id",
+                "value": "\\[REDACTED\\]",
+              },
+              {
+                "title": "client-secret",
+                "value": "\\[REDACTED\\]",
+              },
+              {
+                "title": "resource",
+                "value": "\\[REDACTED\\]",
+              },
+              {
+                "title": "subscription-code",
+                "value": "subscription-example",
+              },
+              {
+                "title": "api-base-url",
+                "value": "https://sandbox.example.test",
+              },
+              {
+                "title": "application-code",
+                "value": "application-example",
+              },
+              {
+                "title": "retention-days",
+                "value": "30",
+              },
+              {
+                "title": "keep-latest",
+                "value": "10",
+              },
+              {
+                "title": "dry-run",
+                "value": "true",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "facts": [
+              {
+                "title": "max-deletions",
+                "value": "20",
+              },
+              {
+                "title": "exclude-build-codes",
+                "value": "protected-build",
+              },
+              {
+                "title": "timeout-minutes",
+                "value": "15",
+              },
+              {
+                "title": "continue-on-delete-error",
+                "value": "false",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "What went wrong",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Error code",
+                "value": "authorization-failure",
+              },
+              {
+                "title": "Error",
+                "value": "CCv2 authorization failed (HTTP 403). Check technical-user permissions.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
 exports[`golden synthetic events > validates and renders each supported event fixture deterministically > cleanup-success.json: Slack 1`] = `
 {
   "attachments": [
@@ -2056,7 +2625,7 @@ DRY RUN",
         {
           "text": {
             "emoji": true,
-            "text": "DRY RUN: 2 planned targets; 0 deletion requests accepted. Outcome: dry-run.",
+            "text": "DRY RUN: 2 planned targets; 0 deletion requests accepted. Cleanup was not applied.",
             "type": "plain_text",
           },
           "type": "section",
@@ -2076,14 +2645,39 @@ application-example",
               "verbatim": true,
             },
             {
-              "text": "*Retention days*
-30",
+              "text": "*Duration*
+1s",
               "type": "mrkdwn",
               "verbatim": true,
             },
             {
-              "text": "*Keep latest*
-10",
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Cleanup counts",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Scanned*
+20",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Eligible*
+4",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -2100,8 +2694,20 @@ application-example",
               "verbatim": true,
             },
             {
-              "text": "*Failed / unknown*
-0 / 0",
+              "text": "*Protected*
+Not reported",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Blocked*
+Not reported",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Skipped*
+20",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -2112,8 +2718,45 @@ application-example",
               "verbatim": true,
             },
             {
-              "text": "*Duration*
-1s",
+              "text": "*Failed*
+0",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Unknown*
+0",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Cleanup policy",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*retention-days*
+30",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*keep-latest*
+10",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -2161,7 +2804,7 @@ application-example",
     },
   ],
   "mrkdwn": false,
-  "text": "Succeeded · CCv2 build cleanup completed · DRY RUN · https://github.com/example-org/project/actions/runs/123456 · DRY RUN: 2 planned targets; 0 deletion requests accepted. Outcome: dry-run.",
+  "text": "Succeeded · CCv2 build cleanup completed · DRY RUN · https://github.com/example-org/project/actions/runs/123456 · DRY RUN: 2 planned targets; 0 deletion requests accepted. Cleanup was not applied.",
   "unfurl_links": false,
   "unfurl_media": false,
 }
@@ -2200,7 +2843,7 @@ exports[`golden synthetic events > validates and renders each supported event fi
               },
               {
                 "spacing": "Medium",
-                "text": "DRY RUN: 2 planned targets; 0 deletion requests accepted. Outcome: dry-run.",
+                "text": "DRY RUN: 2 planned targets; 0 deletion requests accepted. Cleanup was not applied.",
                 "type": "TextBlock",
                 "wrap": true,
               },
@@ -2235,32 +2878,12 @@ exports[`golden synthetic events > validates and renders each supported event fi
                     "value": "application-example",
                   },
                   {
-                    "title": "Retention days",
-                    "value": "30",
-                  },
-                  {
-                    "title": "Keep latest",
-                    "value": "10",
-                  },
-                  {
-                    "title": "Planned",
-                    "value": "2",
-                  },
-                  {
-                    "title": "Requests accepted",
-                    "value": "0",
-                  },
-                  {
-                    "title": "Failed / unknown",
-                    "value": "0 / 0",
-                  },
-                  {
-                    "title": "Deferred",
-                    "value": "2",
-                  },
-                  {
                     "title": "Duration",
                     "value": "1s",
+                  },
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
                   },
                 ],
                 "type": "FactSet",
@@ -2269,6 +2892,643 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "spacing": "Medium",
             "style": "emphasis",
             "type": "Container",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Cleanup counts",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Scanned",
+                "value": "20",
+              },
+              {
+                "title": "Eligible",
+                "value": "4",
+              },
+              {
+                "title": "Planned",
+                "value": "2",
+              },
+              {
+                "title": "Requests accepted",
+                "value": "0",
+              },
+              {
+                "title": "Protected",
+                "value": "Not reported",
+              },
+              {
+                "title": "Blocked",
+                "value": "Not reported",
+              },
+              {
+                "title": "Skipped",
+                "value": "20",
+              },
+              {
+                "title": "Deferred",
+                "value": "2",
+              },
+              {
+                "title": "Failed",
+                "value": "0",
+              },
+              {
+                "title": "Unknown",
+                "value": "0",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Cleanup policy",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "retention-days",
+                "value": "30",
+              },
+              {
+                "title": "keep-latest",
+                "value": "10",
+              },
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > cleanup-warning.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "⚠️ CCv2 build cleanup completed with warnings",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Mode*
+DRY RUN",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "DRY RUN: SAP deletion eligibility could not be verified. No deletion requests were made. 0 deletion requests accepted. Outcome: blocked.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Subscription*
+subscription-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Application*
+application-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Duration*
+1s",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Cleanup counts",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Scanned*
+20",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Eligible*
+4",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Planned*
+2",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Requests accepted*
+0",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Protected*
+12",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Blocked*
+6",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Skipped*
+20",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Deferred*
+2",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Failed*
+0",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Unknown*
+0",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Cleanup inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*token-endpoint*
+[REDACTED]",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*client-id*
+[REDACTED]",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*client-secret*
+[REDACTED]",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*resource*
+[REDACTED]",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*subscription-code*
+subscription-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*api-base-url*
+https://sandbox.example.test",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*application-code*
+application-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*retention-days*
+30",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*keep-latest*
+10",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*dry-run*
+true",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*max-deletions*
+20",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*exclude-build-codes*
+protected-build",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*timeout-minutes*
+15",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*continue-on-delete-error*
+false",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Cleanup issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*eligibility-unverified*
+SAP deletion eligibility could not be verified. No deletion requests were made.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "CommerceKit CI · Run 123456",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#B7791F",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CCv2 build cleanup · Completed with warnings",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Completed with warnings · CCv2 build cleanup completed with warnings · DRY RUN · https://github.com/example-org/project/actions/runs/123456 · DRY RUN: SAP deletion eligibility could not be verified. No deletion requests were made. 0 deletion requests accepted. Outcome: blocked.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > cleanup-warning.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CCv2 build cleanup · ⚠️ Completed with warnings",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CCv2 build cleanup completed with warnings",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "DRY RUN: SAP deletion eligibility could not be verified. No deletion requests were made. 0 deletion requests accepted. Outcome: blocked.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "warning",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "Mode",
+                "value": "DRY RUN",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "items": [
+              {
+                "facts": [
+                  {
+                    "title": "Subscription",
+                    "value": "subscription-example",
+                  },
+                  {
+                    "title": "Application",
+                    "value": "application-example",
+                  },
+                  {
+                    "title": "Duration",
+                    "value": "1s",
+                  },
+                  {
+                    "title": "Repository",
+                    "value": "example-org/project",
+                  },
+                ],
+                "type": "FactSet",
+              },
+            ],
+            "spacing": "Medium",
+            "style": "emphasis",
+            "type": "Container",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Cleanup counts",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Scanned",
+                "value": "20",
+              },
+              {
+                "title": "Eligible",
+                "value": "4",
+              },
+              {
+                "title": "Planned",
+                "value": "2",
+              },
+              {
+                "title": "Requests accepted",
+                "value": "0",
+              },
+              {
+                "title": "Protected",
+                "value": "12",
+              },
+              {
+                "title": "Blocked",
+                "value": "6",
+              },
+              {
+                "title": "Skipped",
+                "value": "20",
+              },
+              {
+                "title": "Deferred",
+                "value": "2",
+              },
+              {
+                "title": "Failed",
+                "value": "0",
+              },
+              {
+                "title": "Unknown",
+                "value": "0",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Cleanup inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "token-endpoint",
+                "value": "\\[REDACTED\\]",
+              },
+              {
+                "title": "client-id",
+                "value": "\\[REDACTED\\]",
+              },
+              {
+                "title": "client-secret",
+                "value": "\\[REDACTED\\]",
+              },
+              {
+                "title": "resource",
+                "value": "\\[REDACTED\\]",
+              },
+              {
+                "title": "subscription-code",
+                "value": "subscription-example",
+              },
+              {
+                "title": "api-base-url",
+                "value": "https://sandbox.example.test",
+              },
+              {
+                "title": "application-code",
+                "value": "application-example",
+              },
+              {
+                "title": "retention-days",
+                "value": "30",
+              },
+              {
+                "title": "keep-latest",
+                "value": "10",
+              },
+              {
+                "title": "dry-run",
+                "value": "true",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "facts": [
+              {
+                "title": "max-deletions",
+                "value": "20",
+              },
+              {
+                "title": "exclude-build-codes",
+                "value": "protected-build",
+              },
+              {
+                "title": "timeout-minutes",
+                "value": "15",
+              },
+              {
+                "title": "continue-on-delete-error",
+                "value": "false",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Cleanup issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "eligibility-unverified",
+                "value": "SAP deletion eligibility could not be verified. No deletion requests were made.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
