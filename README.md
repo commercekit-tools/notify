@@ -1,10 +1,8 @@
 # CommerceKit Notifications
 
-> **Ecosystem reporting candidate:** common notifications and GitHub summaries
-> require the unpublished notification-contract 0.0.6 extension. Normal manifest,
-> lockfile and committed bundle retain published 0.0.5. Candidate validation uses
-> an exact packed artifact in a private workspace; registry/release readiness is
-> blocked pending separate publication authorization and consumer rebuilding. See
+> **Registry-backed ecosystem reporting:** shared notifications and run summaries
+> consume published notification-contract 0.0.6. Maintainers install the exact
+> registry dependency; consumers execute the committed standalone bundle. See
 > [reporting validation](docs/ecosystem-reporting-validation.md).
 
 **Status: Initial implementation under development.** This Action is not yet released. The future `commercekit-tools/notify@v1` reference is unavailable until the separate CCv2 build and deploy Actions are built, their NotificationEvent v1 integration is validated, and an approved release is published.
@@ -19,13 +17,13 @@ The Action performs no CCv2 API calls, build/deployment work, CLI checks, projec
 
 ## Shared event contract
 
-NotificationEvent v1 is supplied by `@commercekit-tools/notification-contract`, pinned to **0.0.5** from GitHub Packages and bundled into `dist/index.js`. Workflow users do not install the package or authenticate to GitHub Packages. Maintainers need package read access to install development dependencies; see [Contributing](CONTRIBUTING.md).
+NotificationEvent v1 is supplied by `@commercekit-tools/notification-contract`, pinned to **0.0.6** from GitHub Packages and bundled into `dist/index.js`. Workflow users do not install the package or authenticate to GitHub Packages. Maintainers need package read access to install development dependencies; see [Contributing](CONTRIBUTING.md).
 
 Notify owns presentation templates, Slack/Teams rendering and escaping, webhook policies, delivery, retries, and Action inputs/outputs. Package SemVer, event `schemaVersion`, and Action releases evolve independently. Notify remains unreleased. See the [migration compatibility notes](docs/shared-contract-migration.md).
 
 ## Consistent notification and summary format
 
-The candidate shares status icons, labels and accents with every CommerceKit
+The Action shares status icons, labels and accents with every CommerceKit
 Action through the existing notification-contract package. Slack and Teams use
 the same header, **Result**, **Inputs** and **Issues** groups for CLI check, CLI
 setup, CCv2 build, deployment and build cleanup events. All provided input names
@@ -44,7 +42,7 @@ deletion requests; acceptance does not establish physical removal.
 | Internal error      | ❌   | CommerceKit error       |
 | Deployment decision | ⚠️   | Action required         |
 
-The candidate also writes a GitHub run summary for Notify itself after every
+The Action also writes a GitHub run summary for Notify itself after every
 handled invocation. It contains delivery outcome, provider, source event type and
 status, attempts, duration, safe errors and all five Notify input names.
 `webhook-url` is always redacted; `event-json` and `event-file` display presence
@@ -188,7 +186,7 @@ For a visual preview, paste the complete Slack payload into [Block Kit Builder](
 ### Cleanup compatibility
 
 This unreleased Action accepts `ccv2.build-cleanup.completed` through the published
-`@commercekit-tools/notification-contract@0.0.5` package. The exact registry
+`@commercekit-tools/notification-contract@0.0.6` package. The exact registry
 dependency and integrity are recorded in `package.json` and `pnpm-lock.yaml`;
 all runtime dependencies are bundled into `dist/index.js`.
 

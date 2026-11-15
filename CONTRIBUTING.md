@@ -1,13 +1,9 @@
 # Contributing
 
-The reporting-consistency source uses unpublished contract 0.0.6 public helpers
-and setup event support. Normal manifest/lockfile/dist retain published 0.0.5.
-Validate only an isolated private consumer with the exact reviewed tarball and
-`COMMERCEKIT_CANDIDATE_CONTRACT_VERSION=0.0.6`; the schema check requires a private
-manifest with an explicit file:tarball dependency in that isolated workspace.
-Never commit a local dependency link or fake registry version. Publication and
-normal bundle adoption need separate authorization. See
-[ecosystem-reporting-validation.md](docs/ecosystem-reporting-validation.md).
+The reporting implementation consumes exact published notification-contract
+0.0.6 through normal registry installation. No candidate flag, source checkout or
+file:tarball dependency is required. Historical candidate provenance is archived
+in [ecosystem-reporting-validation.md](docs/ecosystem-reporting-validation.md).
 
 Use Node.js `24.21.0` and pnpm `12.6.0`. Configure GitHub Packages authentication as described below, enable Corepack, then run `pnpm install --frozen-lockfile`.
 
@@ -15,11 +11,11 @@ Run `pnpm format`, `pnpm lint`, `pnpm typecheck`, `pnpm schema:check`, `pnpm tes
 
 ## GitHub Packages access
 
-`@commercekit-tools/notification-contract` is pinned to `0.0.5`. The committed `.npmrc` contains only the scoped registry. Configure a classic GitHub PAT with `read:packages` in your user-level npm configuration, or supply `NODE_AUTH_TOKEN` through an external npm auth configuration. Never commit credentials or add a long-lived PAT repository secret.
+`@commercekit-tools/notification-contract` is pinned to `0.0.6`. The committed `.npmrc` contains only the scoped registry. Configure a classic GitHub PAT with `read:packages` in your user-level npm configuration, or supply `NODE_AUTH_TOKEN` through an external npm auth configuration. Never commit credentials or add a long-lived PAT repository secret.
 
 ```sh
 npm login --scope=@commercekit-tools --registry=https://npm.pkg.github.com --auth-type=legacy
-pnpm view @commercekit-tools/notification-contract@0.0.5 version --registry=https://npm.pkg.github.com
+pnpm view @commercekit-tools/notification-contract@0.0.6 version --registry=https://npm.pkg.github.com
 pnpm install --frozen-lockfile
 ```
 
