@@ -7,6 +7,7 @@ import { renderTeams } from '../src/providers/teams-workflow/render.js';
 import { theme } from '../src/presentation/theme.js';
 
 const titles: Record<string, string> = {
+  'setup-success': 'CommerceKit CLI setup succeeded',
   'cleanup-success': 'CCv2 build cleanup completed',
   'cleanup-warning': 'CCv2 build cleanup completed with warnings',
   'cleanup-failure': 'CCv2 build cleanup failed',
@@ -32,7 +33,7 @@ describe('golden synthetic events', () => {
     const names = (await readdir(new URL('./fixtures/events/', import.meta.url)))
       .filter((n) => n.endsWith('.json'))
       .sort();
-    expect(names).toHaveLength(19);
+    expect(names).toHaveLength(20);
     for (const name of names) {
       const event = JSON.parse(await readFile(new URL(`./fixtures/events/${name}`, import.meta.url), 'utf8'));
       validateEvent(event);
@@ -94,19 +95,11 @@ describe('golden synthetic events', () => {
       { label: 'Occurred', value: '2026-11-01 20:20:00 UTC' },
     ]);
     expect(presentation.facts.map((fact) => fact.label)).toEqual(['Application', 'Status', 'Repository']);
-    expect(renderSlack(presentation).attachments[0].blocks.map((block) => block.type)).toEqual([
-      'header',
-      'section',
-      'divider',
-      'section',
-      'section',
-      'actions',
-      'context',
-    ]);
+    const slack = renderSlack(presentation);
+    for (const title of ['Result', 'Inputs', 'Issues']) expect(JSON.stringify(slack)).toContain(title);
     const card = renderTeams(presentation).attachments[0].content;
-    expect(card.body.map((element) => element.type)).toEqual(['Container', 'FactSet', 'Container', 'TextBlock']);
     expect(card.body[0]).toMatchObject({ style: 'good' });
-    expect(card.body[2]).toMatchObject({ style: 'emphasis' });
+    for (const title of ['Result', 'Inputs', 'Issues']) expect(JSON.stringify(card)).toContain(title);
     expect(card.actions).toMatchObject([
       { type: 'Action.OpenUrl', title: 'View workflow' },
       { type: 'Action.OpenUrl', title: 'View build progress' },

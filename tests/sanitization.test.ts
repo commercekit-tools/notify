@@ -10,10 +10,10 @@ describe('sanitization rules', () => {
       'Use [REDACTED SLACK WEBHOOK] now',
     ],
     ['GitHub PAT', 'ghp_fakeExampleToken123', '[REDACTED GITHUB TOKEN]'],
-    ['client_secret', 'client_secret=sample-secret', 'client_secret=[REDACTED]'],
-    ['password', 'password:sample-secret', 'password:[REDACTED]'],
-    ['token assignment', 'token = sample-secret', 'token = [REDACTED]'],
-    ['Authorization header', 'Authorization: Bearer sample-secret', 'Authorization: [REDACTED]'],
+    ['client_secret', 'client_secret=sample-secret', '[REDACTED]'],
+    ['password', 'password:sample-secret', '[REDACTED]'],
+    ['token assignment', 'token = sample-secret', '[REDACTED]'],
+    ['Authorization header', 'Authorization: Bearer sample-secret', '[REDACTED]'],
     ['secret query URL', 'https://example.test/hook?sig=sample-secret&mode=go', '[REDACTED URL]'],
   ])('sanitizes %s exactly', (_name, input, expected) => expect(sanitize(input)).toBe(expected));
 

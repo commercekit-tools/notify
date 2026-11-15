@@ -1,5 +1,10 @@
 # CommerceKit Notifications
 
+> **Registry-backed ecosystem reporting:** shared notifications and run summaries
+> consume published notification-contract 0.0.6. Maintainers install the exact
+> registry dependency; consumers execute the committed standalone bundle. See
+> [reporting validation](docs/ecosystem-reporting-validation.md).
+
 **Status: Initial implementation under development.** This Action is not yet released. The future `commercekit-tools/notify@v1` reference is unavailable until the separate CCv2 build and deploy Actions are built, their NotificationEvent v1 integration is validated, and an approved release is published.
 
 Send a normalized CommerceKit workflow event to Slack Incoming Webhooks or Microsoft Teams Workflows. One root Action accepts `provider: slack` or `provider: teams-workflow`.
@@ -12,9 +17,52 @@ The Action performs no CCv2 API calls, build/deployment work, CLI checks, projec
 
 ## Shared event contract
 
-NotificationEvent v1 is supplied by `@commercekit-tools/notification-contract`, pinned to **0.0.5** from GitHub Packages and bundled into `dist/index.js`. Workflow users do not install the package or authenticate to GitHub Packages. Maintainers need package read access to install development dependencies; see [Contributing](CONTRIBUTING.md).
+NotificationEvent v1 is supplied by `@commercekit-tools/notification-contract`, pinned to **0.0.6** from GitHub Packages and bundled into `dist/index.js`. Workflow users do not install the package or authenticate to GitHub Packages. Maintainers need package read access to install development dependencies; see [Contributing](CONTRIBUTING.md).
 
 Notify owns presentation templates, Slack/Teams rendering and escaping, webhook policies, delivery, retries, and Action inputs/outputs. Package SemVer, event `schemaVersion`, and Action releases evolve independently. Notify remains unreleased. See the [migration compatibility notes](docs/shared-contract-migration.md).
+
+## Consistent notification and summary format
+
+The Action shares status icons, labels and accents with every CommerceKit
+Action through the existing notification-contract package. Slack and Teams use
+the same header, **Result**, **Inputs** and **Issues** groups for CLI check, CLI
+setup, CCv2 build, deployment and build cleanup events. All provided input names
+are retained, authentication values are `[REDACTED]`, and input validation and
+truncation are explicit. Older events identify unavailable input context rather
+than inventing settings. Cleanup retains every aggregate and describes accepted
+deletion requests; acceptance does not establish physical removal.
+
+| Outcome             | Icon | Shared language         |
+| ------------------- | ---- | ----------------------- |
+| Success             | ✅   | Succeeded               |
+| Failure             | ❌   | Failed                  |
+| Warning             | ⚠️   | Completed with warnings |
+| Started             | ℹ️   | Started                 |
+| Cancellation        | ⏹️   | Cancelled               |
+| Internal error      | ❌   | CommerceKit error       |
+| Deployment decision | ⚠️   | Action required         |
+
+The Action also writes a GitHub run summary for Notify itself after every
+handled invocation. It contains delivery outcome, provider, source event type and
+status, attempts, duration, safe errors and all five Notify input names.
+`webhook-url` is always redacted; `event-json` and `event-file` display presence
+only, without payloads or filesystem paths. The current workflow link uses the
+shared allowlisted GitHub context.
+
+A successfully delivered failure event produces a successful **delivery**
+summary while its source outcome remains failure in the card and `status` output.
+Failed delivery defaults to a warning; `fail-on-notification-error: true` makes it
+fatal. Invalid configuration/events remain fatal. Summary-writing errors preserve
+delivery outputs and Action outcome. Output-file failures are reported separately
+as an Action contract failure, retaining the known delivery state and attempts;
+they never change an accepted delivery into a failed delivery or trigger a resend.
+
+Both providers retain every input name under their payload limits. Long values
+use explicit bounded previews; Teams reduces preview length when necessary to
+stay below 27 KiB. Slack enforces its 50-block bound. Known secrets, JWT-like
+values, credentials/query-bearing URLs and reflected webhook values are redacted
+before provider escaping and truncation. Delivery/retry policies remain owned by
+Notify and unchanged by this presentation work.
 
 ## Supported providers
 
@@ -138,7 +186,7 @@ For a visual preview, paste the complete Slack payload into [Block Kit Builder](
 ### Cleanup compatibility
 
 This unreleased Action accepts `ccv2.build-cleanup.completed` through the published
-`@commercekit-tools/notification-contract@0.0.5` package. The exact registry
+`@commercekit-tools/notification-contract@0.0.6` package. The exact registry
 dependency and integrity are recorded in `package.json` and `pnpm-lock.yaml`;
 all runtime dependencies are bundled into `dist/index.js`.
 

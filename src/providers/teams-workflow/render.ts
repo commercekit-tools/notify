@@ -1,8 +1,17 @@
 import { Buffer } from 'node:buffer';
+import { previewPresentation } from '../../presentation/preview.js';
 import type { Presentation } from '../../presentation/types.js';
 import { sanitize } from '../../presentation/sanitize.js';
 export const TEAMS_MAX_BYTES = 27 * 1024;
-export function renderTeams(p: Presentation) {
+export function renderTeams(source: Presentation) {
+  for (const maximum of [256, 128, 64, 32]) {
+    const payload = renderTeamsPreview(previewPresentation(source, maximum));
+    if (Buffer.byteLength(JSON.stringify(payload), 'utf8') <= TEAMS_MAX_BYTES) return payload;
+  }
+  throw new Error('Teams Workflow card exceeds the 27 KiB safety limit.');
+}
+function renderTeamsPreview(p: Presentation) {
+  const hasResultSection = p.sections?.some((section) => section.title === 'Result');
   const body: Record<string, unknown>[] = [
     {
       type: 'Container',
@@ -28,19 +37,11 @@ export function renderTeams(p: Presentation) {
       facts: p.highlights.slice(0, 2).map((f) => ({ title: safeText(f.label), value: safeText(f.value) })),
       spacing: 'Medium',
     });
-  if (p.facts.length)
-    body.push({
-      type: 'Container',
-      style: 'emphasis',
-      spacing: 'Medium',
-      items: [
-        {
-          type: 'FactSet',
-          facts: p.facts.slice(0, 10).map((f) => ({ title: safeText(f.label), value: safeText(f.value) })),
-        },
-      ],
-    });
-  for (const section of p.sections ?? []) {
+  const sections = [
+    ...(p.facts.length && !hasResultSection ? [{ title: 'Result', facts: p.facts }] : []),
+    ...(p.sections ?? []),
+  ];
+  for (const section of sections) {
     body.push({ type: 'TextBlock', text: safeText(section.title), weight: 'Bolder', wrap: true, spacing: 'Medium' });
     for (let start = 0; start < section.facts.length; start += 10)
       body.push({
@@ -82,8 +83,6 @@ export function renderTeams(p: Presentation) {
       },
     ],
   };
-  if (Buffer.byteLength(JSON.stringify(payload), 'utf8') > TEAMS_MAX_BYTES)
-    throw new Error('Teams Workflow card exceeds the 27 KiB safety limit.');
   return payload;
 }
 

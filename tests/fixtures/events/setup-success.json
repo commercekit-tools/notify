@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "eventId": "ckevt_setup_success",
+  "eventType": "commercekit.setup.completed",
+  "status": "success",
+  "occurredAt": "2026-11-01T20:20:00Z",
+  "source": { "product": "commercekit", "component": "setup-commercekit" },
+  "context": {
+    "repository": "example-org/project",
+    "workflow": "Integration",
+    "runId": "123456",
+    "runAttempt": 1,
+    "runUrl": "https://github.com/example-org/project/actions/runs/123456"
+  },
+  "data": {
+    "requestedVersion": "0.1.0-preview.2",
+    "version": "0.1.0-preview.2",
+    "target": "linux-x64",
+    "buildId": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "cacheHit": true,
+    "durationMs": 1000,
+    "inputs": { "version": "0.1.0-preview.2" },
+    "inputsValidated": true,
+    "inputsTruncated": false
+  }
+}

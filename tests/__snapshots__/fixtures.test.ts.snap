@@ -42,10 +42,56 @@ build-example",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Repository*
 example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+Review the workflow for details about this outcome.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -155,20 +201,55 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Repository",
+                "value": "example-org/project",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "Review the workflow for details about this outcome.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -232,10 +313,56 @@ build-example",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Repository*
 example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Error*
+The example build did not pass validation.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -345,20 +472,55 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Repository",
+                "value": "example-org/project",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Error",
+                "value": "The example build did not pass validation.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -422,6 +584,14 @@ Main build",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Application*
@@ -438,6 +608,44 @@ main",
             {
               "text": "*Repository*
 example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Error*
+CommerceKit could not create the example build.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -547,28 +755,63 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Application",
-                    "value": "commerce-cloud",
-                  },
-                  {
-                    "title": "Branch",
-                    "value": "main",
-                  },
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Application",
+                "value": "commerce-cloud",
+              },
+              {
+                "title": "Branch",
+                "value": "main",
+              },
+              {
+                "title": "Repository",
+                "value": "example-org/project",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Error",
+                "value": "CommerceKit could not create the example build.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -632,6 +875,14 @@ Main build",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Application*
@@ -648,6 +899,44 @@ main",
             {
               "text": "*Repository*
 example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+No issues were reported in this event.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -757,28 +1046,63 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Application",
-                    "value": "commerce-cloud",
-                  },
-                  {
-                    "title": "Branch",
-                    "value": "main",
-                  },
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Application",
+                "value": "commerce-cloud",
+              },
+              {
+                "title": "Branch",
+                "value": "main",
+              },
+              {
+                "title": "Repository",
+                "value": "example-org/project",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "No issues were reported in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -842,6 +1166,14 @@ build-example",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Application*
@@ -858,6 +1190,44 @@ SUCCESS",
             {
               "text": "*Repository*
 example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+No issues were reported in this event.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -981,28 +1351,63 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Application",
-                    "value": "commerce-cloud",
-                  },
-                  {
-                    "title": "Status",
-                    "value": "SUCCESS",
-                  },
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Application",
+                "value": "commerce-cloud",
+              },
+              {
+                "title": "Status",
+                "value": "SUCCESS",
+              },
+              {
+                "title": "Repository",
+                "value": "example-org/project",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "No issues were reported in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -1063,6 +1468,52 @@ example-org/project",
             "text": "The check was cancelled before completion.",
             "type": "plain_text",
           },
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+Review the workflow for details about this outcome.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
           "type": "section",
         },
         {
@@ -1168,6 +1619,47 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "spacing": "Medium",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "Review the workflow for details about this outcome.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "isSubtle": true,
             "size": "Small",
             "spacing": "Medium",
@@ -1229,6 +1721,14 @@ example-org/project",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Mode*
@@ -1251,6 +1751,44 @@ changed",
             {
               "text": "*Warnings*
 3",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+Review the workflow for details about this outcome.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -1360,32 +1898,67 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Mode",
-                    "value": "changed",
-                  },
-                  {
-                    "title": "Files checked",
-                    "value": "18",
-                  },
-                  {
-                    "title": "Errors",
-                    "value": "2",
-                  },
-                  {
-                    "title": "Warnings",
-                    "value": "3",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Mode",
+                "value": "changed",
+              },
+              {
+                "title": "Files checked",
+                "value": "18",
+              },
+              {
+                "title": "Errors",
+                "value": "2",
+              },
+              {
+                "title": "Warnings",
+                "value": "3",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "Review the workflow for details about this outcome.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -1446,6 +2019,52 @@ example-org/project",
             "text": "The check could not be completed.",
             "type": "plain_text",
           },
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Error*
+The check could not be completed.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
           "type": "section",
         },
         {
@@ -1551,6 +2170,47 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "spacing": "Medium",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Error",
+                "value": "The check could not be completed.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "isSubtle": true,
             "size": "Small",
             "spacing": "Medium",
@@ -1612,6 +2272,14 @@ example-org/project",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Mode*
@@ -1640,6 +2308,44 @@ full",
             {
               "text": "*Duration*
 4s",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+No issues were reported in this event.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -1749,36 +2455,71 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Mode",
-                    "value": "full",
-                  },
-                  {
-                    "title": "Files checked",
-                    "value": "18",
-                  },
-                  {
-                    "title": "Errors",
-                    "value": "0",
-                  },
-                  {
-                    "title": "Warnings",
-                    "value": "0",
-                  },
-                  {
-                    "title": "Duration",
-                    "value": "4s",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Mode",
+                "value": "full",
+              },
+              {
+                "title": "Files checked",
+                "value": "18",
+              },
+              {
+                "title": "Errors",
+                "value": "0",
+              },
+              {
+                "title": "Warnings",
+                "value": "0",
+              },
+              {
+                "title": "Duration",
+                "value": "4s",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "No issues were reported in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -1842,6 +2583,14 @@ example-org/project",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Mode*
@@ -1864,6 +2613,44 @@ changed",
             {
               "text": "*Warnings*
 3",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+Review the workflow for details about this outcome.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -1973,32 +2760,67 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Mode",
-                    "value": "changed",
-                  },
-                  {
-                    "title": "Files checked",
-                    "value": "18",
-                  },
-                  {
-                    "title": "Errors",
-                    "value": "0",
-                  },
-                  {
-                    "title": "Warnings",
-                    "value": "3",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Mode",
+                "value": "changed",
+              },
+              {
+                "title": "Files checked",
+                "value": "18",
+              },
+              {
+                "title": "Errors",
+                "value": "0",
+              },
+              {
+                "title": "Warnings",
+                "value": "3",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "Review the workflow for details about this outcome.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -2062,38 +2884,9 @@ DRY RUN",
           "type": "section",
         },
         {
-          "fields": [
-            {
-              "text": "*Subscription*
-subscription-example",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-            {
-              "text": "*Application*
-application-example",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-            {
-              "text": "*Duration*
-1s",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-            {
-              "text": "*Repository*
-example-org/project",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-          ],
-          "type": "section",
-        },
-        {
           "text": {
             "emoji": false,
-            "text": "Cleanup counts",
+            "text": "Result",
             "type": "plain_text",
           },
           "type": "section",
@@ -2164,9 +2957,50 @@ example-org/project",
           "type": "section",
         },
         {
+          "fields": [
+            {
+              "text": "*Retention days*
+30",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Keep latest*
+10",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Subscription*
+subscription-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Application*
+application-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Duration*
+1s",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
           "text": {
             "emoji": false,
-            "text": "Cleanup inputs",
+            "text": "Inputs",
             "type": "plain_text",
           },
           "type": "section",
@@ -2262,13 +3096,25 @@ false",
               "type": "mrkdwn",
               "verbatim": true,
             },
+            {
+              "text": "*Input validation*
+Passed",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Input truncation*
+No input truncation reported.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
           ],
           "type": "section",
         },
         {
           "text": {
             "emoji": false,
-            "text": "What went wrong",
+            "text": "Issues",
             "type": "plain_text",
           },
           "type": "section",
@@ -2393,36 +3239,8 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
-              {
-                "facts": [
-                  {
-                    "title": "Subscription",
-                    "value": "subscription-example",
-                  },
-                  {
-                    "title": "Application",
-                    "value": "application-example",
-                  },
-                  {
-                    "title": "Duration",
-                    "value": "1s",
-                  },
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
-              },
-            ],
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
-          },
-          {
-            "spacing": "Medium",
-            "text": "Cleanup counts",
+            "text": "Result",
             "type": "TextBlock",
             "weight": "Bolder",
             "wrap": true,
@@ -2474,8 +3292,38 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
+            "facts": [
+              {
+                "title": "Retention days",
+                "value": "30",
+              },
+              {
+                "title": "Keep latest",
+                "value": "10",
+              },
+              {
+                "title": "Subscription",
+                "value": "subscription-example",
+              },
+              {
+                "title": "Application",
+                "value": "application-example",
+              },
+              {
+                "title": "Duration",
+                "value": "1s",
+              },
+              {
+                "title": "Repository",
+                "value": "example-org/project",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "text": "Cleanup inputs",
+            "text": "Inputs",
             "type": "TextBlock",
             "weight": "Bolder",
             "wrap": true,
@@ -2544,13 +3392,21 @@ exports[`golden synthetic events > validates and renders each supported event fi
                 "title": "continue-on-delete-error",
                 "value": "false",
               },
+              {
+                "title": "Input validation",
+                "value": "Passed",
+              },
+              {
+                "title": "Input truncation",
+                "value": "No input truncation reported.",
+              },
             ],
             "spacing": "Small",
             "type": "FactSet",
           },
           {
             "spacing": "Medium",
-            "text": "What went wrong",
+            "text": "Issues",
             "type": "TextBlock",
             "weight": "Bolder",
             "wrap": true,
@@ -2631,38 +3487,9 @@ DRY RUN",
           "type": "section",
         },
         {
-          "fields": [
-            {
-              "text": "*Subscription*
-subscription-example",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-            {
-              "text": "*Application*
-application-example",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-            {
-              "text": "*Duration*
-1s",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-            {
-              "text": "*Repository*
-example-org/project",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-          ],
-          "type": "section",
-        },
-        {
           "text": {
             "emoji": false,
-            "text": "Cleanup counts",
+            "text": "Result",
             "type": "plain_text",
           },
           "type": "section",
@@ -2733,9 +3560,50 @@ Not reported",
           "type": "section",
         },
         {
+          "fields": [
+            {
+              "text": "*Retention days*
+30",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Keep latest*
+10",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Subscription*
+subscription-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Application*
+application-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Duration*
+1s",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
           "text": {
             "emoji": false,
-            "text": "Cleanup policy",
+            "text": "Inputs",
             "type": "plain_text",
           },
           "type": "section",
@@ -2743,20 +3611,27 @@ Not reported",
         {
           "fields": [
             {
-              "text": "*retention-days*
-30",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-            {
-              "text": "*keep-latest*
-10",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-            {
               "text": "*Input context*
 Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+No issues were reported in this event.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -2866,36 +3741,8 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
-              {
-                "facts": [
-                  {
-                    "title": "Subscription",
-                    "value": "subscription-example",
-                  },
-                  {
-                    "title": "Application",
-                    "value": "application-example",
-                  },
-                  {
-                    "title": "Duration",
-                    "value": "1s",
-                  },
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
-              },
-            ],
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
-          },
-          {
-            "spacing": "Medium",
-            "text": "Cleanup counts",
+            "text": "Result",
             "type": "TextBlock",
             "weight": "Bolder",
             "wrap": true,
@@ -2947,8 +3794,38 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
+            "facts": [
+              {
+                "title": "Retention days",
+                "value": "30",
+              },
+              {
+                "title": "Keep latest",
+                "value": "10",
+              },
+              {
+                "title": "Subscription",
+                "value": "subscription-example",
+              },
+              {
+                "title": "Application",
+                "value": "application-example",
+              },
+              {
+                "title": "Duration",
+                "value": "1s",
+              },
+              {
+                "title": "Repository",
+                "value": "example-org/project",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "text": "Cleanup policy",
+            "text": "Inputs",
             "type": "TextBlock",
             "weight": "Bolder",
             "wrap": true,
@@ -2956,16 +3833,25 @@ exports[`golden synthetic events > validates and renders each supported event fi
           {
             "facts": [
               {
-                "title": "retention-days",
-                "value": "30",
-              },
-              {
-                "title": "keep-latest",
-                "value": "10",
-              },
-              {
                 "title": "Input context",
                 "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "No issues were reported in this event.",
               },
             ],
             "spacing": "Small",
@@ -3033,38 +3919,9 @@ DRY RUN",
           "type": "section",
         },
         {
-          "fields": [
-            {
-              "text": "*Subscription*
-subscription-example",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-            {
-              "text": "*Application*
-application-example",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-            {
-              "text": "*Duration*
-1s",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-            {
-              "text": "*Repository*
-example-org/project",
-              "type": "mrkdwn",
-              "verbatim": true,
-            },
-          ],
-          "type": "section",
-        },
-        {
           "text": {
             "emoji": false,
-            "text": "Cleanup counts",
+            "text": "Result",
             "type": "plain_text",
           },
           "type": "section",
@@ -3135,9 +3992,50 @@ example-org/project",
           "type": "section",
         },
         {
+          "fields": [
+            {
+              "text": "*Retention days*
+30",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Keep latest*
+10",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Subscription*
+subscription-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Application*
+application-example",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Duration*
+1s",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
           "text": {
             "emoji": false,
-            "text": "Cleanup inputs",
+            "text": "Inputs",
             "type": "plain_text",
           },
           "type": "section",
@@ -3233,13 +4131,25 @@ false",
               "type": "mrkdwn",
               "verbatim": true,
             },
+            {
+              "text": "*Input validation*
+Passed",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Input truncation*
+No input truncation reported.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
           ],
           "type": "section",
         },
         {
           "text": {
             "emoji": false,
-            "text": "Cleanup issues",
+            "text": "Issues",
             "type": "plain_text",
           },
           "type": "section",
@@ -3358,36 +4268,8 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
-              {
-                "facts": [
-                  {
-                    "title": "Subscription",
-                    "value": "subscription-example",
-                  },
-                  {
-                    "title": "Application",
-                    "value": "application-example",
-                  },
-                  {
-                    "title": "Duration",
-                    "value": "1s",
-                  },
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
-              },
-            ],
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
-          },
-          {
-            "spacing": "Medium",
-            "text": "Cleanup counts",
+            "text": "Result",
             "type": "TextBlock",
             "weight": "Bolder",
             "wrap": true,
@@ -3439,8 +4321,38 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
+            "facts": [
+              {
+                "title": "Retention days",
+                "value": "30",
+              },
+              {
+                "title": "Keep latest",
+                "value": "10",
+              },
+              {
+                "title": "Subscription",
+                "value": "subscription-example",
+              },
+              {
+                "title": "Application",
+                "value": "application-example",
+              },
+              {
+                "title": "Duration",
+                "value": "1s",
+              },
+              {
+                "title": "Repository",
+                "value": "example-org/project",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "text": "Cleanup inputs",
+            "text": "Inputs",
             "type": "TextBlock",
             "weight": "Bolder",
             "wrap": true,
@@ -3509,13 +4421,21 @@ exports[`golden synthetic events > validates and renders each supported event fi
                 "title": "continue-on-delete-error",
                 "value": "false",
               },
+              {
+                "title": "Input validation",
+                "value": "Passed",
+              },
+              {
+                "title": "Input truncation",
+                "value": "No input truncation reported.",
+              },
             ],
             "spacing": "Small",
             "type": "FactSet",
           },
           {
             "spacing": "Medium",
-            "text": "Cleanup issues",
+            "text": "Issues",
             "type": "TextBlock",
             "weight": "Bolder",
             "wrap": true,
@@ -3592,6 +4512,14 @@ deploy-example",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Decision*
@@ -3602,6 +4530,44 @@ approval",
             {
               "text": "*Repository*
 example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+Review the workflow for details about this outcome.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -3725,24 +4691,59 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Decision",
-                    "value": "approval",
-                  },
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Decision",
+                "value": "approval",
+              },
+              {
+                "title": "Repository",
+                "value": "example-org/project",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "Review the workflow for details about this outcome.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -3806,10 +4807,56 @@ deploy-example",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Repository*
 example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+Review the workflow for details about this outcome.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -3919,20 +4966,55 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Repository",
+                "value": "example-org/project",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "Review the workflow for details about this outcome.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -3996,10 +5078,56 @@ deploy-example",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Repository*
 example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Error*
+The example deployment did not pass its health check.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -4109,20 +5237,55 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Repository",
+                "value": "example-org/project",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Error",
+                "value": "The example deployment did not pass its health check.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -4180,10 +5343,56 @@ exports[`golden synthetic events > validates and renders each supported event fi
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Repository*
 example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Error*
+Workflow could not complete deployment.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -4289,20 +5498,55 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Repository",
+                "value": "example-org/project",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Error",
+                "value": "Workflow could not complete deployment.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -4366,6 +5610,14 @@ deploy-example",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Environment*
@@ -4376,6 +5628,44 @@ staging",
             {
               "text": "*Repository*
 example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+No issues were reported in this event.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -4485,24 +5775,59 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Environment",
-                    "value": "staging",
-                  },
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Environment",
+                "value": "staging",
+              },
+              {
+                "title": "Repository",
+                "value": "example-org/project",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "No issues were reported in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
@@ -4566,6 +5891,14 @@ deploy-example",
           "type": "section",
         },
         {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
           "fields": [
             {
               "text": "*Environment*
@@ -4582,6 +5915,44 @@ build-example",
             {
               "text": "*Repository*
 example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Input context*
+Complete input context was not included in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+No issues were reported in this event.",
               "type": "mrkdwn",
               "verbatim": true,
             },
@@ -4691,34 +6062,410 @@ exports[`golden synthetic events > validates and renders each supported event fi
             "type": "FactSet",
           },
           {
-            "items": [
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
               {
-                "facts": [
-                  {
-                    "title": "Environment",
-                    "value": "staging",
-                  },
-                  {
-                    "title": "Build code",
-                    "value": "build-example",
-                  },
-                  {
-                    "title": "Repository",
-                    "value": "example-org/project",
-                  },
-                ],
-                "type": "FactSet",
+                "title": "Environment",
+                "value": "staging",
+              },
+              {
+                "title": "Build code",
+                "value": "build-example",
+              },
+              {
+                "title": "Repository",
+                "value": "example-org/project",
               },
             ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
             "spacing": "Medium",
-            "style": "emphasis",
-            "type": "Container",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Input context",
+                "value": "Complete input context was not included in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "No issues were reported in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
           },
           {
             "isSubtle": true,
             "size": "Small",
             "spacing": "Medium",
             "text": "CommerceKit CI · Run 123456",
+            "type": "TextBlock",
+            "wrap": true,
+          },
+        ],
+        "type": "AdaptiveCard",
+        "version": "1.2",
+      },
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+    },
+  ],
+  "type": "message",
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > setup-success.json: Slack 1`] = `
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "emoji": true,
+            "text": "✅ CommerceKit CLI setup succeeded",
+            "type": "plain_text",
+          },
+          "type": "header",
+        },
+        {
+          "fields": [
+            {
+              "text": "*CLI version*
+0.1.0-preview.2",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Occurred*
+2026-11-01 20:20:00 UTC",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "type": "divider",
+        },
+        {
+          "text": {
+            "emoji": true,
+            "text": "CommerceKit CLI 0.1.0-preview.2 was installed and verified.",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Result",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Requested version*
+0.1.0-preview.2",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Target*
+linux-x64",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Build identity*
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Cache reused*
+true",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Duration*
+1s",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Repository*
+example-org/project",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Inputs",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*version*
+0.1.0-preview.2",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Input validation*
+Passed",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+            {
+              "text": "*Input truncation*
+No input truncation reported.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "text": {
+            "emoji": false,
+            "text": "Issues",
+            "type": "plain_text",
+          },
+          "type": "section",
+        },
+        {
+          "fields": [
+            {
+              "text": "*Details*
+No issues were reported in this event.",
+              "type": "mrkdwn",
+              "verbatim": true,
+            },
+          ],
+          "type": "section",
+        },
+        {
+          "elements": [
+            {
+              "action_id": "notification_action_0",
+              "text": {
+                "text": "View workflow",
+                "type": "plain_text",
+              },
+              "type": "button",
+              "url": "https://github.com/example-org/project/actions/runs/123456",
+            },
+          ],
+          "type": "actions",
+        },
+        {
+          "elements": [
+            {
+              "emoji": true,
+              "text": "Integration · Run 123456 · Attempt 1",
+              "type": "plain_text",
+            },
+          ],
+          "type": "context",
+        },
+      ],
+      "color": "#168A45",
+    },
+  ],
+  "blocks": [
+    {
+      "elements": [
+        {
+          "emoji": false,
+          "text": "CommerceKit · CLI setup · Succeeded",
+          "type": "plain_text",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "mrkdwn": false,
+  "text": "Succeeded · CommerceKit CLI setup succeeded · 0.1.0-preview.2 · https://github.com/example-org/project/actions/runs/123456 · CommerceKit CLI 0.1.0-preview.2 was installed and verified.",
+  "unfurl_links": false,
+  "unfurl_media": false,
+}
+`;
+
+exports[`golden synthetic events > validates and renders each supported event fixture deterministically > setup-success.json: Teams Workflows 1`] = `
+{
+  "attachments": [
+    {
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "actions": [
+          {
+            "title": "View workflow",
+            "type": "Action.OpenUrl",
+            "url": "https://github.com/example-org/project/actions/runs/123456",
+          },
+        ],
+        "body": [
+          {
+            "items": [
+              {
+                "size": "Small",
+                "text": "CommerceKit · CLI setup · ✅ Succeeded",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "size": "Large",
+                "spacing": "Medium",
+                "text": "CommerceKit CLI setup succeeded",
+                "type": "TextBlock",
+                "weight": "Bolder",
+                "wrap": true,
+              },
+              {
+                "spacing": "Medium",
+                "text": "CommerceKit CLI 0.1.0-preview.2 was installed and verified.",
+                "type": "TextBlock",
+                "wrap": true,
+              },
+            ],
+            "style": "good",
+            "type": "Container",
+          },
+          {
+            "facts": [
+              {
+                "title": "CLI version",
+                "value": "0.1.0-preview.2",
+              },
+              {
+                "title": "Occurred",
+                "value": "2026-11-01 20:20:00 UTC",
+              },
+            ],
+            "spacing": "Medium",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Result",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Requested version",
+                "value": "0.1.0-preview.2",
+              },
+              {
+                "title": "Target",
+                "value": "linux-x64",
+              },
+              {
+                "title": "Build identity",
+                "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              },
+              {
+                "title": "Cache reused",
+                "value": "true",
+              },
+              {
+                "title": "Duration",
+                "value": "1s",
+              },
+              {
+                "title": "Repository",
+                "value": "example-org/project",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Inputs",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "version",
+                "value": "0.1.0-preview.2",
+              },
+              {
+                "title": "Input validation",
+                "value": "Passed",
+              },
+              {
+                "title": "Input truncation",
+                "value": "No input truncation reported.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "spacing": "Medium",
+            "text": "Issues",
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "wrap": true,
+          },
+          {
+            "facts": [
+              {
+                "title": "Details",
+                "value": "No issues were reported in this event.",
+              },
+            ],
+            "spacing": "Small",
+            "type": "FactSet",
+          },
+          {
+            "isSubtle": true,
+            "size": "Small",
+            "spacing": "Medium",
+            "text": "Integration · Run 123456 · Attempt 1",
             "type": "TextBlock",
             "wrap": true,
           },

@@ -15,6 +15,9 @@ on:
         type: choice
         options:
           - check-success
+          - check-warning
+          - setup-success
+          - cleanup-warning
           - check-failure
           - build-success
           - build-failure

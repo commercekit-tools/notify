@@ -1,6 +1,12 @@
 # Shared contract migration
 
-The original migration moved the pre-extraction baseline `015479e4340f61598d2125532acf6474381ca976` to `@commercekit-tools/notification-contract@0.0.2`. Notify now pins `0.0.5`; this additive package upgrade preserves the schema, rendering and delivery policies described below. Notify remains unreleased.
+Current ecosystem reporting consumes exact published contract 0.0.6;
+[registry validation](ecosystem-reporting-validation.md) records its authorized
+publication, exact integrity and normal consumer checks. The historical
+snapshot-preservation statements below describe earlier extraction/adoption. The
+present UI intentionally updates all 40 provider snapshots to common sections.
+
+The original migration moved the pre-extraction baseline `015479e4340f61598d2125532acf6474381ca976` to `@commercekit-tools/notification-contract@0.0.2`. Notify now pins `0.0.6`; existing event semantics and delivery policies remain, while the common presentation update is documented separately. Notify remains unreleased.
 
 ## Ownership inventory
 
@@ -66,3 +72,27 @@ normal registry validation and archived candidate provenance are recorded in
 [cleanup validation](cleanup-notification-validation.md). This dependency update
 creates no Action release or Git release tag and does not authorize deployment,
 provider delivery or real SAP operations.
+
+## Ecosystem reporting 0.0.6 adoption
+
+The existing contract supplies shared input context, visual status primitives,
+pure GitHub summary rendering and setup completion support. Notify retains
+provider escaping, bounded card layout and delivery policy. Its theme adapts the
+shared style without redefining colors/icons. Every event family uses consistent
+Result/Inputs/Issues sections and explicit legacy-context absence; no nine-fact
+truncation silently drops context. Own Notify summaries report delivery separately
+from source outcome and preserve known accepted delivery during reporting faults.
+
+The owner-authorized package-only publication run
+[43678067818](https://github.com/commercekit-tools/action-kit/actions/runs/43678067818)
+published 0.0.6 from main `3fecce40414d709884fa48e48eca278f470b20b0`.
+Actual registry integrity matches the reviewed private candidate. Normal source
+now uses an exact registry dependency/lockfile and regenerated standalone bundle;
+no candidate switch, local file link, vendored schema or action-kit source
+checkout is needed. See the validation report for executed normal checks.
+Historical candidate preparation remains available at immutable Notify commit
+`41e699d13bd183bd51551e45c386cf9e8f77d6dd`.
+
+Publication does not create an Action release or authorize Git tags, deployment,
+live provider sends or real SAP operations. Those release and live-validation
+gates remain separate owner decisions.

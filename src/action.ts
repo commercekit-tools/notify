@@ -1,4 +1,5 @@
 import * as core from '@actions/core';
+import { captureActionInputs } from '@commercekit-tools/notification-contract';
 import { parseEvent } from './event/parse.js';
 import { createPresentation } from './presentation/create-presentation.js';
 import { renderSlack } from './providers/slack/render.js';
@@ -6,52 +7,90 @@ import { renderTeams } from './providers/teams-workflow/render.js';
 import { validateWebhook } from './delivery/url-validation.js';
 import { deliver } from './delivery/webhook.js';
 import { enrichContext } from './event/enrich-context.js';
+import { notifyInputDefinitions, reportDelivery, safeNotifyMessage } from './reporting.js';
 export async function runAction(): Promise<void> {
+  const started = Date.now();
+  let rawInputs: Record<string, string> = {};
   let provider = '',
     eventType = '',
-    status = '',
-    attempts = '0';
-  let failOn = 'false';
+    status = '';
+  let attempts = 0;
+  let inputsValidated = false;
+  let delivered = false;
+  let severity: 'success' | 'warning' | 'failure' = 'failure';
+  let problem: string | undefined;
+  let fatalMessage: string | undefined;
   try {
-    failOn = core.getInput('fail-on-notification-error') || 'false';
-    provider = core.getInput('provider', { required: true });
-    if (provider !== 'slack' && provider !== 'teams-workflow')
+    rawInputs = captureActionInputs(notifyInputDefinitions, (name) => core.getInput(name), core.setSecret);
+    const failOn = rawInputs['fail-on-notification-error'] || 'false';
+    const selected = rawInputs['provider'];
+    if (selected !== 'slack' && selected !== 'teams-workflow')
       throw new Error('provider must be slack or teams-workflow.');
-    const webhook = core.getInput('webhook-url', { required: true });
-    core.setSecret(webhook);
+    provider = selected;
+    const webhook = rawInputs['webhook-url'];
+    if (!webhook) throw new Error('webhook-url is required.');
     if (!['true', 'false'].includes(failOn)) throw new Error('fail-on-notification-error must be true or false.');
     const parsedEvent = await parseEvent({
-      json: core.getInput('event-json') || undefined,
-      file: core.getInput('event-file') || undefined,
+      json: rawInputs['event-json'] || undefined,
+      file: rawInputs['event-file'] || undefined,
     });
     const event = enrichContext(parsedEvent);
     eventType = String(event.eventType);
     status = String(event.status);
-    const url = validateWebhook(webhook, provider);
-    const presentation = createPresentation(event);
-    const payload = provider === 'slack' ? renderSlack(presentation) : renderTeams(presentation);
+    const url = validateWebhook(webhook, selected);
+    inputsValidated = true;
+    const presentation = createPresentation(event, [webhook]);
+    const payload = selected === 'slack' ? renderSlack(presentation) : renderTeams(presentation);
     try {
-      const result = await deliver(provider, url, payload);
-      attempts = String(result.attempts);
-      core.setOutput('delivered', 'true');
+      const result = await deliver(selected, url, payload);
+      attempts = result.attempts;
+      delivered = true;
+      severity = 'success';
     } catch (error) {
-      attempts = String((error as { attempts?: number }).attempts ?? 0);
-      core.setOutput('delivered', 'false');
-      const message = error instanceof Error ? error.message : 'Notification delivery failed.';
+      const count = error && typeof error === 'object' && 'attempts' in error ? error.attempts : undefined;
+      attempts = typeof count === 'number' && Number.isSafeInteger(count) && count >= 0 && count <= 3 ? count : 0;
+      problem = safeNotifyMessage(error, [webhook]);
       if (failOn === 'true') throw error;
-      core.warning(message);
+      severity = 'warning';
+      core.warning(problem);
     }
-    core.setOutput('provider', provider);
-    core.setOutput('event-type', eventType);
-    core.setOutput('status', status);
-    core.setOutput('attempts', attempts);
   } catch (error) {
-    core.setOutput('delivered', 'false');
-    core.setOutput('provider', provider);
-    core.setOutput('event-type', eventType);
-    core.setOutput('status', status);
-    core.setOutput('attempts', attempts);
-    const safeMessage = error instanceof Error ? error.message : 'Notification action failed.';
-    core.setFailed(safeMessage);
+    severity = 'failure';
+    problem = safeNotifyMessage(error, [rawInputs['webhook-url'] ?? '']);
+    fatalMessage = problem;
+  } finally {
+    let outputFailure = false;
+    for (const [name, value] of [
+      ['delivered', delivered ? 'true' : 'false'],
+      ['provider', provider],
+      ['event-type', eventType],
+      ['status', status],
+      ['attempts', String(attempts)],
+    ]) {
+      try {
+        core.setOutput(name!, value);
+      } catch {
+        outputFailure = true;
+      }
+    }
+    if (outputFailure) {
+      severity = 'failure';
+      fatalMessage ??=
+        'Notification delivery state was preserved, but one or more Action outputs could not be written.';
+    }
+    await reportDelivery({
+      rawInputs,
+      inputsValidated,
+      severity,
+      delivered,
+      provider,
+      eventType,
+      sourceStatus: status,
+      attempts,
+      outputFailure,
+      durationMs: Math.max(0, Date.now() - started),
+      ...(problem ? { error: problem } : {}),
+    });
+    if (fatalMessage) core.setFailed(fatalMessage);
   }
 }
