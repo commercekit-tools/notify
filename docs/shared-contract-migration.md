@@ -1,5 +1,12 @@
 # Shared contract migration
 
+The current ecosystem consistency candidate is described in
+[ecosystem-reporting-validation.md](ecosystem-reporting-validation.md). It uses
+unpublished 0.0.6 APIs only in isolated candidate consumers; normal 0.0.5
+manifest/lockfile/dist remain unchanged. The historical snapshot-preservation
+statements below describe earlier extraction/adoption work. The present UI change
+intentionally updates all 40 provider snapshots to common sections.
+
 The original migration moved the pre-extraction baseline `015479e4340f61598d2125532acf6474381ca976` to `@commercekit-tools/notification-contract@0.0.2`. Notify now pins `0.0.5`; this additive package upgrade preserves the schema, rendering and delivery policies described below. Notify remains unreleased.
 
 ## Ownership inventory
@@ -66,3 +73,19 @@ normal registry validation and archived candidate provenance are recorded in
 [cleanup validation](cleanup-notification-validation.md). This dependency update
 creates no Action release or Git release tag and does not authorize deployment,
 provider delivery or real SAP operations.
+
+## Ecosystem reporting candidate 0.0.6
+
+The existing contract adds shared input context, visual status primitives, pure
+GitHub summary rendering and setup completion support. Notify retains provider
+escaping, bounded card layout and delivery policy. Its theme now adapts the
+shared style without redefining colors/icons. Every event family uses consistent
+Result/Inputs/Issues sections and explicit legacy-context absence; no nine-fact
+truncation silently drops context. Own Notify summaries report delivery separately
+from source outcome and preserve original outcomes under summary failures.
+
+This source integration is not a published registry build. A separately reviewed
+artifact is installed only in private temporary workspaces for candidate tests.
+No permanent file link, vendored schema, new shared package, OAuth replacement or
+provider-delivery duplication is introduced. Publication, normal repinning/bundle
+regeneration and release approval remain separate owner gates.

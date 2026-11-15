@@ -1,3 +1,4 @@
+import { sanitizeActionText } from '@commercekit-tools/notification-contract';
 // Notify preserves its established redaction labels, webhook/query URL filtering,
 // and provider text behavior; the package sanitizers are not equivalent.
 interface Rule {
@@ -41,7 +42,7 @@ const rules: Rule[] = [
 export function sanitize(value: string): string {
   let sanitized = value;
   for (const rule of rules) sanitized = sanitized.replace(rule.pattern, rule.replace);
-  return sanitized.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, ' ').slice(0, 1000);
+  return sanitizeActionText(sanitized.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, ' '), 1000);
 }
 
 export function sanitizeLabel(value: string): string {

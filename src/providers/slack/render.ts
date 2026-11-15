@@ -1,3 +1,4 @@
+import { previewPresentation } from '../../presentation/preview.js';
 import type { Presentation } from '../../presentation/types.js';
 export const esc = (s: string) =>
   s
@@ -11,7 +12,9 @@ const field = (f: { label: string; value: string }) => ({
   text: `*${esc(f.label)}*\n${escapeMrkdwn(esc(f.value))}`.slice(0, 2000),
   verbatim: true,
 });
-export function renderSlack(p: Presentation) {
+export function renderSlack(source: Presentation) {
+  const p = previewPresentation(source, 256);
+  const hasResultSection = p.sections?.some((section) => section.title === 'Result');
   const lead = [
     {
       type: 'context',
@@ -25,12 +28,11 @@ export function renderSlack(p: Presentation) {
   if (p.highlights.length && (p.summary || p.facts.length)) blocks.push({ type: 'divider' });
   if (p.summary)
     blocks.push({ type: 'section', text: { type: 'plain_text', text: p.summary.slice(0, 3000), emoji: true } });
-  if (p.facts.length)
-    blocks.push({
-      type: 'section',
-      fields: p.facts.slice(0, 10).map(field),
-    });
-  for (const section of p.sections ?? []) {
+  const sections = [
+    ...(p.facts.length && !hasResultSection ? [{ title: 'Result', facts: p.facts }] : []),
+    ...(p.sections ?? []),
+  ];
+  for (const section of sections) {
     blocks.push({ type: 'section', text: { type: 'plain_text', text: section.title.slice(0, 3000), emoji: false } });
     for (let start = 0; start < section.facts.length; start += 10)
       blocks.push({ type: 'section', fields: section.facts.slice(start, start + 10).map(field) });

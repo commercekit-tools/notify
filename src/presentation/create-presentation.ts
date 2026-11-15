@@ -1,5 +1,6 @@
 import { redactKnownSecrets } from '@commercekit-tools/notification-contract';
-import { cleanupConfidentialValues, cleanupDetails } from './cleanup.js';
+import { cleanupDetails } from './cleanup.js';
+import { confidentialValues, detailSections, safeActionLink } from './details.js';
 import type { NotificationEvent } from '@commercekit-tools/notification-contract';
 import { sanitize, sanitizeLabel, safePlainText } from './sanitize.js';
 import { theme } from './theme.js';
@@ -8,11 +9,11 @@ const stringValue = (v: unknown): string =>
   typeof v === 'string' ? sanitize(v) : typeof v === 'number' && Number.isFinite(v) ? String(v) : '';
 const duration = (v: unknown): string => (typeof v === 'number' ? `${Math.round(v / 1000)}s` : '');
 const occurred = (value: string): string => `${new Date(value).toISOString().slice(0, 19).replace('T', ' ')} UTC`;
-export function createPresentation(event: NotificationEvent): Presentation {
+export function createPresentation(event: NotificationEvent, secrets: readonly string[] = []): Presentation {
   const t = theme[event.status],
     d = event.data as Record<string, unknown>,
     c = (event.context ?? {}) as Record<string, unknown>;
-  const confidential = event.eventType === 'ccv2.build-cleanup.completed' ? cleanupConfidentialValues(d) : [];
+  const confidential = [...secrets, ...confidentialValues(d)];
   const str = (value: unknown): string =>
     stringValue(typeof value === 'string' ? redactKnownSecrets(value, confidential) : value);
   const sections: NonNullable<Presentation['sections']> = [];
@@ -29,7 +30,34 @@ export function createPresentation(event: NotificationEvent): Presentation {
     const v = str(value);
     if (v) facts.push({ label, value: v });
   };
-  if (event.eventType === 'check.completed') {
+  if (event.eventType === 'commercekit.setup.completed') {
+    category = 'CommerceKit · CLI setup';
+    title =
+      event.status === 'success'
+        ? 'CommerceKit CLI setup succeeded'
+        : event.status === 'warning'
+          ? 'CommerceKit CLI setup completed with warnings'
+          : event.status === 'cancelled'
+            ? 'CommerceKit CLI setup cancelled'
+            : event.status === 'internal-error'
+              ? 'CommerceKit CLI setup encountered an internal error'
+              : 'CommerceKit CLI setup failed';
+    summary =
+      event.status === 'success'
+        ? `CommerceKit CLI ${str(d.version) || 'installation'} was installed and verified.`
+        : str((d.error as Record<string, unknown> | undefined)?.message) ||
+          (event.status === 'warning'
+            ? 'CommerceKit CLI setup completed with warnings; review the reported issues.'
+            : event.status === 'cancelled'
+              ? 'CommerceKit CLI setup was cancelled before completion.'
+              : 'CommerceKit CLI setup did not complete.');
+    highlight('CLI version', d.version || d.requestedVersion);
+    add('Requested version', d.requestedVersion);
+    add('Target', d.target);
+    add('Build identity', d.buildId);
+    add('Cache reused', typeof d.cacheHit === 'boolean' ? String(d.cacheHit) : undefined);
+    add('Duration', duration(d.durationMs));
+  } else if (event.eventType === 'check.completed') {
     category = 'CommerceKit · Check';
     title =
       event.status === 'success'
@@ -72,7 +100,9 @@ export function createPresentation(event: NotificationEvent): Presentation {
     const cleanup = cleanupDetails(event.status, d, str);
     title = cleanup.title;
     summary = cleanup.summary;
-    sections.push(...cleanup.sections);
+    for (const fact of cleanup.sections[0]!.facts) facts.push(fact);
+    add('Retention days', d.retentionDays);
+    add('Keep latest', d.keepLatest);
     highlight('Mode', d.mode === 'dry-run' ? 'DRY RUN' : 'APPLY');
     add('Subscription', d.subscriptionCode);
     add('Application', d.applicationCode || 'All applications');
@@ -105,6 +135,7 @@ export function createPresentation(event: NotificationEvent): Presentation {
               ? `${subject} was cancelled.`
               : error || 'CommerceKit could not complete the build workflow.';
     highlight(code ? 'Build code' : name ? 'Build name' : 'Application', code || name || application);
+    add('Subscription', d.subscriptionCode);
     if (highlights[0]?.label !== 'Application') add('Application', d.applicationCode);
     add('Branch', d.branch);
     if (highlights[0]?.label !== 'Build name') add('Build name', d.buildName);
@@ -145,6 +176,8 @@ export function createPresentation(event: NotificationEvent): Presentation {
                 : error || 'CommerceKit could not complete the deployment workflow.';
     highlight(code ? 'Deployment code' : 'Environment', code || environment);
     if (highlights[0]?.label !== 'Environment') add('Environment', environment);
+    add('Subscription', d.subscriptionCode);
+    add('Application', d.applicationCode);
     add('Build code', d.buildCode);
     add('Strategy', d.deploymentMode);
     add('Database update', d.databaseUpdateMode);
@@ -154,11 +187,12 @@ export function createPresentation(event: NotificationEvent): Presentation {
   }
   if (event.eventType !== 'check.completed') add('Repository', c.repository);
   highlight('Occurred', occurred(event.occurredAt));
-  const eventLinks = (event.links ?? []).filter((link) => redactKnownSecrets(link.url, confidential) === link.url);
+  sections.push({ title: 'Result', facts }, ...detailSections(event.status, d, str));
+  const eventLinks = (event.links ?? []).filter((link) => safeActionLink(link.url, confidential));
   const links =
     eventLinks.length > 0
       ? eventLinks.map((link) => ({ label: safePlainText(sanitizeLabel(str(link.label))), url: link.url }))
-      : typeof c.runUrl === 'string' && redactKnownSecrets(c.runUrl, confidential) === c.runUrl
+      : typeof c.runUrl === 'string' && safeActionLink(c.runUrl, confidential)
         ? [{ label: 'View workflow', url: c.runUrl }]
         : [];
   const footer = [
@@ -178,7 +212,7 @@ export function createPresentation(event: NotificationEvent): Presentation {
     accent: t.accent,
     summary: sanitize(summary).slice(0, 1000) || undefined,
     highlights: highlights.slice(0, 2),
-    facts: facts.slice(0, 9),
+    facts,
     ...(sections.length ? { sections } : {}),
     actions: links.slice(0, 3),
     footer: footer ? sanitize(footer) : undefined,

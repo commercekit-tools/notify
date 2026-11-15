@@ -1,5 +1,11 @@
 # Cleanup notification validation
 
+> This report records the earlier published 0.0.5 baseline. Current ecosystem UI
+> and summary candidate evidence is in
+> [ecosystem-reporting-validation.md](ecosystem-reporting-validation.md). Historical
+> claims about unchanged non-cleanup snapshots do not describe the intentional
+> common-layout updates in the new candidate.
+
 ## Published registry integration
 
 The notification-contract publication gate is resolved. Notify pins the exact

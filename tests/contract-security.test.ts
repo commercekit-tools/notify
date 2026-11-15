@@ -126,21 +126,22 @@ describe('input and delivery safety', () => {
       { attempts: 2 },
     );
   });
-  it('rejects a Teams card above the 27 KiB safety cap', () => {
-    expect(() =>
-      renderTeams({
-        category: 'CommerceKit · Test',
-        title: 'Synthetic',
-        status: 'success',
-        statusLabel: 'Succeeded',
-        icon: '✅',
-        tone: 'success',
-        accent: '#168A45',
-        highlights: [],
-        facts: Array.from({ length: 10 }, (_, index) => ({ label: `Fact ${index}`, value: '界'.repeat(1000) })),
-        actions: [],
-      }),
-    ).toThrow(/27 KiB/);
+  it('bounds large Teams display values with explicit truncation under the 27 KiB safety cap', () => {
+    const payload = renderTeams({
+      category: 'CommerceKit · Test',
+      title: 'Synthetic',
+      status: 'success',
+      statusLabel: 'Succeeded',
+      icon: '✅',
+      tone: 'success',
+      accent: '#168A45',
+      highlights: [],
+      facts: Array.from({ length: 10 }, (_, index) => ({ label: `Fact ${index}`, value: '界'.repeat(1000) })),
+      actions: [],
+    });
+    expect(Buffer.byteLength(JSON.stringify(payload))).toBeLessThanOrEqual(27 * 1024);
+    expect(JSON.stringify(payload)).toContain('truncated');
+    for (let index = 0; index < 10; index++) expect(JSON.stringify(payload)).toContain(`Fact ${index}`);
   });
 });
 

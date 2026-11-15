@@ -170,7 +170,7 @@ describe('complete cleanup notification context', () => {
     const p = createPresentation(legacy);
     expect(p.facts).toContainEqual({ label: 'Application', value: 'All applications' });
     expect(p.facts).toContainEqual({ label: 'Repository', value: 'example/integration' });
-    expect(p.sections?.find((section) => section.title === 'Cleanup policy')?.facts).toContainEqual({
+    expect(p.sections?.find((section) => section.title === 'Inputs')?.facts).toContainEqual({
       label: 'Input context',
       value: 'Complete input context was not included in this event.',
     });
@@ -209,7 +209,7 @@ describe('complete cleanup notification context', () => {
     expect(p.actions).toEqual([]);
     expect(
       p.sections
-        ?.find((section) => section.title === 'Cleanup inputs')
+        ?.find((section) => section.title === 'Inputs')
         ?.facts.filter((fact) => ['token-endpoint', 'client-id', 'client-secret', 'resource'].includes(fact.label))
         .map((fact) => fact.value),
     ).toEqual(Array(4).fill('[REDACTED]'));
@@ -229,8 +229,8 @@ describe('complete cleanup notification context', () => {
     });
     const p = createPresentation(rejected);
     const both = JSON.stringify([renderSlack(p), renderTeams(p)]);
-    expect(both).toContain('validation failed');
-    expect(both).toContain('rejected before cleanup');
+    expect(both).toContain('Input validation');
+    expect(both).toContain('Incomplete');
     expect(both).toContain('truncated');
     expect(both).not.toContain('<!channel>');
     for (const name of Object.keys(inputs)) expect(both).toContain(name);
@@ -271,16 +271,17 @@ describe('complete cleanup notification context', () => {
       });
       const p = createPresentation(incomplete);
       expect(p.summary).toBeTruthy();
-      expect(p.sections?.find((section) => section.title === 'Cleanup issues')?.facts[0].value).toBe(
-        'Review the workflow report.',
-      );
+      expect(
+        p.sections?.find((section) => section.title === 'Issues')?.facts.find((fact) => fact.label === 'Issue 1')
+          ?.value,
+      ).toBe('Review the workflow report.');
     }
     const incomplete = event('success');
     Object.assign(incomplete.data, { inputs: { ...inputs, 'application-code': '' }, cleanupStatus: '' });
     const p = createPresentation(incomplete);
-    expect(p.sections?.find((section) => section.title === 'Cleanup inputs')?.facts).toContainEqual({
+    expect(p.sections?.find((section) => section.title === 'Inputs')?.facts).toContainEqual({
       label: 'application-code',
-      value: 'Not included',
+      value: '(not set)',
     });
   });
 });

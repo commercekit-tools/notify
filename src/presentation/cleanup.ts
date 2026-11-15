@@ -1,23 +1,6 @@
 import type { NotificationStatus } from '@commercekit-tools/notification-contract';
 import type { Presentation } from './types.js';
 
-const inputNames = [
-  'token-endpoint',
-  'client-id',
-  'client-secret',
-  'resource',
-  'subscription-code',
-  'api-base-url',
-  'application-code',
-  'retention-days',
-  'keep-latest',
-  'dry-run',
-  'max-deletions',
-  'exclude-build-codes',
-  'timeout-minutes',
-  'continue-on-delete-error',
-] as const;
-const confidential = new Set<string>(['token-endpoint', 'client-id', 'client-secret', 'resource']);
 type Data = Record<string, unknown>;
 type Format = (_value: unknown) => string;
 const object = (value: unknown): Data =>
@@ -27,14 +10,6 @@ const bound = (value: string, maximum: number): string => {
   const ending = '… [truncated]';
   return characters.length > maximum ? `${characters.slice(0, maximum - ending.length).join('')}${ending}` : value;
 };
-
-/** Defense for direct presentation callers; validated new events already redact these. */
-export function cleanupConfidentialValues(data: Data): string[] {
-  const inputs = object(data.inputs);
-  return [...confidential]
-    .map((name) => inputs[name])
-    .filter((value): value is string => typeof value === 'string' && value.length > 0 && value !== '[REDACTED]');
-}
 
 export function cleanupDetails(status: NotificationStatus, data: Data, format: Format) {
   const mode = data.mode === 'dry-run' ? 'DRY RUN' : 'APPLY';
@@ -79,57 +54,6 @@ export function cleanupDetails(status: NotificationStatus, data: Data, format: F
     ['Failed', 'failedCount'],
     ['Unknown', 'unknownCount'],
   ].map(([label, key]) => ({ label: label!, value: format(data[key!]) || 'Not reported' }));
-  const sections: NonNullable<Presentation['sections']> = [{ title: 'Cleanup counts', facts: counts }];
-  const hasInputs = data.inputs && typeof data.inputs === 'object' && !Array.isArray(data.inputs);
-  if (hasInputs) {
-    const inputs = object(data.inputs);
-    sections.push({
-      title: data.inputsValidated === false ? 'Inputs — validation failed' : 'Cleanup inputs',
-      facts: inputNames.map((name) => ({
-        label: name,
-        value: confidential.has(name) ? '[REDACTED]' : bound(format(inputs[name]) || 'Not included', 256),
-      })),
-    });
-  } else {
-    sections.push({
-      title: 'Cleanup policy',
-      facts: [
-        { label: 'retention-days', value: format(data.retentionDays) || 'Not reported' },
-        { label: 'keep-latest', value: format(data.keepLatest) || 'Not reported' },
-        { label: 'Input context', value: 'Complete input context was not included in this event.' },
-      ],
-    });
-  }
-  if (data.inputsTruncated === true || data.inputsValidated === false) {
-    sections.push({
-      title: 'Input notes',
-      facts: [
-        ...(data.inputsValidated === false
-          ? [{ label: 'Validation', value: 'The supplied inputs were rejected before cleanup started.' }]
-          : []),
-        ...(data.inputsTruncated === true
-          ? [{ label: 'Truncation', value: 'Some input values are truncated; review the workflow configuration.' }]
-          : []),
-      ],
-    });
-  }
-  if (format(error.code) || format(error.message)) {
-    sections.push({
-      title: 'What went wrong',
-      facts: [
-        ...(format(error.code) ? [{ label: 'Error code', value: bound(format(error.code), 100) }] : []),
-        ...(format(error.message) ? [{ label: 'Error', value: bound(format(error.message), 160) }] : []),
-      ],
-    });
-  }
-  if (issues.length) {
-    sections.push({
-      title: 'Cleanup issues',
-      facts: issues.map((issue, index) => ({
-        label: bound(format(issue.code), 100) || `Issue ${index + 1}`,
-        value: bound(format(issue.message), 160) || 'Review the workflow report.',
-      })),
-    });
-  }
+  const sections: NonNullable<Presentation['sections']> = [{ title: 'Result', facts: counts }];
   return { title, summary, sections };
 }
