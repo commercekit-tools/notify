@@ -2,9 +2,9 @@
 
 NotificationEvent is a provider-neutral JSON contract. Producers create a compact event; this Action validates it and turns it into a shared presentation before rendering a provider payload.
 
-Required members are `schemaVersion: 1`, `eventId`, `eventType`, `status`, ISO date-time `occurredAt`, `source` (`product: commercekit`, one of `cli-check`, `ccv2-build`, `ccv2-deploy`, `workflow`), and event-specific `data`. Optional `context` fields include repository, ref, commit, actor, workflow, job, runId, runAttempt, runUrl, and environment. Up to three HTTPS links may be included.
+Required members are `schemaVersion: 1`, `eventId`, `eventType`, `status`, ISO date-time `occurredAt`, `source` (`product: commercekit`, one of `cli-check`, `ccv2-build`, `ccv2-deploy`, `ccv2-build-cleanup`, `workflow`), and event-specific `data`. Optional `context` fields include repository, ref, commit, actor, workflow, job, runId, runAttempt, runUrl, and environment. Up to three HTTPS links may be included.
 
-Supported event types: `check.completed`, `ccv2.build.started`, `ccv2.build.completed`, `ccv2.deployment.started`, `ccv2.deployment.action-required`, `ccv2.deployment.completed`. Statuses: `started`, `success`, `warning`, `failure`, `cancelled`, `internal-error`, `action-required`. Compatibility rules are checked in code and represented in the schema.
+Supported event types: `ccv2.build-cleanup.completed`, `check.completed`, `ccv2.build.started`, `ccv2.build.completed`, `ccv2.deployment.started`, `ccv2.deployment.action-required`, `ccv2.deployment.completed`. Statuses: `started`, `success`, `warning`, `failure`, `cancelled`, `internal-error`, `action-required`. Compatibility rules are checked in code and represented in the schema.
 
 Check data may contain mode, changedFrom, filesChecked, errors, warnings, durationMs, and a safe error summary. Build data may contain subscriptionCode, applicationCode, buildCode, buildName, branch, buildStatus, durationMs, retryCount, and error. Deployment data may contain subscriptionCode, applicationCode, deploymentCode, buildCode, environmentCode, deploymentMode, databaseUpdateMode, deploymentStatus, durationMs, decisionType, and error. The error object has optional code and required message. Source contents, diagnostics, credentials, raw API responses, and provider payloads are outside the contract.
 
@@ -21,3 +21,20 @@ The optional `links` array carries operational destinations supplied by the prod
 The presentation calls the three operations **CommerceKit check**, **CCv2 build**, and **CCv2 deployment**. Across operations, common outcomes use the same title endings: **succeeded**, **failed**, **cancelled**, and **encountered an internal error**. The shared status theme supplies the same textual status and icon to Slack and Teams Workflows. **Completed with warnings** applies to checks; **action required** applies to deployments. A failed operation and an internal CommerceKit error remain distinct statuses. Operation-specific summaries and facts explain what happened without changing that outcome vocabulary.
 
 The schema `$id` is a logical canonical identifier, not a runtime download endpoint. Runtime validation uses the schema bundled from the installed contract package. This repository no longer vendors a separate schema.
+
+## Cleanup notification context candidate
+
+The proposed cleanup extension reuses `ccv2.build-cleanup.completed`, adds the
+existing global warning status only to that event family, and keeps older
+required data unchanged. New optional context contains all fourteen Action input
+names, validation/truncation flags, protected/blocked totals and up to three safe
+issues. All four authentication values are always `[REDACTED]`; the presenter
+also redacts them defensively for direct malformed presentation callers.
+
+Both providers show the same complete aggregate counts and input names in
+bounded groups. Failure messages include safe error codes/explanations; warnings
+include their issue codes/explanations. Accepted deletion requests never mean
+confirmed physical removal. Missing fields in older events are identified as
+unreported rather than invented. No credentials or raw API responses are added.
+This source feature requires the exact packed 0.0.5 candidate until a separately
+authorized registry publication and normal consumer upgrade.

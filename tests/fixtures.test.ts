@@ -8,6 +8,8 @@ import { theme } from '../src/presentation/theme.js';
 
 const titles: Record<string, string> = {
   'cleanup-success': 'CCv2 build cleanup completed',
+  'cleanup-warning': 'CCv2 build cleanup completed with warnings',
+  'cleanup-failure': 'CCv2 build cleanup failed',
   'check-success': 'CommerceKit check succeeded',
   'check-warning': 'CommerceKit check completed with warnings',
   'check-failure': 'CommerceKit check failed',
@@ -30,7 +32,7 @@ describe('golden synthetic events', () => {
     const names = (await readdir(new URL('./fixtures/events/', import.meta.url)))
       .filter((n) => n.endsWith('.json'))
       .sort();
-    expect(names).toHaveLength(17);
+    expect(names).toHaveLength(19);
     for (const name of names) {
       const event = JSON.parse(await readFile(new URL(`./fixtures/events/${name}`, import.meta.url), 'utf8'));
       validateEvent(event);

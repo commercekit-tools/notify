@@ -40,6 +40,17 @@ export function renderTeams(p: Presentation) {
         },
       ],
     });
+  for (const section of p.sections ?? []) {
+    body.push({ type: 'TextBlock', text: safeText(section.title), weight: 'Bolder', wrap: true, spacing: 'Medium' });
+    for (let start = 0; start < section.facts.length; start += 10)
+      body.push({
+        type: 'FactSet',
+        facts: section.facts
+          .slice(start, start + 10)
+          .map((fact) => ({ title: safeText(fact.label), value: safeText(fact.value) })),
+        spacing: 'Small',
+      });
+  }
   if (p.footer)
     body.push({
       type: 'TextBlock',

@@ -1,8 +1,10 @@
+import { redactKnownSecrets } from '@commercekit-tools/notification-contract';
+import { cleanupConfidentialValues, cleanupDetails } from './cleanup.js';
 import type { NotificationEvent } from '@commercekit-tools/notification-contract';
 import { sanitize, sanitizeLabel, safePlainText } from './sanitize.js';
 import { theme } from './theme.js';
 import type { Presentation } from './types.js';
-const str = (v: unknown): string =>
+const stringValue = (v: unknown): string =>
   typeof v === 'string' ? sanitize(v) : typeof v === 'number' && Number.isFinite(v) ? String(v) : '';
 const duration = (v: unknown): string => (typeof v === 'number' ? `${Math.round(v / 1000)}s` : '');
 const occurred = (value: string): string => `${new Date(value).toISOString().slice(0, 19).replace('T', ' ')} UTC`;
@@ -10,6 +12,10 @@ export function createPresentation(event: NotificationEvent): Presentation {
   const t = theme[event.status],
     d = event.data as Record<string, unknown>,
     c = (event.context ?? {}) as Record<string, unknown>;
+  const confidential = event.eventType === 'ccv2.build-cleanup.completed' ? cleanupConfidentialValues(d) : [];
+  const str = (value: unknown): string =>
+    stringValue(typeof value === 'string' ? redactKnownSecrets(value, confidential) : value);
+  const sections: NonNullable<Presentation['sections']> = [];
   let category = '',
     title = '',
     summary = '';
@@ -63,23 +69,13 @@ export function createPresentation(event: NotificationEvent): Presentation {
     add('Duration', duration(d.durationMs));
   } else if (event.eventType === 'ccv2.build-cleanup.completed') {
     category = 'CommerceKit · CCv2 build cleanup';
-    title =
-      event.status === 'success'
-        ? 'CCv2 build cleanup completed'
-        : event.status === 'cancelled'
-          ? 'CCv2 build cleanup cancelled'
-          : 'CCv2 build cleanup requires attention';
-    const mode = d.mode === 'dry-run' ? 'DRY RUN' : 'APPLY';
-    summary = `${mode}: ${str(d.plannedCount)} planned targets; ${str(d.deletionRequestedCount)} deletion requests accepted. Outcome: ${str(d.cleanupStatus)}.`;
-    highlight('Mode', mode);
+    const cleanup = cleanupDetails(event.status, d, str);
+    title = cleanup.title;
+    summary = cleanup.summary;
+    sections.push(...cleanup.sections);
+    highlight('Mode', d.mode === 'dry-run' ? 'DRY RUN' : 'APPLY');
     add('Subscription', d.subscriptionCode);
-    add('Application', d.applicationCode);
-    add('Retention days', d.retentionDays);
-    add('Keep latest', d.keepLatest);
-    add('Planned', d.plannedCount);
-    add('Requests accepted', d.deletionRequestedCount);
-    add('Failed / unknown', `${str(d.failedCount)} / ${str(d.unknownCount)}`);
-    add('Deferred', d.deferredCount);
+    add('Application', d.applicationCode || 'All applications');
     add('Duration', duration(d.durationMs));
   } else if (event.eventType.startsWith('ccv2.build.')) {
     category = 'CommerceKit · CCv2 build';
@@ -158,11 +154,11 @@ export function createPresentation(event: NotificationEvent): Presentation {
   }
   if (event.eventType !== 'check.completed') add('Repository', c.repository);
   highlight('Occurred', occurred(event.occurredAt));
-  const eventLinks = event.links ?? [];
+  const eventLinks = (event.links ?? []).filter((link) => redactKnownSecrets(link.url, confidential) === link.url);
   const links =
     eventLinks.length > 0
-      ? eventLinks.map((link) => ({ label: safePlainText(sanitizeLabel(link.label)), url: link.url }))
-      : typeof c.runUrl === 'string'
+      ? eventLinks.map((link) => ({ label: safePlainText(sanitizeLabel(str(link.label))), url: link.url }))
+      : typeof c.runUrl === 'string' && redactKnownSecrets(c.runUrl, confidential) === c.runUrl
         ? [{ label: 'View workflow', url: c.runUrl }]
         : [];
   const footer = [
@@ -183,6 +179,7 @@ export function createPresentation(event: NotificationEvent): Presentation {
     summary: sanitize(summary).slice(0, 1000) || undefined,
     highlights: highlights.slice(0, 2),
     facts: facts.slice(0, 9),
+    ...(sections.length ? { sections } : {}),
     actions: links.slice(0, 3),
     footer: footer ? sanitize(footer) : undefined,
   };

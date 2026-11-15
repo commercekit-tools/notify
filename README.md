@@ -148,3 +148,26 @@ builds using notification-contract 0.0.3 reject cleanup events; consumers must
 pin an immutable Notify commit containing this compatible bundle. Package
 publication does not create an Action release or tag and does not authorize
 real cleanup or provider delivery.
+
+### Cleanup notification context candidate
+
+The notification-context source change adds complete redacted cleanup inputs,
+all aggregate counts, safe errors and warning issues in both providers. Accepted
+build-deletion requests are reported as initiation; dry-runs report zero actual
+cleanup requests. Long input/issue previews are bounded and visibly marked when
+truncated. Legacy cleanup events still show their available policy/counts.
+
+This extension requires the unpublished notification-contract **0.0.5 candidate**,
+including cleanup-specific warning support. The normal manifest, registry lockfile
+and committed bundle remain on published **0.0.4** until separate publication and
+consumer-pin authorization. Normal registry release readiness is therefore
+**BLOCKED**; no unsupported warning event is claimed to work in the old bundle.
+
+Candidate integration is tested from an exact-source packed tarball in an isolated
+private workspace. Set `COMMERCEKIT_CANDIDATE_CONTRACT_VERSION=0.0.5` only there;
+`pnpm schema:check` verifies the installed candidate version and requires a
+`file:...tgz` dependency in that temporary manifest. This is not a permanent local
+link, a registry-installed release, or an instruction to publish. The existing
+shared schema/context/text APIs and webhook delivery remain in use. After an
+authorized package publication, the normal dependency, lockfile, assertions and
+bundle must be upgraded together and the complete quality gate rerun.

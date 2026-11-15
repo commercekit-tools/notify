@@ -30,6 +30,11 @@ export function renderSlack(p: Presentation) {
       type: 'section',
       fields: p.facts.slice(0, 10).map(field),
     });
+  for (const section of p.sections ?? []) {
+    blocks.push({ type: 'section', text: { type: 'plain_text', text: section.title.slice(0, 3000), emoji: false } });
+    for (let start = 0; start < section.facts.length; start += 10)
+      blocks.push({ type: 'section', fields: section.facts.slice(start, start + 10).map(field) });
+  }
   if (p.actions.length)
     blocks.push({
       type: 'actions',
