@@ -23,7 +23,8 @@ async function bundleRun(
       ? 'https://hooks.slack.com/services/synthetic/fake/private'
       : 'https://public.example.test/private/synthetic-hook';
   try {
-    await copyFile(new URL('../dist/index.js', import.meta.url), join(dir, 'index.mjs'));
+    await copyFile(new URL('../dist/index.js', import.meta.url), join(dir, 'index.js'));
+    await copyFile(new URL('../dist/package.json', import.meta.url), join(dir, 'package.json'));
     await writeFile(join(dir, 'output'), '');
     await writeFile(join(dir, 'summary'), '');
     if (options.useFile) await writeFile(join(dir, 'event.json'), event);
@@ -45,7 +46,7 @@ async function bundleRun(
         return new Response('', {status: ${options.httpStatus ?? 200}});
       };`,
     );
-    const result = spawnSync(process.execPath, ['--import', join(dir, 'preload.mjs'), join(dir, 'index.mjs')], {
+    const result = spawnSync(process.execPath, ['--import', join(dir, 'preload.mjs'), join(dir, 'index.js')], {
       cwd: dir,
       env: {
         INPUT_PROVIDER: provider,

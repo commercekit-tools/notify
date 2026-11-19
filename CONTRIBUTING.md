@@ -7,7 +7,13 @@ in [ecosystem-reporting-validation.md](docs/ecosystem-reporting-validation.md).
 
 Use Node.js `24.21.0` and pnpm `12.6.0`. Configure GitHub Packages authentication as described below, enable Corepack, then run `pnpm install --frozen-lockfile`.
 
-Run `pnpm format`, `pnpm lint`, `pnpm typecheck`, `pnpm schema:check`, `pnpm test`, `pnpm test:coverage`, `pnpm audit`, and `pnpm bundle`. Review contract changes and provider payload fixtures carefully. Update `dist/index.js` with source changes. Use only synthetic fixtures; normal CI must never call real webhooks. PRs should explain contract/security effects and include focused tests.
+Run `pnpm format`, `pnpm lint`, `pnpm typecheck`, `pnpm schema:check`, `pnpm test`, `pnpm test:coverage`, `pnpm audit`, and `pnpm bundle`. Review contract changes and provider payload fixtures carefully. Regenerate and commit all `dist` artifacts with source changes. Use only synthetic fixtures; normal CI must never call real webhooks. PRs should explain contract/security effects and include focused tests.
+
+`pnpm bundle:check` builds in a temporary directory and compares the complete
+artifact inventory and bytes, including `index.js`, `package.json`, and
+`licenses.txt`, against committed `dist`. It fails for missing, obsolete or stale
+files and never rewrites committed output. Standalone tests execute the packaged
+`index.js` with its actual `package.json`, preserving the Action's module mode.
 
 ## GitHub Packages access
 
