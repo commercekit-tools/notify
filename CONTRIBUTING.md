@@ -5,7 +5,7 @@ The reporting implementation consumes exact published notification-contract
 file:tarball dependency is required. Historical candidate provenance is archived
 in [ecosystem-reporting-validation.md](docs/ecosystem-reporting-validation.md).
 
-Use Node.js `24.21.0` and pnpm `12.6.0`. Configure GitHub Packages authentication as described below, enable Corepack, then run `pnpm install --frozen-lockfile`.
+Use Node.js `26.13.1` and pnpm `12.6.0` for development. Configure GitHub Packages authentication as described below, install Corepack with `npm install --global corepack@0.36.0`, enable it, then run `pnpm install --frozen-lockfile`.
 
 Run `pnpm format`, `pnpm lint`, `pnpm typecheck`, `pnpm schema:check`, `pnpm test`, `pnpm test:coverage`, `pnpm audit`, and `pnpm bundle`. Review contract changes and provider payload fixtures carefully. Regenerate and commit all `dist` artifacts with source changes. Use only synthetic fixtures; normal CI must never call real webhooks. PRs should explain contract/security effects and include focused tests.
 
@@ -34,3 +34,5 @@ common Result/Inputs/Issues layout; review semantic counts, links and outcomes
 independently of those golden changes. Provider escaping remains local; the shared action-text sanitizer adds common
 JWT, known-secret and URL disclosure rules. Do not duplicate the shared visual
 status vocabulary or event schema.
+
+Development and bundle verification use Node 26. The Action still executes with `runs.using: node24`; keep its runtime APIs compatible with Node 24. The existing packaged-Action tests also run on Node 24 in CI without doubling the full quality matrix.

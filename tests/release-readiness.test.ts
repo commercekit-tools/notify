@@ -4,6 +4,19 @@ import { describe, expect, it } from 'vitest';
 const read = (path: string) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 describe('release readiness contracts', () => {
+  it('uses Node 26 development tooling and verifies the Node 24 packaged Action', async () => {
+    const pin = (await read('.node-version')).trim();
+    expect(pin).toMatch(/^26\.\d+\.\d+$/);
+    const manifest = JSON.parse(await read('package.json'));
+    expect(manifest.engines.node).toContain(`>=${pin}`);
+    expect(manifest.engines.node).toContain('>=24.0.0 <25.0.0');
+    const ci = await read('.github/workflows/ci.yml');
+    expect(ci).toContain('node-version-file: .node-version');
+    expect(ci).toContain('npm install --global corepack@0.36.0');
+    expect(ci.indexOf('npm install --global corepack@0.36.0')).toBeLessThan(ci.indexOf('corepack enable'));
+    expect(ci).toContain("node-version: '24.21.0'");
+    expect(ci).toContain('pnpm exec vitest run tests/bundle.test.ts');
+  });
   it('keeps one root Node 24 Action with the bounded public contract', async () => {
     const action = await read('action.yml');
     expect(action).toMatch(/^name: CommerceKit Notifications$/m);

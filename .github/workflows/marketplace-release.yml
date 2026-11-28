@@ -85,6 +85,7 @@ jobs:
           node-version-file: .node-version
           registry-url: https://npm.pkg.github.com
           scope: '@commercekit-tools'
+      - run: npm install --global corepack@0.36.0
       - run: corepack enable
       - run: pnpm install --frozen-lockfile
         env:
